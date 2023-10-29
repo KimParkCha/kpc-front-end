@@ -3,13 +3,13 @@
     <v-app-bar dense dark>
       <ul class="menu">
         <li>
-          <v-btn @click="toHome"> Home </v-btn>
+          <v-btn @click="toHome"> 홈 </v-btn>
         </li>
         <li>
-          <v-btn @click="toPage1"> Page1 </v-btn>
+          <v-btn @click="toCreatePage"> 생성 </v-btn>
         </li>
         <li>
-          <v-btn @click="toPage2"> Page2 </v-btn>
+          <v-btn @click="toTablePage"> 목록 </v-btn>
         </li>
       </ul>
     </v-app-bar>
@@ -21,13 +21,13 @@ export default {
   name: 'CoreAppBar',
   methods: {
     toHome() {
-      alert('home')
+      this.$router.push('/')
     },
-    toPage1() {
-      alert('Page1')
+    toCreatePage() {
+      this.$router.push('/create')
     },
-    toPage2() {
-      alert('Page2')
+    toTablePage() {
+      this.$router.push('/table')
     },
   },
 }
