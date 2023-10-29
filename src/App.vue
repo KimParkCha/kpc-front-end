@@ -2,7 +2,7 @@
   <v-app>
     <core-app-bar />
     <core-view />
-    <core-footer />
+    <core-footer author="현우" />
   </v-app>
 </template>
 
