@@ -1,17 +1,15 @@
 <template>
   <div>
-    <v-app-bar dense dark>
-      <ul class="menu">
-        <li>
-          <v-btn @click="toHome"> 홈 </v-btn>
-        </li>
-        <li>
-          <v-btn @click="toCreatePage"> 생성 </v-btn>
-        </li>
-        <li>
-          <v-btn @click="toTablePage"> 목록 </v-btn>
-        </li>
-      </ul>
+    <v-app-bar dense color="#BBDEFB">
+      <v-btn text @click="toHome">
+        <template v-slot:prepend>
+          <v-icon color="success">mdi-account</v-icon>
+        </template>
+        <v-text> 김박차</v-text>
+      </v-btn>
+      <v-spacer></v-spacer>
+      <v-btn text @click="toCreatePage"> <v-text>생성</v-text></v-btn>
+      <v-btn text @click="toTablePage"> <v-text>목록</v-text></v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -21,20 +19,20 @@ export default {
   name: 'CoreAppBar',
   methods: {
     toHome() {
-      this.$router.push('/')
+      this.$router.push('/').catch(() => {})
     },
     toCreatePage() {
-      this.$router.push('/create')
+      this.$router.push('/create').catch(() => {})
     },
     toTablePage() {
-      this.$router.push('/table')
+      this.$router.push('/table').catch(() => {})
     },
   },
 }
 </script>
 
 <style>
-ul.menu li {
-  display: inline;
+v-text {
+  color: black;
 }
 </style>
