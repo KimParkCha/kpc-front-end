@@ -1,9 +1,7 @@
 <template>
   <div>
     <v-card width="300" outlined>
-      <v-card-item>
-        <v-card-title class="text-white">{{ title }}</v-card-title>
-      </v-card-item>
+      <v-card-title class="text-white">{{ title }}</v-card-title>
       <v-card-text>
         <v-progress-linear
           v-model="value"
