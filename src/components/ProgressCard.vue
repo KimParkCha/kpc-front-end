@@ -1,13 +1,20 @@
 <template>
-  <v-card rounded-pill width="200px" height="100px">
-    <v-card-title>{{ title }}</v-card-title>
-    <v-progress-linear
-      v-model="value"
-      :buffer-value="bufferValue"
-      color="red"
-      height="30"
-    ></v-progress-linear>
-  </v-card>
+  <div>
+    <v-card width="300" outlined>
+      <v-card-item>
+        <v-card-title class="text-white">{{ title }}</v-card-title>
+      </v-card-item>
+      <v-card-text>
+        <v-progress-linear
+          v-model="value"
+          :buffer-value="bufferValue"
+          color="red"
+          rounded
+          height="30"
+        ></v-progress-linear
+      ></v-card-text>
+    </v-card>
+  </div>
 </template>
 <script>
 export default {
@@ -15,7 +22,7 @@ export default {
   data() {
     return {
       value: 0,
-      bufferValue: 100,
+      bufferValue: 0,
       interval: 0,
     }
   },
@@ -42,9 +49,18 @@ export default {
       clearInterval(this.interval)
       this.interval = setInterval(() => {
         this.value += 5
+        this.bufferValue += 8
       }, 100)
     },
   },
 }
 </script>
-<style></style>
+<style>
+.v-sheet.v-card {
+  padding: 20px;
+  border-radius: 25px;
+}
+.v-progress-linear {
+  border-radius: 25px;
+}
+</style>
