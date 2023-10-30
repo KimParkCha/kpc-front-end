@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid class="text-center mt-15 py-12">
+  <v-container fluid class="text-center ma-0 pa-0">
     <home-banner />
     <progress-card title="오늘 온도 봐보자" progressVal="70" />
     <v-avatar size="250">
