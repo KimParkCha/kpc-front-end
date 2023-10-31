@@ -46,7 +46,6 @@ export default {
   margin-bottom: 24px;
 }
 .container {
-  color: aqua;
   background-color: '#BBDEFB';
 }
 </style>
