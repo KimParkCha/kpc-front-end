@@ -1,5 +1,5 @@
 <template>
-  <v-footer color="transparent" absolute>
+  <v-footer absolute>
     <v-spacer />
     <div>
       &copy;
