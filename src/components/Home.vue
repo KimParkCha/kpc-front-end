@@ -1,6 +1,6 @@
 <template>
   <v-container fluid class="text-center ma-0 pa-0">
-    <home-banner />
+    <parallax-banner />
     <progress-card title="오늘 온도 봐보자" progressVal="70" />
     <v-avatar size="250">
       <v-img
@@ -8,17 +8,20 @@
       />
     </v-avatar>
     <p class="text-h3 blue--text mt-3">vue tutorial</p>
+    <kakao-map-wrapper></kakao-map-wrapper>
   </v-container>
 </template>
 <script>
-import HomeBanner from './Banner.vue'
+import KakaoMapWrapper from './KakaoMapWrapper.vue'
+import ParallaxBanner from './ParallaxBanner.vue'
 import ProgressCard from './ProgressCard.vue'
 
 export default {
   name: 'ComponentHome',
   components: {
-    HomeBanner,
     ProgressCard,
+    KakaoMapWrapper,
+    ParallaxBanner,
   },
 }
 </script>
