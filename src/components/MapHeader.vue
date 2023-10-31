@@ -11,6 +11,7 @@
       <v-row align="center">
         <v-col cols="12" sm="6" md="4" align="center">
           <v-text-field
+            v-on:keyup.enter="search($event)"
             dense
             filled
             rounded
@@ -33,8 +34,15 @@
 </template>
 
 <script>
+import { eventBus } from '../main'
 export default {
   name: 'MapHeader',
+  methods: {
+    search(event) {
+      eventBus.$emit('searchKeyword', event.target.value)
+      console.log(event.target.value)
+    },
+  },
 }
 </script>
 
