@@ -24,7 +24,7 @@ export default {
     toCreatePage() {
       this.$router.push('/create').catch(() => {})
     },
-    toTablePage() {
+    toLoginPage() {
       this.$router.push('/login').catch(() => {})
     },
   },
