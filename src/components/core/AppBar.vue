@@ -9,7 +9,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn text @click="toCreatePage"> <v-text>생성</v-text></v-btn>
-      <v-btn text @click="toTablePage"> <v-text>목록</v-text></v-btn>
+      <v-btn text @click="toLoginPage"> <v-text>로그인</v-text></v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
       this.$router.push('/create').catch(() => {})
     },
     toTablePage() {
-      this.$router.push('/table').catch(() => {})
+      this.$router.push('/login').catch(() => {})
     },
   },
 }

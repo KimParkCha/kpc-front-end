@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from '@/components/Home'
-import Create from '@/components/Create'
-import Table from '@/components/Table'
+import Home from '@/views/Home'
+import Create from '@/views/Create'
+import Login from '@/views/Login'
 
 Vue.use(Router) // vue 라우터 사용
 
@@ -14,8 +14,8 @@ export default new Router({
       component: Home,
     },
     {
-      path: '/table',
-      component: Table,
+      path: '/login',
+      component: Login,
     },
     {
       path: '/create',
