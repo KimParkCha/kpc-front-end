@@ -1,5 +1,35 @@
 <template>
-  <div>
+  <div class="map-wrap">
+    <div class="map-panel">
+      <v-list three-line>
+        <template v-for="(item, index) in items">
+          <v-subheader
+            v-if="item.header"
+            :key="item.header"
+            v-text="item.header"
+          ></v-subheader>
+
+          <v-divider
+            v-else-if="item.divider"
+            :key="index"
+            :inset="item.inset"
+          ></v-divider>
+
+          <v-list-item v-else :key="item.title">
+            <v-list-item-avatar>
+              <v-img :src="item.avatar"></v-img>
+            </v-list-item-avatar>
+
+            <v-list-item-content>
+              <v-list-item-title v-html="item.title"></v-list-item-title>
+              <v-list-item-subtitle
+                v-html="item.subtitle"
+              ></v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
+      </v-list>
+    </div>
     <div id="map"></div>
   </div>
 </template>
@@ -9,8 +39,77 @@ import { toRaw } from 'vue'
 import { eventBus } from '../main'
 export default {
   name: 'KakaoMap',
+
   data() {
     return {
+      items: [
+        { header: '30개의 부동산 매물이 있습니다.' },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: '제주첨단과학단지 꿈에그린2차 아파트',
+          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'JDC 제주첨단 리슈빌아파트',
+          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'JDC 제주첨단 행복주택 아파트',
+          subtitle:
+            '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: '제주의료원',
+          subtitle:
+            '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: '제주대학교 아라캠퍼스',
+          subtitle:
+            '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        },
+        { divider: true, inset: true },
+        {
+          src: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+          title: '제주첨단과학단지 꿈에그린2차 아파트',
+          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+          title: 'JDC 제주첨단 리슈빌아파트',
+          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+          title: 'JDC 제주첨단 행복주택 아파트',
+          subtitle:
+            '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+          title: '제주의료원',
+          subtitle:
+            '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
+        },
+        { divider: true, inset: true },
+        {
+          avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
+          title: '제주대학교 아라캠퍼스',
+          subtitle:
+            '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
+        },
+      ],
       markerPositions1: [
         [33.452278, 126.567803],
         [33.452671, 126.574792],
@@ -125,8 +224,27 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.div {
+  display: block;
+}
 #map {
+  position: relative;
   width: 100%;
   height: 600px;
+}
+.map-wrap {
+  position: relative;
+  z-index: 100;
+  width: 100%;
+  height: 600px;
+}
+.map-panel {
+  position: absolute;
+  width: 400px;
+  height: 600px;
+  z-index: 100;
+  box-sizing: border-box;
+  background: white;
+  overflow-y: auto;
 }
 </style>
