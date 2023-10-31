@@ -31,13 +31,38 @@
       </v-list>
     </div>
     <div id="map"></div>
+    <v-container class="mt-12">
+      <v-row>
+        <progress-card
+          title="keyword 지역의 투자상황"
+          :progressVal="50"
+          :width="500"
+          :height="200"
+        ></progress-card>
+        <v-spacer></v-spacer>
+        <v-card class="analyze-card" elevation="2" outlined>
+          <v-card-title>keyword 지역의 투자상황을 분석해봤어요</v-card-title>
+
+          <ul>
+            <li>최근에 사건사고가 많이 있네요</li>
+            <li>밥집이 많이 생겼어요</li>
+            <li>치킨집이 생겼네요</li>
+          </ul>
+          <v-card-subtitle
+            >김박차는 해당 지역의 투자를 추천해요.</v-card-subtitle
+          >
+        </v-card>
+      </v-row>
+    </v-container>
   </div>
 </template>
 
 <script>
 import { toRaw } from 'vue'
 import { eventBus } from '../main'
+import ProgressCard from './ProgressCard.vue'
 export default {
+  components: { ProgressCard },
   name: 'KakaoMap',
 
   data() {
@@ -128,11 +153,13 @@ export default {
       infowindow: null,
       map: null,
       ps: null,
+      keyword: '',
     }
   },
   mounted() {
     eventBus.$on('searchKeyword', (keyword) => {
       this.ps.keywordSearch(keyword, this.placesSearchCB)
+      this.keyword = keyword
     })
     if (window.kakao && window.kakao.maps) {
       this.initMap()
@@ -236,7 +263,7 @@ export default {
   position: relative;
   z-index: 100;
   width: 100%;
-  height: 600px;
+  margin-bottom: 200px;
 }
 .map-panel {
   position: absolute;
@@ -246,5 +273,13 @@ export default {
   box-sizing: border-box;
   background: white;
   overflow-y: auto;
+}
+.analyze-card {
+  padding: 20px;
+  border-radius: 25px;
+}
+.v-sheet.v-card {
+  padding: 20px;
+  border-radius: 25px;
 }
 </style>
