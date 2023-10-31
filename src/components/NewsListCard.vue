@@ -9,23 +9,19 @@
     </v-list-item>
 
     <v-list class="transparent">
-      <v-list-item v-for="item in forecast" :key="item.day">
-        <v-list-item-title>{{ item.day }}</v-list-item-title>
+      <v-list-item v-for="item in news" :key="item.title">
+        <v-list-item-title>{{ item.title }}</v-list-item-title>
 
         <v-list-item-icon>
           <v-icon>{{ item.icon }}</v-icon>
         </v-list-item-icon>
-
-        <v-list-item-subtitle class="text-right">
-          {{ item.temp }}
-        </v-list-item-subtitle>
       </v-list-item>
     </v-list>
 
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn text> Full Report </v-btn>
+      <v-btn block text>전체 뉴스정보 확인하기</v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -34,20 +30,20 @@ export default {
   name: 'NewsListCard',
   data() {
     return {
-      labels: ['SU', 'MO', 'TU', 'WED', 'TH', 'FR', 'SA'],
-      time: 0,
-      forecast: [
+      news: [
         {
-          day: 'Tuesday',
+          title: '尹 "미래세대에 빚 넘기면 안돼…약자보호·성장동력에 예산투입"',
           icon: 'mdi-white-balance-sunny',
-          temp: '24\xB0/12\xB0',
         },
         {
-          day: 'Wednesday',
+          title: '이번엔 전청조 모친이 스토킹…남현희가 경찰에 신고',
           icon: 'mdi-white-balance-sunny',
-          temp: '22\xB0/14\xB0',
         },
-        { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
+        {
+          title:
+            '[이·팔 전쟁] "지상전 예상보다 느리게 전개"…이스라엘 속도조절 이유',
+          icon: 'mdi-cloud',
+        },
       ],
     }
   },
