@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-card width="300" outlined>
+    <v-card width="500" height="200" outlined>
       <v-card-title class="text-white">{{ title }}</v-card-title>
       <v-card-text>
         <v-progress-linear
