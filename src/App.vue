@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app :style="{ background: $vuetify.theme.themes[theme].background }">
     <core-app-bar />
     <core-view />
     <core-footer author="현우" />
@@ -18,6 +18,11 @@ export default {
     CoreAppBar,
     CoreView,
     CoreFooter,
+  },
+  computed: {
+    theme() {
+      return this.$vuetify.theme.dark ? 'dark' : 'light'
+    },
   },
 
   data: () => ({
