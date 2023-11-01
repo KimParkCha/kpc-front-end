@@ -31,18 +31,21 @@
       </v-list>
     </div>
     <div id="map"></div>
-    <v-container class="mt-12">
+
+    <v-container v-if="keyword != ''" class="mt-12">
       <v-row>
         <progress-card
-          title="keyword 지역의 투자상황"
           :progressVal="50"
           :width="500"
           :height="200"
-        ></progress-card>
+          :title="keyword + ' 지역의 투자상황'"
+        >
+        </progress-card>
         <v-spacer></v-spacer>
         <v-card class="analyze-card" elevation="2" outlined>
-          <v-card-title>keyword 지역의 투자상황을 분석해봤어요</v-card-title>
-
+          <v-card-title
+            >{{ keyword }} 지역의 투자상황을 분석해봤어요</v-card-title
+          >
           <ul>
             <li>최근에 사건사고가 많이 있네요</li>
             <li>밥집이 많이 생겼어요</li>
