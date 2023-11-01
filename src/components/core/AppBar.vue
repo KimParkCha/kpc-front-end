@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar dense color="#BBDEFB">
+    <v-app-bar color="#BBDEFB">
       <v-btn text @click="toHome">
         <template v-slot:prepend>
           <v-icon color="success">mdi-account</v-icon>
