@@ -56,6 +56,7 @@
           >
         </v-card>
       </v-row>
+      <news-list-with-thumbnail></news-list-with-thumbnail>
     </v-container>
   </div>
 </template>
@@ -64,8 +65,9 @@
 import { toRaw } from 'vue'
 import { eventBus } from '../main'
 import ProgressCard from './ProgressCard.vue'
+import NewsListWithThumbnail from './NewsListWithThumbnail.vue'
 export default {
-  components: { ProgressCard },
+  components: { ProgressCard, NewsListWithThumbnail },
   name: 'KakaoMap',
 
   data() {
