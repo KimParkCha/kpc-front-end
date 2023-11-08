@@ -1,15 +1,15 @@
 <script setup>
 import { ref } from 'vue'
-const fname = ref('Vue')
+const fname = ref('banner')
 
 function getImageUrl(name) {
-  return new URL(`/src/assets/images/${name}.png`, import.meta.url).href
+  return new URL(`/src/assets/${name}.jpg`, import.meta.url).href
 }
 </script>
 
 <template>
-  <v-parallax :src="getImageUrl(fname)">
-    <v-row align="center" justify="center">
+  <v-parallax :src="getImageUrl(fname)" height="500">
+    <v-row align="center" justify="center" style="height: 100%">
       <v-col cols="12" align="left">
         <h1 class="text-h2 font-weight-bold mb-4">
           오늘의 부동산 분석 정보를 <br /><br />김박차에서 확인하세요.
@@ -21,5 +21,6 @@ function getImageUrl(name) {
 <style scoped>
 .text-h2 {
   margin-left: 30px;
+  color: white;
 }
 </style>
