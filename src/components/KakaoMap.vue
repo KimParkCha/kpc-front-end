@@ -176,6 +176,7 @@ export default {
       console.log(this.map.getCenter());
       kakao.maps.event.addListener(this.map, "idle", () => {
         this.searchAddrFromCoords(this.map.getCenter(), this.displayCenterInfo);
+        console.log(this.map.getBounds());
       });
     },
     changeSize(size) {
