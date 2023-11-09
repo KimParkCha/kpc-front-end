@@ -4,7 +4,7 @@
 
 <template>
  
-  <v-sheet :elevation="12" >
+  <v-sheet :elevation="12" class="mx-auto">
     <v-card class="mx-auto px-6 py-8" >
       <v-form
         v-model="form"
