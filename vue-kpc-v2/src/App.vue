@@ -7,7 +7,7 @@ import Footer from './components/Footer.vue'
 <template>
   <v-layout>
     <AppBar />
-    <v-main class="d-flex justify-center" style="min-height: 1000px; width: 100%">
+    <v-main class="d-flex flex-column justify-center align-center" style="min-height: 1000px; width: 100%">
       <RouterView />
     </v-main>
     <Footer />

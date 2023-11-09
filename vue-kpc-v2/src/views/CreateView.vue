@@ -1,0 +1,90 @@
+<script setup>
+
+</script>
+
+<template>
+    <v-sheet width="400" class="mx-auto">
+  
+      <v-form ref="form">
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :rules="nameRules"
+          label="아이디"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :rules="nameRules"
+          label="비밀번호"
+          required
+        ></v-text-field>
+  
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :rules="nameRules"
+          label="비밀번호 확인"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :rules="nameRules"
+          label="이름"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          :rules="nameRules"
+          label="이메일"
+          required
+        ></v-text-field>
+
+        <v-checkbox
+          v-model="checkbox"
+          :rules="[v => !!v || 'You must agree to continue!']"
+          label="개인정보 수집에 동의하십니까?"
+          required
+        ></v-checkbox>
+  
+        <div class="d-flex flex-column">
+          <v-btn
+            color="success"
+            class="mt-4"
+            block
+            @click="validate"
+          >
+            가입하기
+          </v-btn>
+  
+          <v-btn
+            color="error"
+            class="mt-4"
+            block
+            @click="reset"
+          >
+            초기화
+          </v-btn>
+  
+          <v-btn
+            color="warning"
+            class="mt-4"
+            block
+            @click="resetValidation"
+          >
+            유효성 초기화
+          </v-btn>
+        </div>
+      </v-form>
+    </v-sheet>
+  </template>
+
+<style scoped>
+
+</style>
