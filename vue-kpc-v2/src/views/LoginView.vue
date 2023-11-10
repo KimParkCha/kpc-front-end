@@ -1,5 +1,26 @@
 <script setup>
 
+import { reactive } from "vue"
+import userAPI from "@/api/user"
+import { useRouter } from "vue-router"
+
+const router = useRouter()
+const user = reactive({})
+const login = () => {
+  userAPI.loginUser(
+    user,
+    ({data}) => {
+      console.log(data)
+      console.log("로그인 성공")
+      router.push({name: "home"})
+    },
+    () => {
+      console.log("로그인 실패")
+    }
+
+  )
+}
+
 </script>
 
 <template>
@@ -11,7 +32,7 @@
         @submit.prevent="onSubmit"
       >
         <v-text-field
-          v-model="email"
+          v-model="user.email"
           :readonly="loading"
           :rules="[required]"
           class="mb-2"
@@ -20,7 +41,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="password"
+          v-model="user.password"
           :readonly="loading"
           :rules="[required]"
           clearable
@@ -38,6 +59,7 @@
           size="large"
           type="submit"
           variant="elevated"
+          @click="login"
         >
           Sign In
         </v-btn>

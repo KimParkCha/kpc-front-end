@@ -1,5 +1,25 @@
 <script setup>
 
+import { reactive } from "vue";
+import userAPI from "../api/user";
+import { useRouter } from "vue-router";
+
+const router = useRouter();
+const user = reactive({user_id: "", name: "", email: "", password: ""});
+const login = () => {
+  userAPI.registUser(
+    user,
+    () => {
+      console.log(user);
+      router.push({ name: "home" });
+    },
+    () => {
+      alert('회원가입 실패입니다.')
+      console.log("회원가입 실패입니다."); 
+    }
+  )  
+}
+
 </script>
 
 <template>
@@ -7,7 +27,7 @@
   
       <v-form ref="form">
         <v-text-field
-          v-model="name"
+          v-model="user.user_id"
           :counter="10"
           :rules="nameRules"
           label="아이디"
@@ -15,7 +35,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="name"
+          v-model="user.password"
           :counter="10"
           :rules="nameRules"
           label="비밀번호"
@@ -23,7 +43,7 @@
         ></v-text-field>
   
         <v-text-field
-          v-model="name"
+          v-model="passwordCheck"
           :counter="10"
           :rules="nameRules"
           label="비밀번호 확인"
@@ -31,7 +51,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="name"
+          v-model="user.name"
           :counter="10"
           :rules="nameRules"
           label="이름"
@@ -39,7 +59,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="name"
+          v-model="user.email"
           :counter="10"
           :rules="nameRules"
           label="이메일"
@@ -58,7 +78,7 @@
             color="success"
             class="mt-4"
             block
-            @click="validate"
+            @click="login"
           >
             가입하기
           </v-btn>
