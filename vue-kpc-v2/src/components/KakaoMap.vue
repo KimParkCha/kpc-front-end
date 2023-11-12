@@ -9,18 +9,19 @@ let geocoder = null
 let infowindow = null
 
 const keyword = ref('')
-
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
   panTo(props.receivedKeyword.key)
   getComplexes()
 })
+
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
-    level: 5
+    level: 4,
+    maxLevel: 4
   }
 
   //지도 객체를 등록합니다.
@@ -60,10 +61,28 @@ const getComplexes = () => {
     map.getBounds(),
     (data) => {
       console.log(data)
-      items.value = data.data
+
+      // 카카오맵 표시를 위해 latlng key 추가
+      const processsed = data.data.map((complexes) => ({
+        ...complexes,
+        latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
+      }))
+      items.value = processsed
+      addMarkers()
     },
     () => {}
   )
+}
+const addMarkers = () => {
+  for (const data of items.value) {
+    console.log(data)
+    const marker = new kakao.maps.Marker({
+      map: map,
+      position: data.latlng,
+      title: data.complexName
+    })
+    marker.setMap(map)
+  }
 }
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
