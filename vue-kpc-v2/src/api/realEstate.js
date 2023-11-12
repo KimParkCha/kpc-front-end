@@ -15,8 +15,19 @@ const getRegions = (keyword, success, fail) => {
 }
 
 // 부서 조회
-const get = (deptno, success, fail) => {
-  deptAPI.get(`/api/dept/${deptno}`).then(success).catch(fail)
+const getComplexes = (ia, success, fail) => {
+  console.log(ia)
+  deptAPI
+    .get(`/api/complex/list`, {
+      params: {
+        ha: ia.ha,
+        oa: ia.oa,
+        pa: ia.pa,
+        qa: ia.qa
+      }
+    })
+    .then(success)
+    .catch(fail)
 }
 
 // 부서 삭제
@@ -34,4 +45,4 @@ const modify = (dept, success, fail) => {
   deptAPI.put(`/api/dept/${dept.deptno}`).then(success).catch(fail)
 }
 
-export default { getRegions, get, del, register, modify }
+export default { getRegions, getComplexes, del, register, modify }
