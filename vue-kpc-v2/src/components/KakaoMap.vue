@@ -1,6 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
+import complexAPI from '@/api/realEstate'
 const props = defineProps(['receivedKeyword'])
 let map = null
 let ps = null
@@ -13,6 +14,7 @@ watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
   panTo(props.receivedKeyword.key)
+  getComplexes()
 })
 const initMap = () => {
   const container = document.getElementById('map')
@@ -30,7 +32,6 @@ const initMap = () => {
   console.log(map.getCenter())
   kakao.maps.event.addListener(map, 'idle', () => {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
-    console.log(map.getBounds())
   })
 }
 
@@ -53,6 +54,17 @@ const panTo = (data) => {
   console.log(data)
   map.panTo(moveLatLon)
 }
+const getComplexes = () => {
+  console.log(map.getBounds())
+  complexAPI.getComplexes(
+    map.getBounds(),
+    (data) => {
+      console.log(data)
+      items.value = data.data
+    },
+    () => {}
+  )
+}
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
     initMap()
@@ -66,74 +78,7 @@ onMounted(() => {
   }
 })
 
-const items = reactive([
-  { header: '30개의 부동산 매물이 있습니다.' },
-  {
-    src: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: '제주첨단과학단지 꿈에그린2차 아파트',
-    subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    title: 'JDC 제주첨단 리슈빌아파트',
-    subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    title: 'JDC 제주첨단 행복주택 아파트',
-    subtitle:
-      '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?'
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    title: '제주의료원',
-    subtitle:
-      '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?'
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    title: '제주대학교 아라캠퍼스',
-    subtitle:
-      '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.'
-  },
-  { divider: true, inset: true },
-  {
-    src: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-    title: '제주첨단과학단지 꿈에그린2차 아파트',
-    subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-    title: 'JDC 제주첨단 리슈빌아파트',
-    subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-    title: 'JDC 제주첨단 행복주택 아파트',
-    subtitle:
-      '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?'
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-    title: '제주의료원',
-    subtitle:
-      '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?'
-  },
-  { divider: true, inset: true },
-  {
-    avatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-    title: '제주대학교 아라캠퍼스',
-    subtitle:
-      '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.'
-  }
-])
+const items = ref([])
 </script>
 <template>
   <div class="map-wrap">
