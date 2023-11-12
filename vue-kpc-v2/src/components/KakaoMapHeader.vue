@@ -1,5 +1,5 @@
 <script setup>
-import { ref, reactive, watch, onMounted } from 'vue'
+import { ref, reactive } from 'vue'
 import regionAPI from '@/api/realEstate'
 const emit = defineEmits(['search'])
 
@@ -10,43 +10,26 @@ const snackbarData = reactive({
   text: '검색어에 해당하는 지역 정보가 존재하지 않습니다.',
   timeout: 2000
 })
-// watch(keyword, (newKeyword) => {
-//   keyword.value = newKeyword
-//   console.log(newKeyword)
-//   regionAPI.getRegions(
-//     keyword.value,
-//     (data) => {
-//       console.log(data)
-//     },
-//     () => {}
-//   )
-//   // if (!userInput.value) {
-//   //   return
-//   // }
-//   // this.fetchEntriesDebounced()
-// })
 
 const search = () => {
   console.log(keyword.value.constructor)
   if (keyword.value.constructor == Object) {
     console.log('it is object')
-  } else if (keyword.value.constructor == String) {
-    console.log('it is String')
+    emit('search', keyword)
+  } else {
+    regionAPI.getRegions(
+      keyword.value,
+      (data) => {
+        if (data.data.length == 0) {
+          console.log('데이터 없음')
+          snackbarData.snackbar = true
+        }
+        console.log(data)
+        items.value = data.data
+      },
+      () => {}
+    )
   }
-
-  regionAPI.getRegions(
-    keyword.value,
-    (data) => {
-      if (data.data.length == 0) {
-        console.log('데이터 없음')
-        snackbarData.snackbar = true
-      }
-      console.log(data)
-      items.value = data.data
-    },
-    () => {}
-  )
-  emit('search', keyword)
 }
 </script>
 

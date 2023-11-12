@@ -11,7 +11,8 @@ const keyword = ref('')
 
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
-  keyword.value = props.receivedKeyword
+  keyword.value = props.receivedKeyword.key
+  panTo(props.receivedKeyword.key)
 })
 const initMap = () => {
   const container = document.getElementById('map')
@@ -46,6 +47,11 @@ const displayCenterInfo = (result, status) => {
       }
     }
   }
+}
+const panTo = (data) => {
+  const moveLatLon = new kakao.maps.LatLng(data.centerLat, data.centerLon)
+  console.log(data)
+  map.panTo(moveLatLon)
 }
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
@@ -133,24 +139,6 @@ const items = reactive([
   <div class="map-wrap">
     <div class="map-panel">
       <RealEstateListItem :data="items" />
-      <!-- <v-list three-line>
-        <template v-for="(item, index) in items">
-          <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
-
-          <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-
-          <v-list-item v-else :key="item.title">
-            <v-list-item-avatar>
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-html="item.title"></v-list-item-title>
-              <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list> -->
     </div>
     <div id="map"></div>
 
