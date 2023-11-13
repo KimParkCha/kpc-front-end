@@ -1,10 +1,9 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'
+import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
 const props = defineProps(['receivedKeyword'])
 let map = null
-let ps = null
 let clusterer = null
 let geocoder = null
 
@@ -29,10 +28,8 @@ const initMap = () => {
     maxLevel: 6
   }
 
-  //지도 객체를 등록합니다.
-  //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
   map = new kakao.maps.Map(container, options)
-  ps = new kakao.maps.services.Places()
+  
   geocoder = new kakao.maps.services.Geocoder()
   kakao.maps.event.addListener(map, 'idle', () => {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
@@ -44,7 +41,7 @@ const initMap = () => {
   clusterer = new kakao.maps.MarkerClusterer({
         map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
         averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-        minLevel: 5 // 클러스터 할 최소 지도 레벨 
+        minLevel: 2// 클러스터 할 최소 지도 레벨 
     });
 }
 
@@ -70,17 +67,14 @@ const displayCenterInfo = (result, status) => {
 }
 const panTo = (data) => {
   const moveLatLon = new kakao.maps.LatLng(data.centerLat, data.centerLon)
-  console.log(data)
   map.panTo(moveLatLon)
+  map.setLevel(3);
 }
 const getComplexes = () => {
-  console.log(map.getBounds())
+  // console.log(map.getBounds())
   complexAPI.getComplexes(
     map.getBounds(),
     (data) => {
-      console.log(data)
-
-      // 카카오맵 표시를 위해 latlng key 추가
       const processsed = data.data.map((complexes) => ({
         ...complexes,
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
@@ -92,8 +86,8 @@ const getComplexes = () => {
   )
 }
 const addMarkers = () => {
-  const overlays = []
-  for (const data of items.value) {
+  const overlays = items.value.map((data) => {
+    const position = data.latlng
     const hgroup = document.createElement("hgroup")
     hgroup.className ='speech-bubble'
     const content = `
@@ -102,16 +96,15 @@ const addMarkers = () => {
     `
     hgroup.innerHTML = content
     hgroup.addEventListener('click', () => {
-      map.panTo(data.latlng)
+      map.panTo(positon)
     })
-    const position = data.latlng
+    
 
-    const overlay = new kakao.maps.CustomOverlay({
+    return new overlay = new kakao.maps.CustomOverlay({
         position : position, 
         content : hgroup,
     });
-    overlays.push(overlay)
-  }
+  })
   clusterer.addMarkers(overlays)
 }
 
