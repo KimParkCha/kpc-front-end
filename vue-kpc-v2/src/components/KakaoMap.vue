@@ -33,6 +33,7 @@ const initMap = () => {
   console.log(map.getCenter())
   kakao.maps.event.addListener(map, 'idle', () => {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
+    getComplexes()
   })
 }
 
