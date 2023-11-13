@@ -102,10 +102,14 @@ const items = ref([])
 </script>
 <template>
   <div class="map-wrap">
-    <div class="map-panel">
-      <RealEstateListItem :data="items" />
-    </div>
-    <div id="map"></div>
+    <v-row>
+      <v-col>
+        <RealEstateListItem :data="items" />
+      </v-col>
+      
+      <div id="map"></div>
+    </v-row>
+    
 
     <v-container v-if="keyword != ''" class="mt-12">
       <v-row>
@@ -147,7 +151,7 @@ const items = ref([])
   width: 100%;
   margin-bottom: 200px;
 }
-.map-panel {
+.v-col {
   position: absolute;
   width: 400px;
   height: 600px;
