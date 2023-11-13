@@ -86,6 +86,7 @@ const getComplexes = () => {
   )
 }
 const addMarkers = () => {
+  clusterer.clear()
   const overlays = items.value.map((data) => {
     const position = data.latlng
     const hgroup = document.createElement("hgroup")
@@ -96,11 +97,10 @@ const addMarkers = () => {
     `
     hgroup.innerHTML = content
     hgroup.addEventListener('click', () => {
-      map.panTo(positon)
+      map.panTo(position)
     })
     
-
-    return new overlay = new kakao.maps.CustomOverlay({
+    return new kakao.maps.CustomOverlay({
         position : position, 
         content : hgroup,
     });
