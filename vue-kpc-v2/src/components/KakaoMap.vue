@@ -5,8 +5,8 @@ import complexAPI from '@/api/realEstate'
 const props = defineProps(['receivedKeyword'])
 let map = null
 let ps = null
+let clusterer = null
 let geocoder = null
-let infowindow = null
 
 const keyword = ref('')
 const selectedMarker = ref(null)
@@ -26,7 +26,7 @@ const initMap = () => {
   const options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
     level: 4,
-    maxLevel: 4
+    maxLevel: 6
   }
 
   //지도 객체를 등록합니다.
@@ -34,14 +34,26 @@ const initMap = () => {
   map = new kakao.maps.Map(container, options)
   ps = new kakao.maps.services.Places()
   geocoder = new kakao.maps.services.Geocoder()
-  console.log(map.getBounds())
-  console.log(map.getCenter())
   kakao.maps.event.addListener(map, 'idle', () => {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
     getComplexes()
+    addClusterMarkers()
   })
+
+  // 마커 클러스터러를 생성합니다 
+  clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 5 // 클러스터 할 최소 지도 레벨 
+    });
 }
 
+const addClusterMarkers = () => {
+  items.value.map((item) => {
+    console.log(item)
+    clusterer.addMarkers(item.latlng)
+  })
+}
 const searchAddrFromCoords = (coords, callback) => {
   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
@@ -80,8 +92,8 @@ const getComplexes = () => {
   )
 }
 const addMarkers = () => {
+  const overlays = []
   for (const data of items.value) {
-    console.log(data)
     const hgroup = document.createElement("hgroup")
     hgroup.className ='speech-bubble'
     const content = `
@@ -94,17 +106,13 @@ const addMarkers = () => {
     })
     const position = data.latlng
 
-    // 인포윈도우를 생성합니다
     const overlay = new kakao.maps.CustomOverlay({
         position : position, 
         content : hgroup,
-        xAnchor: 0.3,
-        yAnchor: 0.91
     });
-    // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-    
-    overlay.setMap(map);
+    overlays.push(overlay)
   }
+  clusterer.addMarkers(overlays)
 }
 
 onMounted(() => {
@@ -115,7 +123,7 @@ onMounted(() => {
     /* global kakao */
     script.onload = () => kakao.maps.load(initMap)
     script.src =
-      '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services'
+      '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services,clusterer'
     document.head.appendChild(script)
   }
 })
