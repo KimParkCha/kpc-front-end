@@ -9,13 +9,18 @@ let geocoder = null
 let infowindow = null
 
 const keyword = ref('')
+const selectedMarker = ref(null)
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
   panTo(props.receivedKeyword.key)
   getComplexes()
 })
-
+watch(selectedMarker, (newVal) => {
+  const selectedLatLng = newVal.getPosition()
+  map.panTo(newVal.getPosition())
+  console.log(selectedLatLng)
+})
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
@@ -77,26 +82,31 @@ const getComplexes = () => {
 const addMarkers = () => {
   for (const data of items.value) {
     console.log(data)
-    const iwContent = `<div style='width: 200px; margin: 10px;'><p>${data.complexName}</p><p>${data.cortarAddress}</p></div>`
-    const iwPosition = data.latlng
+    const hgroup = document.createElement("hgroup")
+    hgroup.className ='speech-bubble'
+    const content = `
+      <p>${data.complexName}</p>
+      <p>${data.cortarAddress}</p>
+    `
+    hgroup.innerHTML = content
+    hgroup.addEventListener('click', () => {
+      map.panTo(data.latlng)
+    })
+    const position = data.latlng
 
     // 인포윈도우를 생성합니다
-    const infowindow = new kakao.maps.InfoWindow({
-        position : iwPosition, 
-        content : iwContent 
+    const overlay = new kakao.maps.CustomOverlay({
+        position : position, 
+        content : hgroup,
+        xAnchor: 0.3,
+        yAnchor: 0.91
     });
-  
-    
-
-    const marker = new kakao.maps.Marker({
-      map: map,
-      position: data.latlng,
-    })
     // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-    infowindow.open(map, marker);
-    // marker.setMap(map)
+    
+    overlay.setMap(map);
   }
 }
+
 onMounted(() => {
   if (window.kakao && window.kakao.maps) {
     initMap()
@@ -115,10 +125,9 @@ const items = ref([])
 <template>
   <div class="map-wrap">
     <v-row>
-      <v-col>
+      <v-col class="map-items">
         <RealEstateListItem :data="items" />
       </v-col>
-      
       <div id="map"></div>
     </v-row>
     
@@ -149,9 +158,6 @@ const items = ref([])
 </template>
 
 <style scoped>
-.div {
-  display: block;
-}
 #map {
   position: relative;
   width: 100%;
@@ -179,5 +185,25 @@ const items = ref([])
 .v-sheet.v-card {
   padding: 20px;
   border-radius: 25px;
+} 
+:deep() .speech-bubble {
+	position: relative;
+	background: #7ae9ff;
+	border-radius: 75px;
+}
+
+:deep() .speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-top-color: #7ae9ff;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -14px;
+	margin-bottom: -28px;
 }
 </style>
