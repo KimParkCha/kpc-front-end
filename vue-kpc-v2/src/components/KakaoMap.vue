@@ -92,8 +92,8 @@ const addMarkers = () => {
     const hgroup = document.createElement("hgroup")
     hgroup.className ='speech-bubble'
     const content = `
-      <p>${data.complexName}</p>
-      <p>${data.cortarAddress}</p>
+      <p class='overlay-h2'>${data.complexName}</p>
+      <p class='overlay-p'>${data.cortarAddress}</p>
     `
     hgroup.innerHTML = content
     hgroup.addEventListener('click', () => {
@@ -191,6 +191,7 @@ const items = ref([])
 	position: relative;
 	background: #7ae9ff;
 	border-radius: 75px;
+  padding: 5px 15px 5px 15px;
 }
 
 :deep() .speech-bubble:after {
@@ -206,5 +207,12 @@ const items = ref([])
 	border-right: 0;
 	margin-left: -14px;
 	margin-bottom: -28px;
+}
+:deep() .overlay-h2 {
+  font-weight: bold;
+  color: white;
+}
+:deep() .overlay-p {
+  color: white;
 }
 </style>
