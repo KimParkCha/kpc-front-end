@@ -17,7 +17,7 @@ watch(props.receivedKeyword, (keyword) => {
   getComplexes()
 })
 watch(selectedMarker, (newVal) => {
-  moveLatLng(newVal.latlng, 2)
+  moveLatLng(newVal.latlng, 1)
   // console.log(selectedLatLng)
 })
 
