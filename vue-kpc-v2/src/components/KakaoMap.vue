@@ -1,163 +1,151 @@
 <script setup>
-import { ref, reactive, onMounted, watch } from 'vue'; 
-import RealEstateListItem from './RealEstateListItem.vue';
-const props = defineProps({ receivedKeyword: Object })
+import { ref, onMounted, watch } from 'vue'
+import RealEstateListItem from './RealEstateListItem.vue'
+import complexAPI from '@/api/realEstate'
+const props = defineProps(['receivedKeyword'])
 let map = null
-let ps = null
+let clusterer = null
 let geocoder = null
-let infowindow = null
 
-const keyword = ref("")
-
-watch(props.receivedKeyword, () => {
-    console.log(props.receivedKeyword)
-    keyword.value = props.receivedKeyword.value
+const keyword = ref('')
+const selectedMarker = ref(null)
+watch(props.receivedKeyword, (keyword) => {
+  console.log(props.receivedKeyword.key)
+  keyword.value = props.receivedKeyword.key
+  const latlng = new kakao.maps.LatLng(keyword.value.centerLat, keyword.value.centerLon)
+  moveLatLng(latlng, 3)
+  getComplexes()
 })
-const initMap = () => {
-    const container = document.getElementById("map");
-      const options = {
-        center: new kakao.maps.LatLng(33.450701, 126.570667),
-        level: 5,
-      };
+watch(selectedMarker, (newVal) => {
+  moveLatLng(newVal.latlng, 1)
+  // console.log(selectedLatLng)
+})
 
-      //지도 객체를 등록합니다.
-      //지도 객체는 반응형 관리 대상이 아니므로 initMap에서 선언합니다.
-      map = new kakao.maps.Map(container, options);
-      ps = new kakao.maps.services.Places();
-      geocoder = new kakao.maps.services.Geocoder();
-      console.log(map.getBounds());
-      console.log(map.getCenter());
-      kakao.maps.event.addListener(map, "idle", () => {
-        searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-        console.log(map.getBounds());
-      });
+const selectedComplex = (payload) => {
+  // console.log(payload.item)
+  selectedMarker.value = payload.item
+}
+const initMap = () => {
+  const container = document.getElementById('map')
+  const options = {
+    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    level: 4,
+    maxLevel: 6
+  }
+
+  map = new kakao.maps.Map(container, options)
+  
+  geocoder = new kakao.maps.services.Geocoder()
+  kakao.maps.event.addListener(map, 'idle', () => {
+    searchAddrFromCoords(map.getCenter(), displayCenterInfo)
+    getComplexes()
+    addClusterMarkers()
+  })
+
+  // 마커 클러스터러를 생성합니다 
+  clusterer = new kakao.maps.MarkerClusterer({
+        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
+        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
+        minLevel: 2// 클러스터 할 최소 지도 레벨 
+    });
 }
 
+const addClusterMarkers = () => {
+  items.value.map((item) => {
+    console.log(item)
+    clusterer.addMarkers(item.latlng)
+  })
+}
 const searchAddrFromCoords = (coords, callback) => {
-    geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
+  geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
 const displayCenterInfo = (result, status) => {
-    if (status === kakao.maps.services.Status.OK) {
-        for (var i = 0; i < result.length; i++) {
-          // 행정동의 region_type 값은 'H' 이므로
-          if (result[i].region_type === "H") {
-            console.log(result[i].address_name);
-            break;
-          }
-        }
+  if (status === kakao.maps.services.Status.OK) {
+    for (var i = 0; i < result.length; i++) {
+      // 행정동의 region_type 값은 'H' 이므로
+      if (result[i].region_type === 'H') {
+        console.log(result[i].address_name)
+        break
       }
-}
-onMounted(() => {
-    if (window.kakao && window.kakao.maps) {
-      initMap();
-    } else {
-      const script = document.createElement("script");
-      /* global kakao */
-      script.onload = () => kakao.maps.load(initMap);
-      script.src =
-        "//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services";
-      document.head.appendChild(script);
     }
+  }
+}
+const moveLatLng = (data, level) => {
+  map.setCenter(data)
+  map.setLevel(level);
+}
+const getComplexes = () => {
+  // console.log(map.getBounds())
+  complexAPI.getComplexes(
+    map.getBounds(),
+    (data) => {
+      const processsed = data.data.map((complexes) => ({
+        ...complexes,
+        latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
+      }))
+      items.value = processsed
+      addMarkers()
+    },
+    () => {}
+  )
+}
+const addMarkers = () => {
+  clusterer.clear()
+  const overlays = items.value.map((data) => {
+    const position = data.latlng
+    const hgroup = document.createElement("hgroup")
+    hgroup.className ='speech-bubble'
+    const content = `
+      <p class='overlay-h2'>${data.complexName}</p>
+      <p class='overlay-p'>${data.cortarAddress}</p>
+    `
+    hgroup.innerHTML = content
+    hgroup.addEventListener('click', () => {
+      console.log(data)
+      selectedMarker.value = data
+    })
+    
+    return new kakao.maps.CustomOverlay({
+        position : position, 
+        content : hgroup,
+    });
+  })
+  clusterer.addMarkers(overlays)
+}
+
+onMounted(() => {
+  if (window.kakao && window.kakao.maps) {
+    initMap()
+  } else {
+    const script = document.createElement('script')
+    /* global kakao */
+    script.onload = () => kakao.maps.load(initMap)
+    script.src =
+      '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services,clusterer'
+    document.head.appendChild(script)
+  }
 })
 
-const items = reactive([
-        { header: "30개의 부동산 매물이 있습니다." },
-        {
-          src: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-          title: "제주첨단과학단지 꿈에그린2차 아파트",
-          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-          title: "JDC 제주첨단 리슈빌아파트",
-          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-          title: "JDC 제주첨단 행복주택 아파트",
-          subtitle:
-            '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          title: "제주의료원",
-          subtitle:
-            '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-          title: "제주대학교 아라캠퍼스",
-          subtitle:
-            '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-        },
-        { divider: true, inset: true },
-        {
-          src: "https://cdn.vuetifyjs.com/images/lists/1.jpg",
-          title: "제주첨단과학단지 꿈에그린2차 아파트",
-          subtitle: `<span class="text--primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/2.jpg",
-          title: "JDC 제주첨단 리슈빌아파트",
-          subtitle: `<span class="text--primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/3.jpg",
-          title: "JDC 제주첨단 행복주택 아파트",
-          subtitle:
-            '<span class="text--primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/4.jpg",
-          title: "제주의료원",
-          subtitle:
-            '<span class="text--primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-        },
-        { divider: true, inset: true },
-        {
-          avatar: "https://cdn.vuetifyjs.com/images/lists/5.jpg",
-          title: "제주대학교 아라캠퍼스",
-          subtitle:
-            '<span class="text--primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-        }
-])
-
+const items = ref([])
 </script>
 <template>
-<div class="map-wrap">
-    <div class="map-panel">
-      <RealEstateListItem :data="items"/>
-      <!-- <v-list three-line>
-        <template v-for="(item, index) in items">
-          <v-subheader v-if="item.header" :key="item.header" v-text="item.header"></v-subheader>
-
-          <v-divider v-else-if="item.divider" :key="index" :inset="item.inset"></v-divider>
-
-          <v-list-item v-else :key="item.title">
-            <v-list-item-avatar>
-              <v-img :src="item.avatar"></v-img>
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title v-html="item.title"></v-list-item-title>
-              <v-list-item-subtitle v-html="item.subtitle"></v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-      </v-list> -->
-    </div>
-    <div id="map"></div>
+  <div class="map-wrap">
+    <v-row>
+      <v-col class="map-items">
+        <RealEstateListItem :data="items" @selectedComplex="selectedComplex"/>
+      </v-col>
+      <div id="map"></div>
+    </v-row>
+    
 
     <v-container v-if="keyword != ''" class="mt-12">
       <v-row>
-        <progress-card :progressVal="50" :width="500" :height="200" :title="keyword + ' 지역의 투자상황'">
+        <progress-card
+          :progressVal="50"
+          :width="500"
+          :height="200"
+          :title="keyword + ' 지역의 투자상황'"
+        >
         </progress-card>
         <v-spacer></v-spacer>
         <v-card class="analyze-card" elevation="2" outlined>
@@ -176,9 +164,6 @@ const items = reactive([
 </template>
 
 <style scoped>
-.div {
-  display: block;
-}
 #map {
   position: relative;
   width: 100%;
@@ -190,7 +175,7 @@ const items = reactive([
   width: 100%;
   margin-bottom: 200px;
 }
-.map-panel {
+.v-col {
   position: absolute;
   width: 400px;
   height: 600px;
@@ -206,5 +191,33 @@ const items = reactive([
 .v-sheet.v-card {
   padding: 20px;
   border-radius: 25px;
+} 
+:deep() .speech-bubble {
+	position: relative;
+	background: #7ae9ff;
+	border-radius: 75px;
+  padding: 5px 15px 5px 15px;
+}
+
+:deep() .speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 28px solid transparent;
+	border-top-color: #7ae9ff;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -14px;
+	margin-bottom: -28px;
+}
+:deep() .overlay-h2 {
+  font-weight: bold;
+  color: white;
+}
+:deep() .overlay-p {
+  color: white;
 }
 </style>

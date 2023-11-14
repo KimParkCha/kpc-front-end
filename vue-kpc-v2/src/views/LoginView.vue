@@ -1,36 +1,51 @@
 <script setup>
+import { reactive } from 'vue'
+import userAPI from '@/api/user'
+import { useRouter} from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+const store = useUserStore()
 
-import { reactive } from "vue"
-import userAPI from "@/api/user"
-import { useRouter } from "vue-router"
+const { user: globalUser, token: globalToken } = storeToRefs(store)
+const {login: globalLogin} = store
+
+console.log(globalUser.value)
+console.log(globalToken.value)
+globalLogin(globalUser.value)
+console.log(globalUser.value)
+console.log(globalToken.value)
+
 
 const router = useRouter()
 const user = reactive({})
 const login = () => {
   userAPI.loginUser(
     user,
-    ({data}) => {
-      console.log(data)
-      console.log("로그인 성공")
-      router.push({name: "home"})
+    ({ data }) => {
+      console.log(data.response)
+      console.log(data.message)
+      console.log(data.data)
+      if (data.response == 'success') {
+        localStorage.setItem('token', data.data)
+        localStorage.setItem('user', JSON.stringify(data.user))
+        router.push({ name: 'home' })
+      }
+      if (data.response == 'error') {
+        alert(data.message)
+        router.push({ name: 'login' })
+      }
     },
     () => {
-      console.log("로그인 실패")
+      console.log('로그인 실패')
     }
-
   )
 }
-
 </script>
 
 <template>
- 
   <v-sheet :elevation="12" class="mx-auto">
-    <v-card class="mx-auto px-6 py-8" >
-      <v-form
-        v-model="form"
-        @submit.prevent="onSubmit"
-      >
+    <v-card class="mx-auto px-6 py-8">
+      <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model.lazy="user.email"
           :readonly="loading"
@@ -49,7 +64,7 @@ const login = () => {
           placeholder="Enter your password"
         ></v-text-field>
 
-        <br>
+        <br />
 
         <v-btn
           :disabled="!form"
@@ -71,7 +86,8 @@ const login = () => {
 <style scoped>
 .v-sheet {
   height: 200px;
-  width: 400px;
+  width: 500px;
   margin-bottom: 200px;
+  /* background-color: #27262c; */
 }
 </style>
