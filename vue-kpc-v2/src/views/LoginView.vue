@@ -1,7 +1,20 @@
 <script setup>
 import { reactive } from 'vue'
 import userAPI from '@/api/user'
-import { useRouter } from 'vue-router'
+import { useRouter} from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+const store = useUserStore()
+
+const { user: globalUser, token: globalToken } = storeToRefs(store)
+const {login: globalLogin} = store
+
+console.log(globalUser.value)
+console.log(globalToken.value)
+globalLogin(globalUser.value)
+console.log(globalUser.value)
+console.log(globalToken.value)
+
 
 const router = useRouter()
 const user = reactive({})
