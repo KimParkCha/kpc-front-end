@@ -5,7 +5,7 @@ import userAPI from "../api/user";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
-const user = reactive({user_id: "", name: "", email: "", password: ""});
+const user = reactive({user_id: "", name: "", email: "", password: "", address: ""});
 const login = () => {
   userAPI.registUser(
     user,
@@ -26,16 +26,17 @@ const login = () => {
     <v-sheet width="400" class="mx-auto">
   
       <v-form ref="form">
+       
         <v-text-field
-          v-model="user.user_id"
-          :counter="10"
+          v-model.lazy="user.email"
+          :counter="20"
           :rules="nameRules"
-          label="아이디"
+          label="이메일"
           required
         ></v-text-field>
 
         <v-text-field
-          v-model="user.password"
+          v-model.lazy="user.password"
           :counter="10"
           :rules="nameRules"
           label="비밀번호"
@@ -43,7 +44,7 @@ const login = () => {
         ></v-text-field>
   
         <v-text-field
-          v-model="passwordCheck"
+          v-model.lazy="passwordCheck"
           :counter="10"
           :rules="nameRules"
           label="비밀번호 확인"
@@ -51,7 +52,7 @@ const login = () => {
         ></v-text-field>
 
         <v-text-field
-          v-model="user.name"
+          v-model.lazy="user.name"
           :counter="10"
           :rules="nameRules"
           label="이름"
@@ -59,10 +60,10 @@ const login = () => {
         ></v-text-field>
 
         <v-text-field
-          v-model="user.email"
+          v-model.lazy="user.address"
           :counter="10"
           :rules="nameRules"
-          label="이메일"
+          label="주소"
           required
         ></v-text-field>
 

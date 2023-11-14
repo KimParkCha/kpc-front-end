@@ -32,7 +32,7 @@ const login = () => {
         @submit.prevent="onSubmit"
       >
         <v-text-field
-          v-model="user.email"
+          v-model.lazy="user.email"
           :readonly="loading"
           :rules="[required]"
           class="mb-2"
@@ -41,7 +41,7 @@ const login = () => {
         ></v-text-field>
 
         <v-text-field
-          v-model="user.password"
+          v-model.lazy="user.password"
           :readonly="loading"
           :rules="[required]"
           clearable
