@@ -2,14 +2,32 @@ import { localAxios } from '@/utils/http-commons'
 
 const deptAPI = localAxios()
 
-// 부서 목록 조회
-const getList = (success, fail) => {
-  deptAPI.get('/api/dept').then(success).catch(fail)
+// ㅣ키워드를 포함하는 시군구 정보 요청
+const getRegions = (keyword, success, fail) => {
+  deptAPI
+    .get('/api/region/list', {
+      params: {
+        keyword: keyword
+      }
+    })
+    .then(success)
+    .catch(fail)
 }
 
 // 부서 조회
-const get = (deptno, success, fail) => {
-  deptAPI.get(`/api/dept/${deptno}`).then(success).catch(fail)
+const getComplexes = (ia, success, fail) => {
+  console.log(ia)
+  deptAPI
+    .get(`/api/complex/list`, {
+      params: {
+        ha: ia.ha,
+        oa: ia.oa,
+        pa: ia.pa,
+        qa: ia.qa
+      }
+    })
+    .then(success)
+    .catch(fail)
 }
 
 // 부서 삭제
@@ -27,4 +45,4 @@ const modify = (dept, success, fail) => {
   deptAPI.put(`/api/dept/${dept.deptno}`).then(success).catch(fail)
 }
 
-export default { getList, get, del, register, modify }
+export default { getRegions, getComplexes, del, register, modify }
