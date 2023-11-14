@@ -12,14 +12,19 @@ const selectedMarker = ref(null)
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
-  panTo(props.receivedKeyword.key)
+  const latlng = new kakao.maps.LatLng(keyword.value.centerLat, keyword.value.centerLon)
+  moveLatLng(latlng, 3)
   getComplexes()
 })
 watch(selectedMarker, (newVal) => {
-  const selectedLatLng = newVal.getPosition()
-  map.panTo(newVal.getPosition())
-  console.log(selectedLatLng)
+  moveLatLng(newVal.latlng, 2)
+  // console.log(selectedLatLng)
 })
+
+const selectedComplex = (payload) => {
+  // console.log(payload.item)
+  selectedMarker.value = payload.item
+}
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
@@ -65,10 +70,9 @@ const displayCenterInfo = (result, status) => {
     }
   }
 }
-const panTo = (data) => {
-  const moveLatLon = new kakao.maps.LatLng(data.centerLat, data.centerLon)
-  map.panTo(moveLatLon)
-  map.setLevel(3);
+const moveLatLng = (data, level) => {
+  map.setCenter(data)
+  map.setLevel(level);
 }
 const getComplexes = () => {
   // console.log(map.getBounds())
@@ -97,7 +101,8 @@ const addMarkers = () => {
     `
     hgroup.innerHTML = content
     hgroup.addEventListener('click', () => {
-      map.panTo(position)
+      console.log(data)
+      selectedMarker.value = data
     })
     
     return new kakao.maps.CustomOverlay({
@@ -127,7 +132,7 @@ const items = ref([])
   <div class="map-wrap">
     <v-row>
       <v-col class="map-items">
-        <RealEstateListItem :data="items" />
+        <RealEstateListItem :data="items" @selectedComplex="selectedComplex"/>
       </v-col>
       <div id="map"></div>
     </v-row>
