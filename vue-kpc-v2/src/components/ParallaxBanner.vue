@@ -8,7 +8,7 @@ function getImageUrl(name) {
 </script>
 
 <template>
-  <v-parallax :src="getImageUrl(fname)" height="500">
+  <v-parallax :src="getImageUrl(fname)" height="700">
     <v-row align="center" justify="center" style="height: 100%">
       <v-col cols="12" align="left">
         <h1 class="text-h2 font-weight-bold mb-4">

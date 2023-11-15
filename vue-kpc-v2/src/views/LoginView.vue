@@ -1,5 +1,6 @@
 <script setup>
 import { ref, reactive } from 'vue'
+<<<<<<< HEAD
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
@@ -19,6 +20,25 @@ const loginUser = ref({
 
 console.log(globalUser.value)
 console.log(globalToken.value)
+=======
+import userAPI from '@/api/user'
+import { useRouter} from 'vue-router'
+import { useUserStore } from '@/stores/user'
+import { storeToRefs } from 'pinia'
+
+const userStore = useUserStore()
+
+const { isLogin } = storeToRefs(userStore)
+const { login, getUserInfo } = userStore
+
+const loginUser = ref({
+  email: '',
+  password: ''
+})
+
+// console.log(globalUser.value)
+// console.log(globalToken.value)
+>>>>>>> 1bb102f2a4b5b4c31168429d3cede814d368d973
 // globalLogin(globalUser.value)
 // console.log(globalUser.value)
 // console.log(globalToken.value)
@@ -26,13 +46,28 @@ console.log(globalToken.value)
 const router = useRouter()
 const user = reactive({})
 const loginFn = async () => {
+<<<<<<< HEAD
   console.log('login ing!!!! !!!')
   await login(loginUser.value)
   let token = sessionStorage.getItem('token')
+=======
+  console.log(loginUser.value.email)
+  console.log(loginUser.value.password)
+  console.log('login ing!!!! !!!')
+
+  await login(loginUser.value)
+
+  let token = sessionStorage.getItem('accessToken')
+
+>>>>>>> 1bb102f2a4b5b4c31168429d3cede814d368d973
   console.log('111. ', token)
   console.log('isLogin: ', isLogin)
   if (isLogin) {
     console.log('로그인 성공아닌가???')
+<<<<<<< HEAD
+=======
+    getUserInfo(token)
+>>>>>>> 1bb102f2a4b5b4c31168429d3cede814d368d973
     router.push('/')
   } else {
     console.log('로그인 실패')
@@ -46,7 +81,7 @@ const loginFn = async () => {
     <v-card class="mx-auto px-6 py-8">
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
-          v-model="user.email"
+          v-model.lazy="loginUser.email"
           :readonly="loading"
           :rules="[required]"
           class="mb-2"
@@ -55,7 +90,7 @@ const loginFn = async () => {
         ></v-text-field>
 
         <v-text-field
-          v-model="user.password"
+          v-model.lazy="loginUser.password"
           :readonly="loading"
           :rules="[required]"
           clearable

@@ -1,20 +1,22 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import userAPI from '@/api/user'
+import { jwtDecode } from 'jwt-decode'
 
 export const useUserStore = defineStore('user', () => {
-  const orgUser = ref(null)
+  const userInfo = ref(null)
   const orgToken = ref(null)
   const isLogin = ref(false)
+  const isValidToken = ref(false)
 
   const user = computed(() => {
-    return orgUser.value
+    return userInfo.value
   })
   const token = computed(() => {
     return orgToken.value
   })
   const setUser = (user) => {
-    orgUser.value = user
+    userInfo.value = user
   }
 
   const setToken = (token) => {
@@ -26,25 +28,60 @@ export const useUserStore = defineStore('user', () => {
       userInfo,
       ({ data }) => {
         console.log(data)
-        console.log('data ' + data.response)
-        console.log('data status ' + data.status)
-        console.log('data token ' + data.token)
+        console.log('data response' + data.response)
+        console.log('data message ' + data.message)
+        console.log('data ref ' + data.data)
 
         if (data.response === 'success') {
-          setUser(data.user)
+          // setUser(data.user)
           setToken(data.token)
-          console.log('5')
-          sessionStorage.setItem('accessToken', data.token)
+          console.log('success5')
+
+          isLogin.value = true
+          isValidToken.value = true
+
+          sessionStorage.setItem('accessToken', data.accessToken)
+          sessionStorage.setItem('refreshToken', data.refreshToken)
+          console.log('sessiontStorage에 담았다', isLogin.value)
         } else {
-          console.log('로그인 실패')
+          console.log('로그인 실패2')
           isLogin.value = false
+          isValidToken.value = false
         }
       },
-      () => {
-        console.log('로그인 실패')
+      (error) => {
+        console.error(error)
       }
     )
   }
 
-  return { user, token, isLogin, login }
+  const getUserInfo = (token) => {
+    console.log('1. token', token)
+    // let decodeToken = jwtDecode(token);
+    // console.log("2. decodeToken", decodeToken);
+    userAPI.getUser(
+      // decodeToken.userId,
+      30,
+      (response) => {
+        console.log(response)
+        if (response.status === httpStatusCode.OK) {
+          userInfo.value = response.data.userInfo
+          console.log('3. getUserInfo data >> ', response.data)
+        } else {
+          console.log('유저 정보 없음!!!!')
+        }
+      },
+      async (error) => {
+        console.error(
+          'getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ',
+          error.response.status
+        )
+        isValidToken.value = false
+
+        await tokenRegenerate()
+      }
+    )
+  }
+
+  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo }
 })

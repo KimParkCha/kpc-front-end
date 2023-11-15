@@ -17,12 +17,11 @@ const logout = () => {
       <RouterLink to="/">김박차</RouterLink>
     </v-btn>
     <v-spacer></v-spacer>
-    <v-btn><RouterLink to="/create">생성</RouterLink></v-btn>
-    <v-btn><RouterLink to="/login">로그인</RouterLink></v-btn>
+    <RouterLink to="/map"><v-btn>지도</v-btn></RouterLink>
+    <RouterLink to="/create"><v-btn>생성</v-btn></RouterLink>
+    <RouterLink to="/login"><v-btn>로그인</v-btn></RouterLink>
     <!-- <v-btn><RouterLink @click="logout">로그아웃</RouterLink></v-btn> -->
     <!-- <v-btn><RouterLink to="/mypage">마이페이지</RouterLink></v-btn> -->
-    <v-btn
-      ><RouterLink :to="{ name: 'mypage', params: { user_id: '3' } }">마이페이지</RouterLink></v-btn
-    >
+    <RouterLink :to="{ name: 'mypage', params: { user_id: '3' } }"><v-btn>마이페이지</v-btn></RouterLink>
   </v-app-bar>
 </template>
