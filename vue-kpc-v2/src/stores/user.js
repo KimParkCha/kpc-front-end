@@ -4,19 +4,19 @@ import userAPI from '@/api/user'
 import { jwtDecode } from 'jwt-decode'
 
 export const useUserStore = defineStore('user', () => {
-  const orgUser = ref(null)
+  const userInfo = ref(null)
   const orgToken = ref(null)
   const isLogin = ref(false)
-  const isVaildToken = ref(false)
+  const isValidToken = ref(false)
 
   const user = computed(() => {
-    return orgUser.value
+    return userInfo.value
   })
   const token = computed(() => {
     return orgToken.value
   })
   const setUser = (user) => {
-    orgUser.value = user
+    userInfo.value = user
   }
 
   const setToken = (token) => {
@@ -36,13 +36,17 @@ export const useUserStore = defineStore('user', () => {
           // setUser(data.user)
           setToken(data.token)
           console.log('success5')
+
+          isLogin.value = true;
+          isValidToken.value = true;
+
           sessionStorage.setItem('accessToken', data.accessToken)
           sessionStorage.setItem('refreshToken', data.refreshToken)
           console.log("sessiontStorage에 담았다", isLogin.value);
         } else {
           console.log('로그인 실패2')
           isLogin.value = false
-          isVaildToken.value = false
+          isValidToken.value = false
         }
       },
       (error) => {
@@ -51,7 +55,33 @@ export const useUserStore = defineStore('user', () => {
     )
   }
 
+  const getUserInfo = (token) => {
+    console.log("1. token", token);
+    // let decodeToken = jwtDecode(token);
+    // console.log("2. decodeToken", decodeToken);
+    userAPI.getUser(
+      // decodeToken.userId,
+      30,
+      (response) => {
+        console.log(response)
+        if (response.status === httpStatusCode.OK) {
+          userInfo.value = response.data.userInfo;
+          console.log("3. getUserInfo data >> ", response.data);
+        } else {
+          console.log("유저 정보 없음!!!!");
+        }
+      },
+      async (error) => {
+        console.error(
+          "getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ",
+          error.response.status
+        );
+        isValidToken.value = false;
 
+        await tokenRegenerate();
+      }
+    );
+  };
 
-  return { user, token, isLogin, isVaildToken, login }
+  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo}
 })

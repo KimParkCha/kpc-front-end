@@ -14,7 +14,7 @@ const loginUser = async (user, success, fail) => {
 }
 
 const getUser = async (user_id, success, fail) => {
-  local.defaults.headers['Authorization'] = sessionStorage.getItem('token')
+  userAPI.defaults.headers['Authorization'] = sessionStorage.getItem('accessToken')
   await userAPI.get(`/user/detailUser/${user_id}`).then(success).catch(fail)
 }
 

@@ -4,20 +4,19 @@ import userAPI from '@/api/user'
 import { useRouter} from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+
 const userStore = useUserStore()
 
-const { user: globalUser, token: globalToken } = storeToRefs(userStore)
 const { isLogin } = storeToRefs(userStore)
-
-const { login } = userStore
+const { login, getUserInfo } = userStore
 
 const loginUser = ref({
   email: '',
   password: ''
 })
 
-console.log(globalUser.value)
-console.log(globalToken.value)
+// console.log(globalUser.value)
+// console.log(globalToken.value)
 // globalLogin(globalUser.value)
 // console.log(globalUser.value)
 // console.log(globalToken.value)
@@ -30,12 +29,14 @@ const loginFn = async () => {
   console.log('login ing!!!! !!!')
 
   await login(loginUser.value)
-  let token = sessionStorage.getItem('token')
-  
+
+  let token = sessionStorage.getItem('accessToken')
+
   console.log('111. ', token)
   console.log('isLogin: ', isLogin)
   if (isLogin) {
     console.log('로그인 성공아닌가???')
+    getUserInfo(token)
     router.push('/')
   } else {
     console.log('로그인 실패')
