@@ -2,6 +2,7 @@
 import ParallaxBanner from '../components/ParallaxBanner.vue'
 import KakaoMap from '../components/KakaoMap.vue'
 import KakaoMapView from '../components/KakaoMapView.vue'
+import { RouterLink } from 'vue-router'
 import { ref } from 'vue';
 
 const topTitle = ref({
@@ -98,7 +99,7 @@ const posts = ref([
                                   <v-col class="d-flex flex-column justify-center align-center">
                                         <h1 class="title" v-html="bottomTitle.title"></h1>
                                         <br>
-                                        <v-btn rounded="xl" size="x-large" tonal>시작하기</v-btn>
+                                        <RouterLink to="/map"><v-btn rounded="xl" size="x-large">시작하기</v-btn></RouterLink>
                                     </v-col>
                                 </v-row>
                             </v-card-text>
