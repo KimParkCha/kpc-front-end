@@ -13,9 +13,9 @@ const loginUser = async (user, success, fail) => {
   console.log('api user 성공??')
 }
 
-const getUser = async (user_id, success, fail) => {
+const getUser = async (email, success, fail) => {
   userAPI.defaults.headers['Authorization'] = sessionStorage.getItem('accessToken')
-  await userAPI.get(`/user/detailUser/${user_id}`).then(success).catch(fail)
+  await userAPI.get(`/user/detailUser/${email}`).then(success).catch(fail)
 }
 
 const logout = async (userid, success, fail) => {
