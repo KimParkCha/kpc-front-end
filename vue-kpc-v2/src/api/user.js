@@ -3,16 +3,22 @@ import { localAxios } from '@/utils/http-commons'
 
 const userAPI = localAxios()
 
-const registUser = (user, success, fail) => {
-  userAPI.post(`/user/register`, user).then(success).catch(fail)
+const registUser = async (user, success, fail) => {
+  console.log('user: ', user)
+  await userAPI.post(`/user/register`, user).then(success).catch(fail)
 }
 
-const loginUser = (user, success, fail) => {
-  userAPI.post(`/user/login`, user).then(success).catch(fail)
+const loginUser = async (user, success, fail) => {
+  await userAPI.post(`/user/login`, user).then(success).catch(fail)
 }
 
-const getUser = (user_id, success, fail) => {
-  userAPI.get(`/user/detailUser/${user_id}`).then(success).catch(fail)
+const getUser = async (user_id, success, fail) => {
+  local.defaults.headers['Authorization'] = sessionStorage.getItem('token')
+  await userAPI.get(`/user/detailUser/${user_id}`).then(success).catch(fail)
 }
 
-export default { registUser, loginUser, getUser }
+const logout = async (userid, success, fail) => {
+  await userAPI.get(`/user/logout/${userid}`).then(success).catch(fail)
+}
+
+export default { registUser, loginUser, getUser, logout }

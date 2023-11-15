@@ -10,6 +10,19 @@ function localAxios() {
     }
   })
 
+  // Request 발생 시 적용할 내용.
+  instance.defaults.headers.common['Authorization'] = ''
+  instance.defaults.headers.post['Content-Type'] = 'application/json'
+  instance.defaults.headers.put['Content-Type'] = 'application/json'
+
+  // Request, Response 시 설정한 내용을 적용.
+  instance.interceptors.request.use((config) => {
+    return config
+  }),
+    (error) => {
+      return Promise.reject(error)
+    }
+
   return instance
 }
 

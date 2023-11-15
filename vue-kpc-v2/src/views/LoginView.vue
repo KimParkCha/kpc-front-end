@@ -1,44 +1,43 @@
 <script setup>
-import { reactive } from 'vue'
-import userAPI from '@/api/user'
-import { useRouter} from 'vue-router'
+import { ref, reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-const store = useUserStore()
+// import {useMenuStore} from '@/stores/menu'
 
-const { user: globalUser, token: globalToken } = storeToRefs(store)
-const {login: globalLogin} = store
+const userStore = useUserStore()
+
+const { user: globalUser, token: globalToken } = storeToRefs(userStore)
+const { isLogin } = storeToRefs(userStore)
+
+const { login } = userStore
+
+const loginUser = ref({
+  email: '',
+  password: ''
+})
 
 console.log(globalUser.value)
 console.log(globalToken.value)
-globalLogin(globalUser.value)
-console.log(globalUser.value)
-console.log(globalToken.value)
-
+// globalLogin(globalUser.value)
+// console.log(globalUser.value)
+// console.log(globalToken.value)
 
 const router = useRouter()
 const user = reactive({})
-const login = () => {
-  userAPI.loginUser(
-    user,
-    ({ data }) => {
-      console.log(data.response)
-      console.log(data.message)
-      console.log(data.data)
-      if (data.response == 'success') {
-        localStorage.setItem('token', data.data)
-        localStorage.setItem('user', JSON.stringify(data.user))
-        router.push({ name: 'home' })
-      }
-      if (data.response == 'error') {
-        alert(data.message)
-        router.push({ name: 'login' })
-      }
-    },
-    () => {
-      console.log('로그인 실패')
-    }
-  )
+const loginFn = async () => {
+  console.log('login ing!!!! !!!')
+  await login(loginUser.value)
+  let token = sessionStorage.getItem('token')
+  console.log('111. ', token)
+  console.log('isLogin: ', isLogin)
+  if (isLogin) {
+    console.log('로그인 성공아닌가???')
+    router.push('/')
+  } else {
+    console.log('로그인 실패')
+    router.push('/login')
+  }
 }
 </script>
 
@@ -74,7 +73,7 @@ const login = () => {
           size="large"
           type="submit"
           variant="elevated"
-          @click="login"
+          @click="loginFn"
         >
           Sign In
         </v-btn>
