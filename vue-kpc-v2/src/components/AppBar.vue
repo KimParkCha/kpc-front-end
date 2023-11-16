@@ -18,7 +18,7 @@ const fname = ref('logo')
 const getImageUrls = (name) => {
   return new URL(`/src/assets/${name}.svg`, import.meta.url).href
 }
-  
+   
 </script>
 
 <template>
