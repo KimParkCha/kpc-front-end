@@ -2,29 +2,14 @@
 import { reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import userAPI from '../api/user'
+import { useUserStore } from '@/stores/user'
 
-const user = reactive({})
+const userStore = useUserStore()
+
+const { user } = userStore
+
 const route = useRoute()
 console.log(route.params.user_id)
-
-const getUser = () => {
-  console.log('getUser')
-  userAPI.getUser(
-    3,
-    ({ data }) => {
-      console.log(data)
-      user.id = data.user_id
-      user.name = data.name
-      user.email = data.email
-      user.password = data.password
-    },
-    (err) => {
-      console.log(err)
-    }
-  )
-}
-
-getUser()
 </script>
 
 <template>

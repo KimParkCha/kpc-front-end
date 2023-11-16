@@ -65,6 +65,7 @@ export const useUserStore = defineStore('user', () => {
         console.log(response.data.name)
         if (response.status === 200) {
           userInfo.value = response.data
+          setUser(response.data)
           console.log('3. getUserInfo data >> ', response.data)
         } else {
           console.log('유저 정보 없음!!!!')
