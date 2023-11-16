@@ -2,6 +2,7 @@
 import { RouterLink } from 'vue-router'
 import { useMenuStore } from '@/stores/menu'
 import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
 
 const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
@@ -11,16 +12,20 @@ const logout = () => {
   console.log('로그아웃!!!!')
   changeMenuState()
 }
+
+const fname = ref('logo')
+
+const getImageUrls = (name) => {
+  return new URL(`/src/assets/${name}.svg`, import.meta.url).href
+}
+  
 </script>
 
 <template>
   <v-app-bar>
-    <v-btn text>
-      <template v-slot:prepend>
-        <v-icon color="success">mdi-account</v-icon>
-      </template>
-      <RouterLink to="/">김박차</RouterLink>
-    </v-btn>
+    <RouterLink to="/">  
+      <v-img :src="getImageUrls(fname)" :width="56" :height="56" class="ms-2"></v-img>
+  </RouterLink>
     <v-spacer></v-spacer>
 
     <RouterLink to="/map"><v-btn>지도</v-btn></RouterLink>
