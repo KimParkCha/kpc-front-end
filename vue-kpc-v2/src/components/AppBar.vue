@@ -14,7 +14,7 @@ const logout = () => {
 </script>
 
 <template>
-  <v-app-bar color="#BBDEFB">
+  <v-app-bar>
     <v-btn text>
       <template v-slot:prepend>
         <v-icon color="success">mdi-account</v-icon>
