@@ -19,9 +19,6 @@ const fetchEntriesDebounced = () => {
       clearTimeout(timerId)
       // 0.5초 동안 동작이 없으면 completeSearch 함수 호출
       timerId = setTimeout(() => {
-        // maybe : this.fetch_data()
-        console.log("api 호출")
-       
         completeSearch()
       }, 500)
 }
