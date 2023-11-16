@@ -4,7 +4,7 @@ import KakaoMap from '../components/KakaoMap.vue'
 import KakaoMapView from '../components/KakaoMapView.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue';
-
+import FloatingButton from '../components/FloatingButton.vue';
 const topTitle = ref({
   isActive: false,
   title: '매번 직접 분석해야했던 부동산 정보',
@@ -39,8 +39,8 @@ const posts = ref([
 
 <template>
   <ParallaxBanner />
+  <FloatingButton />
   <v-sheet class="d-flex flex-column justify-center align-center fill-height" color="transparent" min-height="500">
-    
                   <v-lazy
                         v-model="topTitle.isActive"
                         >
