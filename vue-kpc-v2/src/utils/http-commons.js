@@ -12,6 +12,7 @@ function localAxios() {
   })
 
   // Request 발생 시 적용할 내용.
+<<<<<<< HEAD
   instance.defaults.headers.common["Authorization"] = "";
   instance.defaults.headers.post["Content-Type"] = "application/json";
   instance.defaults.headers.put["Content-Type"] = "application/json";
@@ -24,6 +25,20 @@ function localAxios() {
       return Promise.reject(error);
     };
   
+=======
+  instance.defaults.headers.common['Authorization'] = ''
+  instance.defaults.headers.post['Content-Type'] = 'application/json'
+  instance.defaults.headers.put['Content-Type'] = 'application/json'
+
+  // Request, Response 시 설정한 내용을 적용.
+  instance.interceptors.request.use((config) => {
+    return config
+  }),
+    (error) => {
+      return Promise.reject(error)
+    }
+
+>>>>>>> 0b3d90fcfe7a397320b07a84cb2b80d68e110148
   return instance
 }
 

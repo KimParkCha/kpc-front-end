@@ -33,16 +33,16 @@ export const useUserStore = defineStore('user', () => {
         console.log('data ref ' + data.data)
 
         if (data.response === 'success') {
-          // setUser(data.user)
-          setToken(data.token)
+          setUser(data.user)
+          setToken(data.accessToken)
           console.log('success5')
 
-          isLogin.value = true;
-          isValidToken.value = true;
+          isLogin.value = true
+          isValidToken.value = true
 
           sessionStorage.setItem('accessToken', data.accessToken)
           sessionStorage.setItem('refreshToken', data.refreshToken)
-          console.log("sessiontStorage에 담았다", isLogin.value);
+          console.log('sessiontStorage에 담았다', isLogin.value)
         } else {
           console.log('로그인 실패2')
           isLogin.value = false
@@ -56,32 +56,29 @@ export const useUserStore = defineStore('user', () => {
   }
 
   const getUserInfo = (token) => {
-    console.log("1. token", token);
-    // let decodeToken = jwtDecode(token);
-    // console.log("2. decodeToken", decodeToken);
+    console.log('1. token', token)
+    let decodeToken = jwtDecode(token)
+    console.log('2. decodeToken', decodeToken)
     userAPI.getUser(
-      // decodeToken.userId,
-      30,
+      decodeToken.email,
       (response) => {
-        console.log(response)
-        if (response.status === httpStatusCode.OK) {
-          userInfo.value = response.data.userInfo;
-          console.log("3. getUserInfo data >> ", response.data);
+        console.log(response.data.name)
+        if (response.status === 200) {
+          userInfo.value = response.data
+          setUser(response.data)
+          console.log('3. getUserInfo data >> ', response.data)
         } else {
-          console.log("유저 정보 없음!!!!");
+          console.log('유저 정보 없음!!!!')
         }
       },
       async (error) => {
-        console.error(
-          "getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ",
-          error.response.status
-        );
-        isValidToken.value = false;
+        console.error('getUserInfo() error code [토큰 만료되어 사용 불가능.] ::: ')
+        isValidToken.value = false
 
-        await tokenRegenerate();
+        // await tokenRegenerate()
       }
-    );
-  };
+    )
+  }
 
-  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo}
+  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo }
 })

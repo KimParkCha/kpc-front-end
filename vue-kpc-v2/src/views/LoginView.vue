@@ -1,14 +1,16 @@
 <script setup>
 import { ref, reactive } from 'vue'
 import userAPI from '@/api/user'
-import { useRouter} from 'vue-router'
+import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
+import { useMenuStore } from '@/stores/menu'
 
 const userStore = useUserStore()
 
 const { isLogin } = storeToRefs(userStore)
 const { login, getUserInfo } = userStore
+const { changeMenuState } = useMenuStore()
 
 const loginUser = ref({
   email: '',
@@ -37,6 +39,7 @@ const loginFn = async () => {
   if (isLogin) {
     console.log('로그인 성공아닌가???')
     getUserInfo(token)
+    changeMenuState()
     router.push('/')
   } else {
     console.log('로그인 실패')

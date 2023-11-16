@@ -27,9 +27,9 @@ const vuetify = createVuetify({
           //green: '#00ff00' // cannot use primary color names here, so use a custom color name (such as 'greenish')
           greenish: colors.blue.lighten3,
           // Workaround: Custom colors seem to erase default colors, so we need to include the default colors (of `light` or `dark` theme)
-          background: colors.blue.lighten3,
-          surface: colors.blue.lighten3,
-          primary: colors.blue.lighten3,
+          background: colors.blue.lighten4,
+          surface: colors.blue.lighten4,
+          primary: colors.blue.lighten4,
           'primary-darken-1': colors.blue.lighten3,
           secondary: colors.blue.lighten3,
           'secondary-darken-1': colors.blue.lighten3,
