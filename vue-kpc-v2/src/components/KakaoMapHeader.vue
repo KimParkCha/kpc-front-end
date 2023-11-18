@@ -1,22 +1,33 @@
 <script setup>
-import { ref, reactive } from 'vue'
+import { ref, reactive, watch } from 'vue'
 import regionAPI from '@/api/realEstate'
 const emit = defineEmits(['search'])
 
 const keyword = ref('')
 const items = ref([])
+const autoSearchList = ref(false)
+
+let timerId = null
 const snackbarData = reactive({
   snackbar: false,
   text: '검색어에 해당하는 지역 정보가 존재하지 않습니다.',
   timeout: 2000
 })
 
-const search = () => {
-  console.log(keyword.value.constructor)
-  if (keyword.value.constructor == Object) {
-    console.log('it is object')
-    emit('search', keyword)
-  } else {
+const fetchEntriesDebounced = () => {
+      items.value = null
+      clearTimeout(timerId)
+      // 0.5초 동안 동작이 없으면 completeSearch 함수 호출
+      timerId = setTimeout(() => {
+        completeSearch()
+      }, 500)
+}
+const completeSearch = () => {
+  let str = keyword.value
+  str = str.trim()                                                
+  const reg = /[^가-힣ㄱ-ㅎㅏ-ㅣa-zA-Z0-9|+]/.test(str);    
+  if(!reg && str !== ""){
+
     regionAPI.getRegions(
       keyword.value,
       (data) => {
@@ -24,18 +35,32 @@ const search = () => {
           console.log('데이터 없음')
           snackbarData.snackbar = true
         }
-        console.log(data)
         items.value = data.data
       },
       () => {}
     )
   }
 }
+
+watch(keyword, (newVal) => {
+  if (newVal) {
+    fetchEntriesDebounced()
+  } else {
+    items.value = []
+  }
+})
+const updateStatus = (status) => {
+    autoSearchList.value = status
+}
+const clickItem = (item) => {
+  emit('search', item)
+  keyword.value = ""
+}
 </script>
 
 <template>
   <div>
-    <v-tabs bg-color="#BBDEFB" fixed-tabs>
+    <v-tabs fixed-tabs>
       <v-tab>아파트, 오피스텔</v-tab>
       <v-tab>빌라, 주택</v-tab>
       <v-tab>원룸, 투룸</v-tab>
@@ -45,21 +70,37 @@ const search = () => {
     <v-col class="container" align="center" justify="center">
       <v-row align="center">
         <v-col cols="12" sm="6" md="4" align="center">
-          <v-combobox
-            v-model="keyword"
-            v-on:keyup.enter="search($event)"
-            :items="items"
-            item-title="cortarName"
-            rounded
-            theme="light"
-            variant="solo"
-            return-object
-            validate-on="lazy"
-            placeholder="원하는 매물을 검색해보세요"
-          >
-          </v-combobox>
-        </v-col>
-
+    <v-text-field
+        v-model.lazy="keyword"
+        filled
+        rounded
+        dense
+        variant="solo"
+        @focus="updateStatus(true)"
+    >
+    </v-text-field>
+    <transition name="top-slide" mode="in-out">
+      <div class="justify-center align-center flex-column d-flex">
+        <v-list class="pa-0 ma-0 search-list" :v-show="autoSearchList.value" light>
+          <v-list-item-group>
+              <v-list-item
+              v-for="(item,index) in items"
+                     :key="index" 
+                     @click="clickItem(item)"
+                  class="top-list"
+                  :class="{ 'on-hover': hover }">
+                <v-list-item-content class="pl-0">
+                  <v-list-item-title :title="item.cortarName">
+                    <span > {{item.cortarName}} </span>
+                  </v-list-item-title>
+                </v-list-item-content>
+                <v-divider></v-divider> 
+              </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </div>
+    </transition>
+  </v-col>
         <v-chip-group v-model="amenities" column multiple>
           <v-chip large filter outlined> 아파트 </v-chip>
           <v-chip large filter outlined> 아파트 분양권 </v-chip>
@@ -79,6 +120,14 @@ const search = () => {
   </div>
 </template>
 <style scoped>
+.v-list {
+  z-index: 3333;
+  position: absolute;
+  width: 400px;
+  border-radius: 10px;
+  top: 210px;
+}
+
 .v-tabs {
   margin: 10px;
 }
