@@ -2,16 +2,33 @@
 import { RouterLink } from 'vue-router'
 import { useMenuStore } from '@/stores/menu'
 import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
+import { ref, reactive } from 'vue'
 
 const menuStore = useMenuStore()
+const userStore = useUserStore()
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
+const { user, getUserInfo } = userStore;
+const { isLogin, userInfo } = storeToRefs(userStore)
+
+const getToken = sessionStorage.getItem('accessToken')
+console.log('appbar :' +  getToken)
+console.log('isLogin :' +  isLogin.value)
+
+const token = ref({
+    tokens : getToken,
+    user : getUserInfo
+})
 
 const logout = () => {
   console.log('로그아웃!!!!')
+  sessionStorage.clear();
   changeMenuState()
 }
+
 </script>
+
 
 <template>
   <v-app-bar>
@@ -29,9 +46,14 @@ const logout = () => {
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.show">
         <template v-if="menu.routeName === 'logout'">
-          <RouterLink to="/" @click.prevent="logout"
-            ><v-btn>{{ menu.name }}</v-btn></RouterLink
-          >
+          
+                  <RouterLink to="/" @click.prevent="logout"
+                ><v-btn>{{ menu.name }}</v-btn></RouterLink
+              >
+              <RouterLink
+                ><v-btn>token.user</v-btn></RouterLink
+              >
+            
         </template>
         <template v-else>
           <RouterLink :to="{ name: menu.routeName }"

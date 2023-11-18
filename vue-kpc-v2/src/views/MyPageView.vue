@@ -9,7 +9,7 @@ const userStore = useUserStore()
 const { user } = userStore
 
 const route = useRoute()
-console.log(route.params.user_id)
+console.log(user.id)
 </script>
 
 <template>

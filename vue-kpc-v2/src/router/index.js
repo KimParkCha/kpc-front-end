@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import LoginView from '../views/LoginView.vue'
 import MapView from '../views/MapView.vue'
 import MyPageView from '../views/MyPageView.vue'
+import CreateView from '../views/CreateView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,7 +21,7 @@ const router = createRouter({
     {
       path: '/create',
       name: 'create',
-      component: MapView
+      component: CreateView
     },
     {
       path: '/map',

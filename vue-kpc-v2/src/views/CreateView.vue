@@ -81,4 +81,10 @@ const login = () => {
   </v-sheet>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.v-text-field{
+  background-color: #fff;
+}
+
+</style>

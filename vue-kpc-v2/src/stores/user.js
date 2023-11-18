@@ -22,21 +22,26 @@ export const useUserStore = defineStore('user', () => {
   const setToken = (token) => {
     orgToken.value = token
   }
-  const login = async (userInfo) => {
+
+  const loginBoolean = computed(() => {
+      return isLogin.value
+  })
+
+  const login = async (getuser) => {
     console.log('store login')
     await userAPI.loginUser(
-      userInfo,
+      getuser,
       ({ data }) => {
-        console.log(data)
-        console.log('data response' + data.response)
-        console.log('data message ' + data.message)
-        console.log('data ref ' + data.data)
+        // console.log(data)
+        // console.log('data response' + data.response)
+        // console.log('data message ' + data.message)
+        // console.log('data ref ' + data.data)
 
         if (data.response === 'success') {
           setUser(data.user)
           setToken(data.accessToken)
-          console.log('success5')
-
+          // console.log('success5')
+          userInfo.value = data.user;
           isLogin.value = true
           isValidToken.value = true
 
@@ -80,5 +85,5 @@ export const useUserStore = defineStore('user', () => {
     )
   }
 
-  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo }
+  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo, loginBoolean }
 })
