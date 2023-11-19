@@ -4,7 +4,7 @@ import userAPI from '../api/user'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const user = reactive({ user_id: '', name: '', email: '', password: '' })
+const user = reactive({ user_id: '', name: '', email: '', password: '', passwordCheck: '' })
 const login = () => {
   userAPI.registUser(
     user,
@@ -40,7 +40,7 @@ const login = () => {
       ></v-text-field>
 
       <v-text-field
-        v-model="passwordCheck"
+        v-model="user.passwordCheck"
         :counter="10"
         :rules="nameRules"
         label="비밀번호 확인"
@@ -81,4 +81,20 @@ const login = () => {
   </v-sheet>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-card {
+  background-color: #fff;
+  height: 400px;
+}
+.v-text-field {
+  background-color: #fff;
+}
+
+.v-checkbox {
+  background-color: #fff;
+}
+
+.d-flex {
+  background-color: #fff;
+}
+</style>

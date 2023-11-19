@@ -9,6 +9,8 @@ const { changeMenuState } = menuStore
 
 const logout = () => {
   console.log('로그아웃!!!!')
+  localStorage.removeItem('accessToken')
+  localStorage.removeItem('refreshToken')
   changeMenuState()
 }
 </script>

@@ -37,14 +37,18 @@ const loginFn = async () => {
   console.log('111. ', token)
   console.log('isLogin: ', isLogin)
   if (isLogin) {
-    console.log('로그인 성공아닌가???')
     getUserInfo(token)
     changeMenuState()
     router.push('/')
   } else {
     console.log('로그인 실패')
+    alert('로그인 실패하셨습니다.')
     router.push('/login')
   }
+}
+
+const create = () => {
+  router.push('/create')
 }
 </script>
 
@@ -54,19 +58,15 @@ const loginFn = async () => {
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model.lazy="loginUser.email"
-          :readonly="loading"
-          :rules="[required]"
           class="mb-2"
           clearable
-          label="Email"
+          label="이메일"
         ></v-text-field>
 
         <v-text-field
           v-model.lazy="loginUser.password"
-          :readonly="loading"
-          :rules="[required]"
           clearable
-          label="Password"
+          label="비밀번호"
           placeholder="Enter your password"
         ></v-text-field>
 
@@ -82,7 +82,20 @@ const loginFn = async () => {
           variant="elevated"
           @click="loginFn"
         >
-          Sign In
+          로그인
+        </v-btn>
+        <br />
+        <v-btn
+          :disabled="!form"
+          :loading="loading"
+          block
+          color="light-blue"
+          size="large"
+          type="submit"
+          variant="elevated"
+          @click="create"
+        >
+          가입하기
         </v-btn>
       </v-form>
     </v-card>
@@ -95,5 +108,12 @@ const loginFn = async () => {
   width: 500px;
   margin-bottom: 200px;
   /* background-color: #27262c; */
+}
+.v-card {
+  background-color: #fff;
+  height: 400px;
+}
+.v-text-field {
+  background-color: #fff;
 }
 </style>
