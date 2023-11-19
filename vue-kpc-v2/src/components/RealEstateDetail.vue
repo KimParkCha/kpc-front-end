@@ -1,6 +1,8 @@
 <script setup>
 import { ref, watch } from 'vue';
 import colors from 'vuetify/lib/util/colors'
+import realPriceView from './RealPriceView.vue'
+
 const props = defineProps(['data'])
 
 const show = ref(true)
@@ -9,17 +11,23 @@ console.log(props.data)
 watch(props.data, (receivedData) => {
     data.value = receivedData.value
 })
-</script>
 
+</script>
 <template>
     <v-container>
     <button @click="show = !show">Toggle Slide + Fade</button>
     <Transition name="slide-fade">
+    
         <div v-if="show">
             <h2>단지 정보</h2>
+            <v-tabs>
+              <v-tab><h2>단지정보</h2></v-tab>
+              <v-tab><h2>실거래가 정보</h2></v-tab>
+            </v-tabs>
         <v-table>
     <thead>
     </thead>
+    
     <tbody>
       <tr>
         <th>단지명</th>
@@ -65,6 +73,10 @@ watch(props.data, (receivedData) => {
         
     </Transition>
     </v-container>
+
+    <realPriceView></realPriceView>
+
+
 </template>
 
 <style scoped>

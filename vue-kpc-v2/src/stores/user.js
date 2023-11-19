@@ -22,26 +22,26 @@ export const useUserStore = defineStore('user', () => {
   const setToken = (token) => {
     orgToken.value = token
   }
-
-  const loginBoolean = computed(() => {
-      return isLogin.value
-  })
-
-  const login = async (getuser) => {
+  const login = async (userInfo) => {
     console.log('store login')
+    // setUser({ test: 'test' })
+    // setToken({ accessToken: 'asdasdasd' })
+
+    // sessionStorage.setItem('accessToken', 'asdad')
+    // sessionStorage.setItem('refreshToken', 'asdasd')
     await userAPI.loginUser(
-      getuser,
+      userInfo,
       ({ data }) => {
-        // console.log(data)
-        // console.log('data response' + data.response)
-        // console.log('data message ' + data.message)
-        // console.log('data ref ' + data.data)
+        console.log(data)
+        console.log('data response' + data.response)
+        console.log('data message ' + data.message)
+        console.log('data ref ' + data.data)
 
         if (data.response === 'success') {
           setUser(data.user)
           setToken(data.accessToken)
-          // console.log('success5')
-          userInfo.value = data.user;
+          console.log('success5')
+
           isLogin.value = true
           isValidToken.value = true
 
@@ -67,7 +67,7 @@ export const useUserStore = defineStore('user', () => {
     userAPI.getUser(
       decodeToken.email,
       (response) => {
-        console.log(response.data.name)
+        console.log("data   " + response.data.name)
         if (response.status === 200) {
           userInfo.value = response.data
           setUser(response.data)
@@ -85,5 +85,5 @@ export const useUserStore = defineStore('user', () => {
     )
   }
 
-  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo, loginBoolean }
+  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo }
 })

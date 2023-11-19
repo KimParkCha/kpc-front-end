@@ -1,25 +1,28 @@
 <script setup>
-import { reactive } from 'vue'
+import { ref, reactive } from 'vue'
 import { useRoute } from 'vue-router'
 import userAPI from '../api/user'
-import { useUserStore } from '@/stores/user'
+import { useUserStore } from '../stores/user'
 
 const userStore = useUserStore()
-
-const { user } = userStore
-
 const route = useRoute()
-console.log(user.id)
+const { user, getUserInfo } = userStore
+
+const getUser = getUserInfo(sessionStorage.getItem('accessToken'))
+console.log('mypage data:  ' + getUser)
+
 </script>
 
 <template>
-  <v-table>
+
+  <v-sheet :elevation="12" class="mx-auto">
+    <h2>마이페이지</h2>
+    <v-table>
     <thead>
       <tr>
         <th class="text-left">번호</th>
         <th class="text-left">이름</th>
         <th class="text-left">이메일</th>
-        <th class="text-left">비밀번호</th>
       </tr>
     </thead>
     <tbody>
@@ -27,10 +30,17 @@ console.log(user.id)
         <td>{{ user.id }}</td>
         <td>{{ user.name }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.password }}</td>
       </tr>
     </tbody>
   </v-table>
+  </v-sheet>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-sheet {
+  height: 200px;
+  width: 1000px;
+  margin-bottom: 200px;
+  /* background-color: #27262c; */
+}
+</style>

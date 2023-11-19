@@ -1,26 +1,24 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import { useUserStore } from './user'
-import { storeToRefs } from 'pinia'
 
 export const useMenuStore = defineStore('menuStore', () => {
+  const menuList = ref([])
 
-  const userStore = useUserStore();
-  const { user, getUserInfo } = userStore;
-  const { isLogin } = storeToRefs(userStore)
-
-  const menuList = ref([
-    { name: '회원가입', show: true, routeName: 'create' },
-    { name: '로그인', show: true, routeName: 'login' },
-    { name: '마이페이지', show: false, routeName: 'mypage' },
-    { name: '로그아웃', show: false, routeName: 'logout' }
+  const loginMenu = ref([
+    { name: '회원가입', isLogin: false, routeName: 'create' },
+    { name: '로그인', isLogin: false, routeName: 'login' }
   ])
-
+  const logoutMenu = ref([
+    { name: '마이페이지', isLogin: true, routeName: 'mypage' },
+    { name: '로그아웃', isLogin: true, routeName: 'logout' }
+  ])
   const changeMenuState = () => {
-    
-    console.log("change :" + isLogin.value)
-   
-    menuList.value = menuList.value.map((item) => ({ ...item, show: !item.show }))
+    // 세션에 데이터가 남아있는지 여부를 통해서 메뉴리스트를 반환
+    if (sessionStorage.getItem('accessToken') != null) {
+      menuList.value = logoutMenu.value
+    } else {
+      menuList.value = loginMenu.value
+    }
   }
   return {
     menuList,
