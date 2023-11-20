@@ -18,8 +18,8 @@ const getUser = async (email, success, fail) => {
   await userAPI.get(`/user/detailUser/${email}`).then(success).catch(fail)
 }
 
-const logout = async (userid, success, fail) => {
-  await userAPI.get(`/user/logout/${userid}`).then(success).catch(fail)
+const logout = async (success, fail) => {
+  await userAPI.get(`/user/logout`).then(success).catch(fail)
 }
 
 export default { registUser, loginUser, getUser, logout }
