@@ -100,7 +100,7 @@ const createFn = () => {
 .v-sheet {
   height: 200px;
   width: 500px;
-  margin-bottom: 200px;
+  margin-bottom: 400px;
   /* background-color: #27262c; */
 }
 

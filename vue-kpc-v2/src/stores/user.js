@@ -32,21 +32,18 @@ export const useUserStore = defineStore('user', () => {
     await userAPI.loginUser(
       userInfo,
       ({ data }) => {
-        console.log(data)
-        console.log('data response' + data.response)
-        console.log('data message ' + data.message)
-        console.log('data ref ' + data.data)
 
         if (data.response === 'success') {
           setUser(data.user)
           setToken(data.accessToken)
-          console.log('success5')
+          console.log('user: ' + data.response)
 
           isLogin.value = true
           isValidToken.value = true
 
           sessionStorage.setItem('accessToken', data.accessToken)
           sessionStorage.setItem('refreshToken', data.refreshToken)
+          sessionStorage.setItem('user', data.user)
           console.log('sessiontStorage에 담았다', isLogin.value)
         } else {
           console.log('로그인 실패2')
