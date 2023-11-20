@@ -24,6 +24,11 @@ export const useUserStore = defineStore('user', () => {
   }
   const login = async (userInfo) => {
     console.log('store login')
+    // setUser({ test: 'test' })
+    // setToken({ accessToken: 'asdasdasd' })
+
+    // sessionStorage.setItem('accessToken', 'asdad')
+    // sessionStorage.setItem('refreshToken', 'asdasd')
     await userAPI.loginUser(
       userInfo,
       ({ data }) => {
@@ -62,7 +67,7 @@ export const useUserStore = defineStore('user', () => {
     userAPI.getUser(
       decodeToken.email,
       (response) => {
-        console.log(response.data.name)
+        console.log("data   " + response.data.name)
         if (response.status === 200) {
           userInfo.value = response.data
           setUser(response.data)

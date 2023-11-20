@@ -17,12 +17,6 @@ const loginUser = ref({
   password: ''
 })
 
-// console.log(globalUser.value)
-// console.log(globalToken.value)
-// globalLogin(globalUser.value)
-// console.log(globalUser.value)
-// console.log(globalToken.value)
-
 const router = useRouter()
 const user = reactive({})
 const loginFn = async () => {
@@ -35,19 +29,20 @@ const loginFn = async () => {
   let token = sessionStorage.getItem('accessToken')
 
   console.log('111. ', token)
-  console.log('isLogin: ', isLogin)
-  if (isLogin) {
-    getUserInfo(token)
+  console.log('isLogin: ', isLogin.value)
+  if (isLogin.value) {
+    console.log('로그인 성공')
+    // getUserInfo(token)
     changeMenuState()
     router.push('/')
   } else {
     console.log('로그인 실패')
-    alert('로그인 실패하셨습니다.')
+    alert('회원정보를 다시 입력해주세요')
     router.push('/login')
   }
 }
 
-const create = () => {
+const createFn = () => {
   router.push('/create')
 }
 </script>
@@ -73,7 +68,6 @@ const create = () => {
         <br />
 
         <v-btn
-          :disabled="!form"
           :loading="loading"
           block
           color="light-blue"
@@ -86,16 +80,15 @@ const create = () => {
         </v-btn>
         <br />
         <v-btn
-          :disabled="!form"
           :loading="loading"
           block
           color="light-blue"
           size="large"
           type="submit"
           variant="elevated"
-          @click="create"
+          @click="createFn"
         >
-          가입하기
+          회원가입
         </v-btn>
       </v-form>
     </v-card>
@@ -109,11 +102,8 @@ const create = () => {
   margin-bottom: 200px;
   /* background-color: #27262c; */
 }
+
 .v-card {
-  background-color: #fff;
-  height: 400px;
-}
-.v-text-field {
   background-color: #fff;
 }
 </style>

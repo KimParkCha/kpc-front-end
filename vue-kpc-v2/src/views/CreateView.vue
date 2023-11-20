@@ -5,7 +5,7 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const user = reactive({ user_id: '', name: '', email: '', password: '', passwordCheck: '' })
-const login = () => {
+const register = () => {
   userAPI.registUser(
     user,
     () => {
@@ -24,15 +24,16 @@ const login = () => {
   <v-sheet width="400" class="mx-auto">
     <v-form ref="form">
       <v-text-field
-        v-model="user.user_id"
+        v-model="user.email"
         :counter="10"
         :rules="nameRules"
-        label="아이디"
+        label="이메일"
         required
       ></v-text-field>
 
       <v-text-field
         v-model="user.password"
+        type="password"
         :counter="10"
         :rules="nameRules"
         label="비밀번호"
@@ -41,7 +42,8 @@ const login = () => {
 
       <v-text-field
         v-model="user.passwordCheck"
-        :counter="10"
+        type="password"
+        :counter="15"
         :rules="nameRules"
         label="비밀번호 확인"
         required
@@ -55,46 +57,24 @@ const login = () => {
         required
       ></v-text-field>
 
-      <v-text-field
-        v-model="user.email"
-        :counter="10"
-        :rules="nameRules"
-        label="이메일"
-        required
-      ></v-text-field>
-
       <v-checkbox
-        v-model="checkbox"
         :rules="[(v) => !!v || 'You must agree to continue!']"
         label="개인정보 수집에 동의하십니까?"
         required
       ></v-checkbox>
 
       <div class="d-flex flex-column">
-        <v-btn color="success" class="mt-4" block @click="login"> 가입하기 </v-btn>
-
-        <v-btn color="error" class="mt-4" block @click="reset"> 초기화 </v-btn>
-
-        <v-btn color="warning" class="mt-4" block @click="resetValidation"> 유효성 초기화 </v-btn>
+        <v-btn color="light-blue" class="mt-4" size="large" @click="register"> 가입하기 </v-btn>
       </div>
     </v-form>
   </v-sheet>
 </template>
 
 <style scoped>
-.v-card {
-  background-color: #fff;
-  height: 400px;
-}
 .v-text-field {
   background-color: #fff;
 }
-
-.v-checkbox {
-  background-color: #fff;
-}
-
-.d-flex {
+.v-form {
   background-color: #fff;
 }
 </style>

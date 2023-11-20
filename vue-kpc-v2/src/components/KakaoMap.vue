@@ -2,6 +2,7 @@
 import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
+import RealEstateDetail from './RealEstateDetail.vue'
 const props = defineProps(['receivedKeyword'])
 let map = null
 let clusterer = null
@@ -9,6 +10,49 @@ let geocoder = null
 
 const keyword = ref('')
 const selectedMarker = ref(null)
+
+const detail = {
+    "complexNo": "14419",
+    "complexName": "초당유화1차",
+    "cortarNo": "5115011200",
+    "realEstateTypeCode": "APT",
+    "realEstateTypeName": "아파트",
+    "detailAddress": "182-2",
+    "roadAddress": "연당길 94-3",
+    "latitude": 37.7861,
+    "longitude": 128.91371,
+    "totalHouseholdCount": 90,
+    "totalLeaseHouseholdCount": 0,
+    "permanentLeaseHouseholdCount": 0,
+    "nationLeaseHouseholdCount": 0,
+    "civilLeaseHouseholdCount": 0,
+    "publicLeaseHouseholdCount": 0,
+    "longTermLeaseHouseholdCount": 0,
+    "etcLeaseHouseholdCount": 0,
+    "highFloor": 14,
+    "lowFloor": 5,
+    "useApproveYmd": "19931013",
+    "totalDongCount": 1,
+    "maxSupplyArea": 71.15,
+    "minSupplyArea": 71.15,
+    "dealCount": 9,
+    "rentCount": 1,
+    "leaseCount": 3,
+    "shortTermRentCount": 0,
+    "isBookmarked": false,
+    "batlRatio": "282",
+    "btlRatio": "26",
+    "parkingPossibleCount": 30,
+    "parkingCountByHousehold": 0.33,
+    "constructionCompanyName": "(주)유화주택건설",
+    "heatMethodTypeCode": "HT001",
+    "heatFuelTypeCode": "HF007",
+    "pyoengNames": "71",
+    "managementOfficeTelNo": "033-653-9687",
+    "address": "강원도 강릉시 초당동",
+    "roadAddressPrefix": "강원도 강릉시",
+    "roadZipCode": "25469"
+}
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -137,9 +181,9 @@ const items = ref([])
       <div id="map"></div>
     </v-row>
     
-
-    <v-container v-if="keyword != ''" class="mt-12">
-      <v-row>
+    <!-- <v-container v-if="keyword != ''" class="mt-12"> -->
+      <RealEstateDetail :data="detail" />
+      <!-- <v-row>
         <progress-card
           :progressVal="50"
           :width="500"
@@ -158,8 +202,8 @@ const items = ref([])
           <v-card-subtitle>김박차는 해당 지역의 투자를 추천해요.</v-card-subtitle>
         </v-card>
       </v-row>
-      <news-list-with-thumbnail></news-list-with-thumbnail>
-    </v-container>
+      <news-list-with-thumbnail></news-list-with-thumbnail> -->
+    <!-- </v-container> -->
   </div>
 </template>
 

@@ -1,5 +1,2 @@
-// import { userStore } from 'pinia'
-// import { ref, computed } from 'vue'
-// import userAPI from '@/api/user'
-
-// export const useUserStore = userStore()
+import Vue from 'vue';
+import Vuex from 'vuex';

@@ -5,8 +5,8 @@ import { ref, reactive } from 'vue'
 
 const keyword = reactive({})
 const search = (payload) => {
-  keyword.key = payload.value
-  console.log(payload.value)
+  console.log(payload)
+  keyword.key = payload
 }
 </script>
 <template>
