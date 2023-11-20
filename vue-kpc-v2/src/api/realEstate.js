@@ -30,9 +30,8 @@ const getComplexes = (ia, success, fail) => {
     .catch(fail)
 }
 
-// 부서 삭제
-const del = (deptno, success, fail) => {
-  deptAPI.delete(`/api/dept/${deptno}`).then(success).catch(fail)
+const getDetail = (complexNo, success, fail) => {
+  deptAPI.get(`/api/complex/${complexNo}`).then(success).catch(fail)
 }
 
 // 부서 등록
@@ -45,4 +44,4 @@ const modify = (dept, success, fail) => {
   deptAPI.put(`/api/dept/${dept.deptno}`).then(success).catch(fail)
 }
 
-export default { getRegions, getComplexes, del, register, modify }
+export default { getRegions, getComplexes, getDetail, register, modify }
