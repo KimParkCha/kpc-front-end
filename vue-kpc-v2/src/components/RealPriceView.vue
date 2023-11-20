@@ -2,60 +2,83 @@
 import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
 import chartDataView from './ChartDataView.vue'
+import houseApi from '../api/realEstate.js'
 
-const props = defineProps(['data'])
+const props = defineProps(['complexNo'])
 
-const show = ref(true)
-const data = ref(null)
-console.log(props.data)
-watch(props.data, (receivedData) => {
-  data.value = receivedData.value
-  
+// const show = ref(false)
+const realprice = ref()
+console.log('realpriceView 나와라좀')
+
+watch(props, (complexNo) => {
+  console.log('complex' + complexNo)
+  houseCall(complexNo.complexNo.complexNo)
+  // show.value = true
 })
+
+const houseCall = (complexNo) => {
+  console.log('realprice call')
+  houseApi.getRealPrices(
+    complexNo,
+    (data) => {
+      console.log('실거래가 가져와라잇')
+      console.log(data.data)
+      realprice.value = data.data
+      // console.log('realprice 배열 complexNo: ' + realprice.value[0].complexNo)
+      // console.log('realprice 배열 tradeYear: ' + realprice.value[0].tradeYear)
+      // console.log('realprice 배열 tradeMonth : ' + realprice.value[0].tradeMonth)
+      // console.log('realprice 배열 formattedPrice : ' + realprice.value[0].formattedPrice)
+      // console.log('realprice 배열 tradeDate : ' + realprice.value[0].tradeDate)
+    },
+    () => {
+      console.log('error')
+    }
+  )
+}
 </script>
 
 <template>
   <v-container>
-    <chartDataView :data="props.data"></chartDataView>
+    <!-- <chartDataView :data="props.data"></chartDataView> -->
 
-    <button @click="show = !show">Toggle Slide + Fade</button>
-    <Transition name="slide-fade">
-      <div v-if="show">
-        <h2>실거래가 정보</h2>
-        <v-table>
-          <thead>
-            <tr>
-              <td>계약월</td>
-              <td>전세가</td>
-            </tr>
-          </thead>
+    <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
+    <!-- <Transition name="slide-fade"> -->
+    <div>
+      <h2>실거래가 정보</h2>
+      <v-table>
+        <thead>
+          <tr>
+            <td>계약월</td>
+            <td>전세가</td>
+          </tr>
+        </thead>
 
-          <tbody>
-            <tr>
-              <!-- tradeYear. tradeMonth -->
-              <td>{{ props.data.tradeYear }}.{{ props.data.tradeMonth }}</td>
-              <!-- formattedPrice(tradeDate일, floor층) -->
-              <td>
-                {{ props.data.formattedPrice }}({{ props.data.tradeDate }}일,
-                {{ props.data.floor }}층)
-              </td>
-            </tr>
-            <tr>
-              <td>2023.05</td>
-              <td>1억 9000(26일, 5층)</td>
-            </tr>
-            <tr>
-              <td>2023.01</td>
-              <td>1억 3500(26일, 5층)</td>
-            </tr>
-            <tr>
-              <td>2022.12</td>
-              <td>1억 1000(26일, 5층)</td>
-            </tr>
-          </tbody>
-        </v-table>
-      </div>
-    </Transition>
+        <tbody>
+          <tr>
+            <!-- tradeYear. tradeMonth -->
+            <td>{{ console.log(realprice[0].tradeYear) }}</td>
+            <!-- formattedPrice(tradeDate일, floor층) -->
+            <td>
+              <!-- {{ realprice.value[0].formattedPrice }}({{ realprice.value[0].tradeDate }}일, -->
+              <!-- {{ realprice.value[0].floor }}층) -->
+            </td>
+          </tr>
+          <tr>
+            <td>2023.05</td>
+            <td>1억 9000(26일, 5층)</td>
+          </tr>
+          <tr>
+            <td>2023.01</td>
+            <td>1억 3500(26일, 5층)</td>
+          </tr>
+          <tr>
+            <td>2022.12</td>
+            <td>1억 1000(26일, 5층)</td>
+          </tr>
+        </tbody>
+      </v-table>
+    </div>
+    <!-- </Transition> -->
   </v-container>
 </template>
 <style scoped>
