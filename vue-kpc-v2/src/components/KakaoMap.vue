@@ -207,32 +207,4 @@ onMounted(() => {
   padding: 20px;
   border-radius: 25px;
 }
-:deep() .speech-bubble {
-  position: relative;
-  background: #7ae9ff;
-  border-radius: 75px;
-  padding: 5px 15px 5px 15px;
-}
-
-:deep() .speech-bubble:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  width: 0;
-  height: 0;
-  border: 28px solid transparent;
-  border-top-color: #7ae9ff;
-  border-bottom: 0;
-  border-right: 0;
-  margin-left: -14px;
-  margin-bottom: -28px;
-}
-:deep() .overlay-h2 {
-  font-weight: bold;
-  color: white;
-}
-:deep() .overlay-p {
-  color: white;
-}
 </style>
