@@ -14,6 +14,9 @@ const selectedMarker = ref(null)
 const selectedNo = ref(null)
 const items = ref([])
 
+function getImageUrl() {
+  return new URL(`/../assets/house1.png`, import.meta.url).href
+}
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -98,26 +101,32 @@ const getComplexes = () => {
 }
 
 const addMarkers = () => {
+  const src = './src/assets/house2.png'
+  const icon = new kakao.maps.MarkerImage(
+    src,
+    new kakao.maps.Size(31, 35),
+    {
+        offset: new kakao.maps.Point(16, 34),
+        shape: "poly",
+        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
+    }
+);
   clusterer.clear()
   const overlays = items.value.map((data) => {
     const position = data.latlng
-    const hgroup = document.createElement('hgroup')
-    hgroup.className = 'speech-bubble'
-    const content = `
-      <p class='overlay-h2'>${data.complexName}</p>
-      <p class='overlay-p'>${data.cortarAddress}</p>
-    `
-    hgroup.innerHTML = content
-    hgroup.addEventListener('click', () => {
-      console.log(data)
-      selectedMarker.value = data
+    const marker = new kakao.maps.Marker({
+      position: position,
+      image: icon
     })
 
-    return new kakao.maps.CustomOverlay({
-      position: position,
-      content: hgroup
-    })
+    kakao.maps.event.addListener(marker, 'click', function() {
+      console.log(data)
+      selectedMarker.value = data
+    });
+
+    return marker;
   })
+
   clusterer.addMarkers(overlays)
 }
 

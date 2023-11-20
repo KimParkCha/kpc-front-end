@@ -7,6 +7,7 @@ const props = defineProps(['complexNo'])
 const show = ref(false)
 const detail = ref({})
 watch(props, (complexNo) => {
+  console.log(complexNo)
   getDetail(complexNo.complexNo.complexNo)
   show.value = true
 })
