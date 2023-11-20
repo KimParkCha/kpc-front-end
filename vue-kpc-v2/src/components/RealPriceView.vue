@@ -1,7 +1,6 @@
 <script setup>
-import { ref, watch, defineComponent } from 'vue'
+import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
-import realPriceView from './RealPriceView.vue'
 import chartDataView from './ChartDataView.vue'
 
 const props = defineProps(['data'])
@@ -11,6 +10,7 @@ const data = ref(null)
 console.log(props.data)
 watch(props.data, (receivedData) => {
   data.value = receivedData.value
+  
 })
 </script>
 

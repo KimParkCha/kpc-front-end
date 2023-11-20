@@ -2,7 +2,6 @@
 import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
-import RealEstateDetail from './RealEstateDetail.vue'
 import TabTest from './TabTest.vue'
 
 const props = defineProps(['receivedKeyword'])
@@ -12,49 +11,9 @@ let geocoder = null
 
 const keyword = ref('')
 const selectedMarker = ref(null)
+const selectedNo = ref(null)
+const items = ref([])
 
-const detail = ref({
-    "complexNo": "14419",
-    "complexName": "초당유화1차",
-    "cortarNo": "5115011200",
-    "realEstateTypeCode": "APT",
-    "realEstateTypeName": "아파트",
-    "detailAddress": "182-2",
-    "roadAddress": "연당길 94-3",
-    "latitude": 37.7861,
-    "longitude": 128.91371,
-    "totalHouseholdCount": 90,
-    "totalLeaseHouseholdCount": 0,
-    "permanentLeaseHouseholdCount": 0,
-    "nationLeaseHouseholdCount": 0,
-    "civilLeaseHouseholdCount": 0,
-    "publicLeaseHouseholdCount": 0,
-    "longTermLeaseHouseholdCount": 0,
-    "etcLeaseHouseholdCount": 0,
-    "highFloor": 14,
-    "lowFloor": 5,
-    "useApproveYmd": "19931013",
-    "totalDongCount": 1,
-    "maxSupplyArea": 71.15,
-    "minSupplyArea": 71.15,
-    "dealCount": 9,
-    "rentCount": 1,
-    "leaseCount": 3,
-    "shortTermRentCount": 0,
-    "isBookmarked": false,
-    "batlRatio": "282",
-    "btlRatio": "26",
-    "parkingPossibleCount": 30,
-    "parkingCountByHousehold": 0.33,
-    "constructionCompanyName": "(주)유화주택건설",
-    "heatMethodTypeCode": "HT001",
-    "heatFuelTypeCode": "HF007",
-    "pyoengNames": "71",
-    "managementOfficeTelNo": "033-653-9687",
-    "address": "강원도 강릉시 초당동",
-    "roadAddressPrefix": "강원도 강릉시",
-    "roadZipCode": "25469"
-})
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -65,7 +24,7 @@ watch(props.receivedKeyword, (keyword) => {
 watch(selectedMarker, (newVal) => {
   console.log(newVal)
   moveLatLng(newVal.latlng, 1)
-  getDetail(newVal.complexNo)
+  selectedNo.value = newVal.complexNo
 
 })
 
@@ -100,7 +59,6 @@ const initMap = () => {
 
 const addClusterMarkers = () => {
   items.value.map((item) => {
-    console.log(item)
     clusterer.addMarkers(item.latlng)
   })
 }
@@ -138,16 +96,7 @@ const getComplexes = () => {
     () => {}
   )
 }
-const getDetail = (complexNo) => {
-  complexAPI.getDetail(
-    complexNo,
-    (data) => {
-      console.log(data)
-      detail.value = data.data
-    },
-    () => {}
-  )
-}
+
 const addMarkers = () => {
   clusterer.clear()
   const overlays = items.value.map((data) => {
@@ -185,7 +134,6 @@ onMounted(() => {
   }
 })
 
-const items = ref([])
 </script>
 <template>
   <div class="map-wrap">
@@ -196,9 +144,7 @@ const items = ref([])
       <div id="map"></div>
     </v-row>
 
-    <!-- <v-container v-if="keyword != ''" class="mt-12"> -->
-    <!-- <RealEstateDetail :data="detail" /> -->
-    <TabTest></TabTest>
+    <TabTest :complex-no="selectedNo"></TabTest>
     <!-- <v-row>
         <progress-card
           :progressVal="50"
