@@ -35,8 +35,7 @@ const variants = ['뉴스1', '뉴스2', '뉴스3', '뉴스4']
           rel="noopener"
           :variant="variant"
         >
-          {{ variant }}</v-card
-        >
+        </v-card>
       </v-col>
     </v-row>
   </v-container>

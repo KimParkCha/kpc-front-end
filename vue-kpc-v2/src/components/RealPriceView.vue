@@ -16,7 +16,7 @@ watch(props.data, (receivedData) => {
 
 <template>
   <v-container>
-    <chartDataView></chartDataView>
+    <chartDataView :data="props.data"></chartDataView>
 
     <button @click="show = !show">Toggle Slide + Fade</button>
     <Transition name="slide-fade">
@@ -33,10 +33,11 @@ watch(props.data, (receivedData) => {
           <tbody>
             <tr>
               <!-- tradeYear. tradeMonth -->
-              <td>2023.06</td>
+              <td>{{ props.data.tradeYear }}.{{ props.data.tradeMonth }}</td>
               <!-- formattedPrice(tradeDate일, floor층) -->
               <td>
-                1억 1000(26일, 5층) 1억 1000(26일, 5층) 1억 1000(26일, 5층) 1억 1000(26일, 5층)
+                {{ props.data.formattedPrice }}({{ props.data.tradeDate }}일,
+                {{ props.data.floor }}층)
               </td>
             </tr>
             <tr>
