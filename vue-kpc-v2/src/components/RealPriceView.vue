@@ -3,15 +3,35 @@ import { ref, watch, defineComponent } from 'vue'
 import colors from 'vuetify/lib/util/colors'
 import realPriceView from './RealPriceView.vue'
 import chartDataView from './ChartDataView.vue'
+import houseApi from '../api/realEstate.js'
 
 const props = defineProps(['data'])
 
 const show = ref(true)
 const data = ref(null)
 console.log(props.data)
+
 watch(props.data, (receivedData) => {
   data.value = receivedData.value
+  console.log('realprice watch')
 })
+
+const complexNo = 1
+const houseCall = () => {
+  console.log('realprice call')
+  houseApi.getRealPrices(
+    complexNo,
+    ({ data }) => {
+      console.log('실거래가 가져와라잇')
+      console.log('data' + data)
+    },
+    () => {
+      console.log('error')
+    }
+  )
+}
+
+houseCall()
 </script>
 
 <template>
