@@ -17,37 +17,32 @@ const loginUser = ref({
   password: ''
 })
 
-// console.log(globalUser.value)
-// console.log(globalToken.value)
-// globalLogin(globalUser.value)
-// console.log(globalUser.value)
-// console.log(globalToken.value)
-
 const router = useRouter()
 const user = reactive({})
 const loginFn = async () => {
-  // console.log(loginUser.value.email)
-  // console.log(loginUser.value.password)
-  // console.log('login ing!!!! !!!')
+  console.log(loginUser.value.email)
+  console.log(loginUser.value.password)
+  console.log('login ing!!!! !!!')
 
   await login(loginUser.value)
 
   let token = sessionStorage.getItem('accessToken')
 
-  // console.log('111. ', token)
-  // console.log('isLogin: ', isLogin)
-  if (isLogin) {
-    // console.log('로그인 성공아닌가???')
-    getUserInfo(token)
+  console.log('111. ', token)
+  console.log('isLogin: ', isLogin.value)
+  if (isLogin.value) {
+    console.log('로그인 성공')
+    // getUserInfo(token)
     changeMenuState()
     router.push('/')
   } else {
     console.log('로그인 실패')
+    alert('회원정보를 다시 입력해주세요')
     router.push('/login')
   }
 }
 
-const create = () => {
+const createFn = () => {
   router.push('/create')
 }
 </script>
@@ -65,16 +60,15 @@ const create = () => {
 
         <v-text-field
           v-model.lazy="loginUser.password"
-          :rules="[required]"
           clearable
-          label="패스워드"
+          label="비밀번호"
           placeholder="Enter your password"
         ></v-text-field>
 
         <br />
 
         <v-btn
-          :disabled="!form"
+          :loading="loading"
           block
           color="light-blue"
           size="large"
@@ -84,15 +78,15 @@ const create = () => {
         >
           로그인
         </v-btn>
-        <br>
+        <br />
         <v-btn
-          :disabled="!form"
+          :loading="loading"
           block
           color="light-blue"
           size="large"
           type="submit"
           variant="elevated"
-          @click="create"
+          @click="createFn"
         >
           회원가입
         </v-btn>
@@ -109,7 +103,7 @@ const create = () => {
   /* background-color: #27262c; */
 }
 
-.v-card{
+.v-card {
   background-color: #fff;
 }
 </style>
