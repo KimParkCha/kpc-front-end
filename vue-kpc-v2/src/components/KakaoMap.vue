@@ -11,7 +11,7 @@ let geocoder = null
 const keyword = ref('')
 const selectedMarker = ref(null)
 
-const detail = {
+const detail = ref({
     "complexNo": "14419",
     "complexName": "초당유화1차",
     "cortarNo": "5115011200",
@@ -52,7 +52,7 @@ const detail = {
     "address": "강원도 강릉시 초당동",
     "roadAddressPrefix": "강원도 강릉시",
     "roadZipCode": "25469"
-}
+})
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -61,12 +61,14 @@ watch(props.receivedKeyword, (keyword) => {
   getComplexes()
 })
 watch(selectedMarker, (newVal) => {
+  console.log(newVal)
   moveLatLng(newVal.latlng, 1)
-  // console.log(selectedLatLng)
+  getDetail(newVal.complexNo)
+
 })
 
 const selectedComplex = (payload) => {
-  // console.log(payload.item)
+  console.log(payload.item)
   selectedMarker.value = payload.item
 }
 const initMap = () => {
@@ -119,7 +121,7 @@ const moveLatLng = (data, level) => {
   map.setLevel(level);
 }
 const getComplexes = () => {
-  // console.log(map.getBounds())
+  console.log(map.getBounds())
   complexAPI.getComplexes(
     map.getBounds(),
     (data) => {
@@ -127,8 +129,19 @@ const getComplexes = () => {
         ...complexes,
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
       }))
+      console.log(data.data)
       items.value = processsed
       addMarkers()
+    },
+    () => {}
+  )
+}
+const getDetail = (complexNo) => {
+  complexAPI.getDetail(
+    complexNo,
+    (data) => {
+      console.log(data)
+      detail.value = data.data
     },
     () => {}
   )
