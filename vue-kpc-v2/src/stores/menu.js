@@ -1,5 +1,11 @@
 import { ref } from 'vue'
 import { defineStore } from 'pinia'
+import userAPI from '@/api/user'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore
+
+const { user, token } = userStore
 
 export const useMenuStore = defineStore('menuStore', () => {
   const menuList = ref([])

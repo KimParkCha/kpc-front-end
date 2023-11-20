@@ -1,6 +1,7 @@
 <script setup>
 import { RouterLink } from 'vue-router'
 import { useMenuStore } from '@/stores/menu'
+import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
 
@@ -56,9 +57,7 @@ const getImageUrls = (name) => {
 </template>
 
 <style scoped>
-
 .v-btn {
-  color : black;
+  color: black;
 }
-
 </style>

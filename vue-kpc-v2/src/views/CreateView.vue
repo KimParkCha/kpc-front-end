@@ -4,7 +4,7 @@ import userAPI from '../api/user'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
-const user = reactive({ user_id: '', name: '', email: '', password: '' , passwordCheck: ''})
+const user = reactive({ user_id: '', name: '', email: '', password: '', passwordCheck: '' })
 const register = () => {
   userAPI.registUser(
     user,
@@ -57,7 +57,6 @@ const register = () => {
         required
       ></v-text-field>
 
-
       <v-checkbox
         :rules="[(v) => !!v || 'You must agree to continue!']"
         label="개인정보 수집에 동의하십니까?"
@@ -65,20 +64,17 @@ const register = () => {
       ></v-checkbox>
 
       <div class="d-flex flex-column">
-    
-        <v-btn color="light-blue" class="mt-4"  size="large" @click="register"> 가입하기 </v-btn>
-
+        <v-btn color="light-blue" class="mt-4" size="large" @click="register"> 가입하기 </v-btn>
       </div>
     </v-form>
   </v-sheet>
 </template>
 
 <style scoped>
-
-.v-text-field{
+.v-text-field {
   background-color: #fff;
 }
-.v-form{
+.v-form {
   background-color: #fff;
 }
 </style>

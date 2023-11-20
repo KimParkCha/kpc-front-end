@@ -68,6 +68,7 @@ export const useUserStore = defineStore('user', () => {
         if (response.status === 200) {
           userInfo.value = response.data
           setUser(response.data)
+          setToken(token)
           console.log('3. getUserInfo data >> ', response.data)
         } else {
           console.log('유저 정보 없음!!!!')
@@ -82,5 +83,5 @@ export const useUserStore = defineStore('user', () => {
     )
   }
 
-  return { userInfo, user, token, isLogin, isValidToken, login, getUserInfo }
+  return { userInfo, user, token, isLogin, isValidToken, setUser, setToken, login, getUserInfo }
 })

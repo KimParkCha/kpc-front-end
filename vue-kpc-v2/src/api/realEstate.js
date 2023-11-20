@@ -1,10 +1,10 @@
-import { localAxios } from '@/utils/http-commons'
+import { localAxios, backAxios } from '@/utils/http-commons'
 
-const deptAPI = localAxios()
+const houseAPI = backAxios()
 
 // ㅣ키워드를 포함하는 시군구 정보 요청
 const getRegions = (keyword, success, fail) => {
-  deptAPI
+  houseAPI
     .get('/api/region/list', {
       params: {
         keyword: keyword
@@ -17,7 +17,7 @@ const getRegions = (keyword, success, fail) => {
 // 부서 조회
 const getComplexes = (ia, success, fail) => {
   console.log(ia)
-  deptAPI
+  houseAPI
     .get(`/api/complex/list`, {
       params: {
         ha: ia.ha,
@@ -30,19 +30,12 @@ const getComplexes = (ia, success, fail) => {
     .catch(fail)
 }
 
-// 부서 삭제
-const del = (deptno, success, fail) => {
-  deptAPI.delete(`/api/dept/${deptno}`).then(success).catch(fail)
+const getDetail = (complexNo, success, fail) => {
+  houseAPI.get(`/api/complex/${complexNo}`).then(success).catch(fail)
 }
 
-// 부서 등록
-const register = (dept, success, fail) => {
-  deptAPI.post(`/api/dept/`, JSON.stringify(dept)).then(success).catch(fail)
+const getRealPrices = (complexNo, success, fail) => {
+  houseAPI.get(`/api/realprice/list/${complexNo}`).then(success).catch(fail)
 }
 
-// 부서 수정
-const modify = (dept, success, fail) => {
-  deptAPI.put(`/api/dept/${dept.deptno}`).then(success).catch(fail)
-}
-
-export default { getRegions, getComplexes, del, register, modify }
+export default { getRegions, getComplexes, getDetail, getRealPrices }

@@ -45,7 +45,6 @@ const loginFn = async () => {
 const createFn = () => {
   router.push('/create')
 }
-
 </script>
 
 <template>
@@ -56,13 +55,13 @@ const createFn = () => {
           v-model.lazy="loginUser.email"
           class="mb-2"
           clearable
-          label="Email"
+          label="이메일"
         ></v-text-field>
 
         <v-text-field
           v-model.lazy="loginUser.password"
           clearable
-          label="Password"
+          label="비밀번호"
           placeholder="Enter your password"
         ></v-text-field>
 
@@ -79,7 +78,7 @@ const createFn = () => {
         >
           로그인
         </v-btn>
-        <br>
+        <br />
         <v-btn
           :loading="loading"
           block
@@ -104,8 +103,7 @@ const createFn = () => {
   /* background-color: #27262c; */
 }
 
-.v-card{
+.v-card {
   background-color: #fff;
 }
-
 </style>

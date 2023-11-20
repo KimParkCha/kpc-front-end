@@ -1,98 +1,90 @@
 <script setup>
-import { ref, watch } from 'vue';
+import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
-import realPriceView from './RealPriceView.vue'
+import houseApi from '@/api/realEstate'
+const props = defineProps(['complexNo'])
 
-const props = defineProps(['data'])
-
-const show = ref(true)
-const data = ref(null)
-console.log(props.data)
-watch(props.data, (receivedData) => {
-    data.value = receivedData.value
+const show = ref(false)
+const detail = ref({})
+watch(props, (complexNo) => {
+  console.log(complexNo)
+  getDetail(complexNo.complexNo.complexNo)
+  show.value = true
 })
 
+const getDetail = (complexNo) => {
+  houseApi.getDetail(
+    complexNo,
+    (data) => {
+      console.log(data)
+      detail.value = data.data
+    },
+    () => {}
+  )
+}
 </script>
 <template>
-    <v-container>
-    <button @click="show = !show">Toggle Slide + Fade</button>
-    <Transition name="slide-fade">
-    
-        <div v-if="show">
-            <h2>단지 정보</h2>
-            <v-tabs>
-              <v-tab><h2>단지정보</h2></v-tab>
-              <v-tab><h2>실거래가 정보</h2></v-tab>
-              <v-tab><h2>뉴스</h2></v-tab>
-            </v-tabs>
-        <v-table>
-    <thead>
-    </thead>
-    
-    <tbody>
-      <tr>
-        <th>단지명</th>
-        <td>{{ props.data.complexName }}</td>
-        <th>단지 주소</th>
-        <td>{{ props.data.address }}</td>
-      </tr>
-      <tr>
-        <th>세대수</th>
-        <td>{{ props.data.totalHouseholdCount }}</td>
-        <th>동수</th>
-        <td>{{ props.data.totalDongCount }}</td>
-      </tr>
-      <tr>
-        <th>사용승인일</th>
-        <td>{{ props.data.useApproveYmd }}</td>
-        <th>저층/최고층</th>
-        <td>{{ props.data.lowFloor + "/" + props.data.highFloor + "층" }}</td>
-      </tr>
-      <tr>
-        <th>용적률</th>
-        <td>{{ props.data.batlRatio + "%" }}</td>
-        <th>건폐율</th>
-        <td>{{ props.data.btlRatio + "%" }}</td>
-      </tr>
-      <tr>
-        <th>총 주차대수</th>
-        <td>{{ props.data.parkingPossibleCount }}</td>
-        <th>세대당 주차대수</th>
-        <td>{{ props.data.parkingCountByHousehold }}</td>
-      </tr>
-      <tr>
-        <th colspan="1">건설사</th>
-        <td colspan="3">{{ props.data.constructionCompanyName }}</td>
-      </tr>
-      <tr>
-        <th colspan="1">관리사무소</th>
-        <td colspan="3">{{ props.data.managementOfficeTelNo }}</td>
-      </tr>
-    </tbody>
-  </v-table>
-        </div>
-        
-    </Transition>
-    </v-container>
-
-    <realPriceView></realPriceView>
-
-
+  <v-container>
+    <div v-if="show">
+      <v-table>
+        <thead></thead>
+        <tbody>
+          <tr>
+            <th>단지명</th>
+            <td>{{ detail.complexName }}</td>
+            <th>단지 주소</th>
+            <td>{{ detail.address }}</td>
+          </tr>
+          <tr>
+            <th>세대수</th>
+            <td>{{ detail.totalHouseholdCount }}</td>
+            <th>동수</th>
+            <td>{{ detail.totalDongCount }}</td>
+          </tr>
+          <tr>
+            <th>사용승인일</th>
+            <td>{{ detail.useApproveYmd }}</td>
+            <th>저층/최고층</th>
+            <td>{{ detail.lowFloor + '/' + detail.highFloor + '층' }}</td>
+          </tr>
+          <tr>
+            <th>용적률</th>
+            <td>{{ detail.batlRatio + '%' }}</td>
+            <th>건폐율</th>
+            <td>{{ detail.btlRatio + '%' }}</td>
+          </tr>
+          <tr>
+            <th>총 주차대수</th>
+            <td>{{ detail.parkingPossibleCount }}</td>
+            <th>세대당 주차대수</th>
+            <td>{{ detail.parkingCountByHousehold }}</td>
+          </tr>
+          <tr>
+            <th colspan="1">건설사</th>
+            <td colspan="3">{{ detail.constructionCompanyName }}</td>
+          </tr>
+          <tr>
+            <th colspan="1">관리사무소</th>
+            <td colspan="3">{{ detail.managementOfficeTelNo }}</td>
+          </tr>
+        </tbody>
+      </v-table>
+    </div>
+  </v-container>
 </template>
 
 <style scoped>
-
 th {
-    border: 1px solid;
-    border-color: v-bind(colors.grey.lighten2);
-    background-color: v-bind(colors.blue.lighten4);
-    color:  v-bind(colors.grey.darken2);
+  border: 1px solid;
+  border-color: v-bind(colors.grey.lighten2);
+  background-color: v-bind(colors.blue.lighten4);
+  color: v-bind(colors.grey.darken2);
 }
 td {
-    border: 1px solid;
-    border-color: v-bind(colors.grey.lighten2);
-    background-color: v-bind(colors.blue.lighten5);
-    color:  v-bind(colors.grey.darken2);
+  border: 1px solid;
+  border-color: v-bind(colors.grey.lighten2);
+  background-color: v-bind(colors.blue.lighten5);
+  color: v-bind(colors.grey.darken2);
 }
 .slide-fade-enter-active {
   transition: all 0.3s ease-out;
