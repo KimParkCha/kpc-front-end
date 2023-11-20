@@ -8,8 +8,8 @@ const userStore = useUserStore()
 const route = useRoute()
 const { user, getUserInfo } = userStore
 
-const getUser = getUserInfo(sessionStorage.getItem('accessToken'))
-console.log('mypage data:  ' + getUser)
+const getUser = sessionStorage.getItem('user')
+console.log('mypage data:  ' + getUser.name)
 
 </script>
 
@@ -27,9 +27,9 @@ console.log('mypage data:  ' + getUser)
     </thead>
     <tbody>
       <tr>
-        <td>{{ user.id }}</td>
-        <td>{{ user.name }}</td>
-        <td>{{ user.email }}</td>
+        <td>{{ getUser.id }}</td>
+        <td>{{ getUser.name }}</td>
+        <td>{{ getUser.email }}</td>
       </tr>
     </tbody>
   </v-table>

@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { httpStatusCode } from './http-status'
 
-const { VITE_API_BASE_URL, VITE_API_BACK_URL } = import.meta.env
+const { VITE_API_USER_URL, VITE_API_HOUSE_URL, VITE_API_NEWS_URL } = import.meta.env
 // local vue api axios instance
-function localAxios() {
+function userAxios() {
   const instance = axios.create({
-    baseURL: VITE_API_BASE_URL,
+    baseURL: VITE_API_USER_URL,
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     }
@@ -78,9 +78,10 @@ function localAxios() {
   return instance
 }
 
-function backAxios() {
+// House Port
+function houseAxios() {
   const instance = axios.create({
-    baseURL: VITE_API_BACK_URL,
+    baseURL: VITE_API_HOUSE_URL,
     headers: {
       'Content-Type': 'application/json;charset=utf-8'
     }
@@ -89,4 +90,16 @@ function backAxios() {
   return instance
 }
 
-export { localAxios, backAxios }
+
+// News Port
+function newsAxios() {
+  const instance = axios.create({
+    baseURL: VITE_API_NEWS_URL,
+    headers: {
+      'Content-Type': 'application/json;charset=utf-8'
+    }
+  })
+
+  return instance
+}
+export { userAxios, houseAxios, newsAxios }

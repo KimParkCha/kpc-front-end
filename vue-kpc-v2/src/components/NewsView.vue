@@ -1,5 +1,13 @@
 <script setup>
-const variants = ['뉴스1', '뉴스2', '뉴스3', '뉴스4']
+const variants = [
+  '급매 아니면 쳐다도 안봐"… 강남 아파트도 한달새 3억 ',
+ '고금리 빚내서 내집마련은 불안"…집값 관망세 속 전세수요',
+ '집주인 바뀌면 전세금 돌려받기 어려울 수 있어” 사기 주의해야',
+  '상승 멈춘 강남구 아파트…“집값 단기 조정” vs “대세 하락',
+  '이러다 가격 더 빠지는 거 아냐"…강남 집주인들 초비상',
+  '집주인이 집을 팔겠대요" 불안한 세입자, 보증금 승계 거부할 수 있다'
+
+  ]
 </script>
 
 <template>
@@ -28,8 +36,8 @@ const variants = ['뉴스1', '뉴스2', '뉴스3', '뉴스4']
         <v-card
           class="mx-auto my-8"
           max-width="344"
-          title="Vuetify on GitHub"
-          append-icon="mdi-open-in-new"
+          :title="variant"
+          append-icon="mdi-plus"
           href="https://n.news.naver.com/article/417/0000963239?cds=news_media_pc&type=editn"
           target="_blank"
           rel="noopener"
@@ -41,4 +49,9 @@ const variants = ['뉴스1', '뉴스2', '뉴스3', '뉴스4']
   </v-container>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-card{
+  background-color: #fff;
+  /* height: 100px;  */
+}
+</style>
