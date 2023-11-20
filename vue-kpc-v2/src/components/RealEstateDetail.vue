@@ -1,75 +1,76 @@
 <script setup>
 import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
-import realPriceView from './RealPriceView.vue'
-import tabTest from './TabTest.vue'
+import complexAPI from '@/api/realEstate'
+const props = defineProps(['complexNo'])
 
-const props = defineProps(['data'])
-
-const show = ref(true)
-const data = ref(null)
-console.log(props.data)
-watch(props.data, (receivedData) => {
-  data.value = receivedData.value
+const show = ref(false)
+const detail = ref({})
+watch(props, (complexNo) => {
+  getDetail(complexNo.complexNo.complexNo)
+  show.value = true
 })
+
+const getDetail = (complexNo) => {
+  complexAPI.getDetail(
+    complexNo,
+    (data) => {
+      console.log(data)
+      detail.value = data.data
+    },
+    () => {}
+  )
+}
+
 </script>
 <template>
   <v-container>
-    <!-- <tabTest></tabTest> -->
-    <button @click="show = !show">Toggle Slide + Fade</button>
-    <Transition name="slide-fade">
       <div v-if="show">
-        <h2>단지 정보</h2>
-
         <v-table>
           <thead></thead>
-
           <tbody>
             <tr>
               <th>단지명</th>
-              <td>{{ props.data.complexName }}</td>
+              <td>{{ detail.complexName }}</td>
               <th>단지 주소</th>
-              <td>{{ props.data.address }}</td>
+              <td>{{ detail.address }}</td>
             </tr>
             <tr>
               <th>세대수</th>
-              <td>{{ props.data.totalHouseholdCount }}</td>
+              <td>{{ detail.totalHouseholdCount }}</td>
               <th>동수</th>
-              <td>{{ props.data.totalDongCount }}</td>
+              <td>{{ detail.totalDongCount }}</td>
             </tr>
             <tr>
               <th>사용승인일</th>
-              <td>{{ props.data.useApproveYmd }}</td>
+              <td>{{ detail.useApproveYmd }}</td>
               <th>저층/최고층</th>
-              <td>{{ props.data.lowFloor + '/' + props.data.highFloor + '층' }}</td>
+              <td>{{detail.lowFloor + '/' + detail.highFloor + '층' }}</td>
             </tr>
             <tr>
               <th>용적률</th>
-              <td>{{ props.data.batlRatio + '%' }}</td>
+              <td>{{ detail.batlRatio + '%' }}</td>
               <th>건폐율</th>
-              <td>{{ props.data.btlRatio + '%' }}</td>
+              <td>{{ detail.btlRatio + '%' }}</td>
             </tr>
             <tr>
               <th>총 주차대수</th>
-              <td>{{ props.data.parkingPossibleCount }}</td>
+              <td>{{ detail.parkingPossibleCount }}</td>
               <th>세대당 주차대수</th>
-              <td>{{ props.data.parkingCountByHousehold }}</td>
+              <td>{{ detail.parkingCountByHousehold }}</td>
             </tr>
             <tr>
               <th colspan="1">건설사</th>
-              <td colspan="3">{{ props.data.constructionCompanyName }}</td>
+              <td colspan="3">{{ detail.constructionCompanyName }}</td>
             </tr>
             <tr>
               <th colspan="1">관리사무소</th>
-              <td colspan="3">{{ props.data.managementOfficeTelNo }}</td>
+              <td colspan="3">{{ detail.managementOfficeTelNo }}</td>
             </tr>
           </tbody>
         </v-table>
-      </div>
-    </Transition>
+        </div>
   </v-container>
-
-  <!-- <realPriceView></realPriceView> -->
 </template>
 
 <style scoped>

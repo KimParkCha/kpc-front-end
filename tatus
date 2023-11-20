@@ -1,0 +1,671 @@
+[33mcommit 26305ca471d6665801fcde40d2f381bf09536ed1[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/main[m[33m)[m
+Merge: 12352ff 7d5e303
+Author: sycha11 <76770475+sycha11@users.noreply.github.com>
+Date:   Mon Nov 20 14:09:47 2023 +0900
+
+    Merge pull request #4 from gogoadl/kpcv3
+    
+    Kpcv3
+
+[33mcommit 7d5e3037b1e389fa57692f52c7a3d3a5daa47226[m[33m ([m[1;31morigin/kpcv3[m[33m)[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 14:07:46 2023 +0900
+
+    fix: TabTest 수정
+
+[33mcommit 4e79caa28b8d7ab8448599e393de96ec57485a9f[m
+Merge: 957d843 3524a73
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 11:37:47 2023 +0900
+
+    Merge branch 'kpcv3' of https://github.com/gogoadl/vue-tutorial into kpcv3
+
+[33mcommit 957d8430a51f24e388d1f71ff13afe615fd47690[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 11:37:12 2023 +0900
+
+    fix: map 단지정보 UI 수정
+
+[33mcommit 12352ffed721bba46c1d4cc3d41f34cdc378ccc6[m
+Merge: 7754543 3524a73
+Author: sycha11 <76770475+sycha11@users.noreply.github.com>
+Date:   Mon Nov 20 11:30:17 2023 +0900
+
+    Merge pull request #3 from gogoadl/kpcv3
+    
+    feat: map에 tabs 추가
+
+[33mcommit 3524a73d32c835e3a979acc08dbef6dbd93e807d[m
+Merge: d900841 7754543
+Author: sycha11 <76770475+sycha11@users.noreply.github.com>
+Date:   Mon Nov 20 11:28:55 2023 +0900
+
+    Merge branch 'main' into kpcv3
+
+[33mcommit d900841b195af21a35d01a9ae82cc71857bfc415[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 11:20:14 2023 +0900
+
+    feat: map에 tabs 추가
+
+[33mcommit 775454371189b998520075e606b2918f03955943[m
+Merge: ddd61a9 f2646e5
+Author: unknown <gogoadl@naver.com>
+Date:   Mon Nov 20 10:41:45 2023 +0900
+
+    Merge branch 'main' of https://github.com/gogoadl/vue-tutorial
+
+[33mcommit ddd61a9a62f8a21a342f3b3bf8a8ebc6532c130e[m
+Author: unknown <gogoadl@naver.com>
+Date:   Mon Nov 20 10:41:22 2023 +0900
+
+    feat : 상세정보 API  요청 추가
+
+[33mcommit f2646e5f0e529881582e34987e434c0e67df5292[m
+Merge: b0cb79e a6b44cb
+Author: sycha11 <76770475+sycha11@users.noreply.github.com>
+Date:   Mon Nov 20 09:29:35 2023 +0900
+
+    Merge pull request #2 from gogoadl/kpcv3
+    
+    Kpcv3
+
+[33mcommit a6b44cb02a4cc3ee0daa06a69c45efac05e0fdc1[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 09:24:41 2023 +0900
+
+    feat: chart.js 추가
+
+[33mcommit f3feea2fec991602028ed80fbc54c3e3ad8d592f[m
+Merge: d8b5e44 3001848
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 09:03:08 2023 +0900
+
+    kpc-v3 충돌 해결
+
+[33mcommit d8b5e447fcf79ebcc0536c69f26064ee9591e954[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 08:15:11 2023 +0900
+
+    fix: http-commons.js 수정
+
+[33mcommit 3001848ac0d91e8151ed2c45061a65252ebf9790[m[33m ([m[1;31morigin/vue-kpc-v3[m[33m)[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Mon Nov 20 00:25:22 2023 +0900
+
+    fix: 로그인시 새로고침 버그 수정
+
+[33mcommit b0cb79e358820823406f0eb449763a19bfee11a0[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 19 10:49:23 2023 +0900
+
+    remove : vue2 버전 제거
+
+[33mcommit cdb92a4c67575f99ab16b0082b7aa4a981398050[m
+Merge: bcf81f3 8f10b26
+Author: sycha11 <sycha112@naver.com>
+Date:   Sat Nov 18 11:19:43 2023 +0900
+
+    fix: AppBar 경로 수정
+
+[33mcommit bcf81f31efaf5c5365909387cb61d44fba87b945[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Sat Nov 18 11:17:21 2023 +0900
+
+    fix: AppBar 경로 수정
+
+[33mcommit 8f10b26fa17d89a20160ddd708ceac8fc392150a[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 16:46:20 2023 +0900
+
+    feat : 미반영 사항 추가
+
+[33mcommit 2dc5ea0bd2d722b6194967b9a4b67ba2bf7d075b[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 16:45:49 2023 +0900
+
+    fix : 검색 자동완성 기능 수정
+
+[33mcommit f41cd26b4c68d8899079c25c052144cf4d958461[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 14:59:45 2023 +0900
+
+    feat : 아파트 상세정보 표시 기능 추가
+
+[33mcommit 0b6184a4af7ee17aa6db92cabc584a93804f4adf[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 12:35:01 2023 +0900
+
+    feat : Floating Button 추가
+
+[33mcommit 94304be7e09837288437cee3587a270747545431[m[33m ([m[1;31morigin/master[m[33m)[m
+Merge: b6f30c9 0623a3b
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 10:56:57 2023 +0900
+
+    Merge branch 'main' of https://github.com/gogoadl/vue-tutorial
+
+[33mcommit b6f30c99af0dd5a4f97512cbf558e2337e71efb8[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 10:54:34 2023 +0900
+
+    test
+
+[33mcommit 0623a3bec662ed512d50490b373dd9eb95875189[m
+Merge: 0b3d90f d802f2c
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Thu Nov 16 10:52:37 2023 +0900
+
+    Merge pull request #1 from gogoadl/master
+    
+    feat : 로고 이미지 추가 및 버튼 홈버튼 클릭 오류 수정
+
+[33mcommit d802f2c0ecd8cfa16021b1265e0c02b8fe36ebcf[m
+Author: unknown <gogoadl@naver.com>
+Date:   Thu Nov 16 10:51:57 2023 +0900
+
+    계정 변경 테스트
+
+[33mcommit e644b9a72ef45c8ce68aefee9711c99dfa73f16b[m
+Author: unknown <suninisy@gmail.com>
+Date:   Thu Nov 16 10:46:50 2023 +0900
+
+    feat : 로고 이미지 추가 및 버튼 홈버튼 클릭 오류 수정
+
+[33mcommit c6a92573a1fd4d4f0d5212cf27d4e8b4144991b6[m
+Merge: 3d117bd 0b3d90f
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 10:22:09 2023 +0900
+
+    merge AppBar
+
+[33mcommit 3d117bdeb1a62dddea7c0cbf8221ff7c19bc1aac[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 10:20:57 2023 +0900
+
+    merge AppBar
+
+[33mcommit 0b3d90fcfe7a397320b07a84cb2b80d68e110148[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 16 09:33:44 2023 +0900
+
+    fix : appbar 색상을 테마색으로 변경 및 테마 색 1단계 밝게 수정
+
+[33mcommit 2d04d38c6e63222460bf9209558b5773194ba595[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 09:12:28 2023 +0900
+
+    feat: login에 따른 navbar 변경
+
+[33mcommit 9ab2e6f21570478fb2ab9f197b88bae86070892b[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 08:17:42 2023 +0900
+
+    feat : stores/user.js getUser 추가
+
+[33mcommit 462e36b0c5e2bffd4126c0a2ff735fff0e0f239e[m
+Merge: 328ddb1 1bb102f
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 07:27:35 2023 +0900
+
+    merge login jwt
+
+[33mcommit 328ddb1d03b147e9e84afd462370b99eff969d89[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 07:25:33 2023 +0900
+
+    store 수정
+
+[33mcommit 1bb102f2a4b5b4c31168429d3cede814d368d973[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 02:57:25 2023 +0900
+
+    feat : token decode 추가
+
+[33mcommit cedd7509eaf66cf79d79b472a6c6de35b29e871d[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 02:27:02 2023 +0900
+
+    fix : store/user.js loginUser 수정
+
+[33mcommit 6a778fe9c650cdc484d77f8903e6a6ca6964053e[m
+Merge: fa23ee5 8c0394e
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 16 00:38:53 2023 +0900
+
+    Merge branch 'main' of https://github.com/gogoadl/vue-tutorial
+
+[33mcommit 8c0394e6a89d630bff51005b9ebe07695a435705[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 15 17:43:33 2023 +0900
+
+    feat : 버튼 이벤트 추가
+
+[33mcommit 255356a07731b599c8e2ff0265377f7e14c824bd[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 15 17:36:19 2023 +0900
+
+    feat : MapView 분리, 라우터 이동 이벤트 불가능 현상 수정
+
+[33mcommit 5978ff10bf331faef99f53822b27d3254fbada75[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 15 17:31:35 2023 +0900
+
+    fix : 불필요 뷰 제거
+
+[33mcommit b271716c15d78581cb334aef0202c4d5998e3d58[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 15 17:20:03 2023 +0900
+
+    feat : Main 화면 UI 업데이트
+
+[33mcommit fa23ee5fdf0d5915e7b95c7dd3f187eb6fe60c69[m
+Merge: 1258b57 a830db5
+Author: sycha11 <sycha112@naver.com>
+Date:   Tue Nov 14 22:13:24 2023 +0900
+
+    interceptor
+
+[33mcommit 1258b574cce2f8ce62354762030b18291dabc3aa[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Tue Nov 14 22:11:21 2023 +0900
+
+    interceptor
+
+[33mcommit a830db570a0a20cf44f604030ee0ef14e5e86ce8[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 16:19:30 2023 +0900
+
+    feat : 전역 저장소에 user 저장 기능 추가
+
+[33mcommit 67caadb80168f648a312a5556e10a048a748202e[m
+Merge: bfe1c89 8ac371c
+Author: sycha11 <sycha112@naver.com>
+Date:   Tue Nov 14 15:16:28 2023 +0900
+
+    jwt 추가(미완)
+
+[33mcommit bfe1c89a17017d3abf13886ab4116f438f5ef6b5[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Tue Nov 14 15:09:35 2023 +0900
+
+    login jwt 추가(미완성)
+
+[33mcommit 8ac371c33271377e1ee02631a146767e70456aa8[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 10:22:03 2023 +0900
+
+    fix : 마커, 리스트 아이템 클릭 이벤트 zoom level 변경
+
+[33mcommit 00369bd06c0f19572edf83e980808145e125afff[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 10:19:58 2023 +0900
+
+    feat : 맵 이동 리팩토링 및 좌측 카드 클릭 이벤트 추가
+
+[33mcommit 2c719fec823050a74087d1114715b6ae6afd173d[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 09:11:07 2023 +0900
+
+    fix : 아파트 단지 리스트 css 수정
+
+[33mcommit dda64ce1ca687e65a3cba28e3eafa7834079c7d2[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 08:54:39 2023 +0900
+
+    feat : overlay css 수정
+
+[33mcommit 7226f5e33f78335ba516d4aa2da2438f58509116[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Nov 14 08:31:45 2023 +0900
+
+    fix : 클러스터 마커 중복 오류 수정
+    
+    표시된 클러스터 중복 현상 제거
+
+[33mcommit 86d2d67a249213338543b63f4bac20bf83ffaaae[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 17:54:57 2023 +0900
+
+    feat : 클러스터 최적화 작업중
+
+[33mcommit cc3ca562f10f0564d1249f37212cf10fef752fa1[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 17:40:13 2023 +0900
+
+    feat : 클러스터링 기능 추가
+
+[33mcommit 2750ea5d3d8576a9d2839018a6d5329d03b89c63[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 17:16:29 2023 +0900
+
+    feat : InfoWindow 클릭 이벤트 추가
+
+[33mcommit 22aacd91f6de47c12520e32c56a675c394a8e4d0[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 11:44:55 2023 +0900
+
+    feat: 마커 상단에 인포윈도우 함께 표시
+
+[33mcommit 9a4d11c5caffec8a78fa72463a33214e813ca7dd[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 11:24:04 2023 +0900
+
+    fix : panel 디자인 변경
+    
+    map 위에 panel이 올라가는 형식에서, map과 panel을 분리하는 형식으로 변경
+
+[33mcommit 5ab0909fca007fce56f91e94e189c05b1c786e7f[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 11:13:24 2023 +0900
+
+    feat : ec2 instance 서버를 통해 rest api 요청
+
+[33mcommit 0c6b6f6a161b1249746eb0caf43eb9fc0a158463[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Nov 13 11:12:54 2023 +0900
+
+    feat : 맵 이동 시 단지 정보 마커에 표시
+
+[33mcommit cc445f79ce7a1914fb6cf28043f7483d731bf01e[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 23:52:55 2023 +0900
+
+    feat : vuetify 테마 적용
+
+[33mcommit ef0bbab458d46af5a9acce4cca10822e511a2ff1[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 21:43:53 2023 +0900
+
+    feat : 해당 위치에 마커 표시
+
+[33mcommit de2ed9aafe6360681d93bdddad38e14180f61e87[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 19:24:59 2023 +0900
+
+    feat : 검색 시 해당 아파트 리스트에 표시기능 추가
+
+[33mcommit ba22c550d0523d5ec7fa6eaa78b1560cc2fbd505[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 19:24:24 2023 +0900
+
+    feat : 아파트 단지 조회 API 추가
+
+[33mcommit 6a714470acd2f89732c33fb9a4fdde345f08e12f[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 15:44:44 2023 +0900
+
+    feat : 검색 시 맵 이동기능  추가
+
+[33mcommit e95dc67e93e7cdeabe06890056c59841acd4f8ba[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Sun Nov 12 15:28:37 2023 +0900
+
+    feat : 지역 검색 기능 추가
+
+[33mcommit 7a77b23da0cc1525d5dfc700c5174a67628c4c03[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Fri Nov 10 17:52:19 2023 +0900
+
+    로그인 회원가입 백엔드 연결
+
+[33mcommit 73f643f487fc7f0657d3ea929472e27ac91cd4b9[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 9 17:58:20 2023 +0900
+
+    feat : 카카오맵 기능 추가
+
+[33mcommit 782ee9a82133254f28d55c6a15a4c4ba90745385[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 9 17:58:01 2023 +0900
+
+    fix : UI 불일치 현상 수정
+
+[33mcommit bf9f7a71fc00c709bfab47692f911af6d0caeefd[m
+Merge: 0d935ec 32b0872
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 9 17:51:39 2023 +0900
+
+    Merge branch 'main' of https://github.com/gogoadl/vue-tutorial
+
+[33mcommit 32b0872ac228053875a1a2956e412b628dbf5156[m
+Author: sycha11 <sycha112@naver.com>
+Date:   Thu Nov 9 17:48:53 2023 +0900
+
+    login join 추가
+
+[33mcommit 0d935eccb0f0123e6a6277c5c11ff4a1dcf1eba0[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 9 17:40:20 2023 +0900
+
+    fix : 실행 포트 변경
+
+[33mcommit 54ae78e6f45d0a61288167cdcad6d31419d7fec0[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Thu Nov 9 10:06:30 2023 +0900
+
+    feat : 샘플 코드추가
+
+[33mcommit d5d18be70871da81de29a0b55fa0b617ccae55cd[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Thu Nov 9 01:11:31 2023 +0900
+
+    feat : 메인페이지 Banner 마이그레이션
+
+[33mcommit 9a77328d1263aba4e5c19acdbeaf98992d1221de[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Thu Nov 9 01:11:07 2023 +0900
+
+    fix : 기본적용 css 제거
+
+[33mcommit 7f2a5cfcf20fb6362cc8f5f4dcf12282d5b81f35[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Thu Nov 9 00:41:21 2023 +0900
+
+    feat : vue2 -> vue3 마이그레이션
+
+[33mcommit ccd149831b425547a8392d66f12f2a6a46939d8d[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Thu Nov 9 00:41:03 2023 +0900
+
+    feat : map bounds api 로그
+
+[33mcommit bad100e7bbdea87a98d7fe0e80e67047705891df[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Fri Nov 3 00:46:58 2023 +0900
+
+    feat : 카카오 맵 API에서 법정동 추출 기능 추가
+
+[33mcommit 861bc5945b714e9ff8fb7e5cb208a45c1ae39a3d[m
+Author: HyeonWoo Park <49335446+gogoadl@users.noreply.github.com>
+Date:   Fri Nov 3 00:18:27 2023 +0900
+
+    feat : 카카오맵 상하좌우 좌표 얻기 API 테스트
+
+[33mcommit 99bb11dec3d4319657b37df33fbe6aa92ec95516[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 1 10:17:16 2023 +0900
+
+    feat : 맵뷰 하단 뉴스리스트 컴포넌트 추가
+
+[33mcommit 666948d929ada947393ac40c32ec5dc64d96e142[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 1 09:36:22 2023 +0900
+
+    feat : 검색어 여부에 따라 맵뷰 하단에 분석정보 표시
+
+[33mcommit f6ccf9f093ef55b47fc0dec23e6e0e346018fe97[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Wed Nov 1 09:36:04 2023 +0900
+
+    fix : AppBar 크기를 더 크게 변경
+
+[33mcommit fd8d267640ce2b9b9ebc128a02fb6ba512134658[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 17:52:59 2023 +0900
+
+    feat : 맵뷰 하단 컴포넌트 추가
+
+[33mcommit faf75aaf6330bf9917fd3c1348fb70f2f9932f22[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 17:18:32 2023 +0900
+
+    feat : 맵뷰 측면 아이템 리스트뷰 추가
+
+[33mcommit 319959f1f5938513df31330652b9d14d7e4a4912[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 17:18:14 2023 +0900
+
+    fix : ProgressCard 크기 변경
+
+[33mcommit 814183f81963dd28629c0afd5af49d0aa053be72[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 16:48:16 2023 +0900
+
+    feat : 지도 검색 이벤트 추가
+    
+    + 형제 컴포넌트간 데이터 전달을 위해 eventBus 사용
+
+[33mcommit 4018bd7a99820b4108575d4eb19a8db5203f8338[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:55:45 2023 +0900
+
+    fix : 로그인 페이지 이동불가 버그 수정
+
+[33mcommit 1a9ba2cef18e57df7dc0ab20809384708d863c48[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:55:31 2023 +0900
+
+    fix : footer 텍스트 변경 및 투명한 배경 제거
+
+[33mcommit bd0630fca58db867726ee853f030f9079a62dbb5[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:55:06 2023 +0900
+
+    fix : chip 클릭 시 텍스트 색상 변경되는 버그 수정
+
+[33mcommit f0599542e74bf6560b115efcdff1536c6584e206[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:54:35 2023 +0900
+
+    feat : 뉴스 더미데이터 표시
+
+[33mcommit 7e21353a827802a61b89a61c8222bba0393ad43f[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:36:35 2023 +0900
+
+    feat : 맵뷰 헤더 추가 및 뉴스리스트 컴포넌트 추가
+
+[33mcommit fb4aab2aa2d1cab0be306620cd0aab4ca42d3e10[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:36:06 2023 +0900
+
+    fix : 디렉토리 구조 변경 적용
+
+[33mcommit ff6ba91e548144aeaa216b735d05e20815a6012e[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:35:46 2023 +0900
+
+    fix : view 디렉토리 구조 변경
+
+[33mcommit 19fa3442de1cb54d76dfa88d71ecc47a7f0b6b6e[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 15:35:04 2023 +0900
+
+    fix : 카카오맵 크기 변경
+
+[33mcommit 98b80234829669448999a64bb355077f3b0553cd[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 10:53:11 2023 +0900
+
+    feat : vuetify 테마 적용
+
+[33mcommit b777a94d929f99d3b432c53c4e9c828642fd694d[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 09:09:16 2023 +0900
+
+    feat : parallax 배너 추가 및 변경
+
+[33mcommit 8c7c3d90f0184def258348a122a47ade1b4eba75[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Tue Oct 31 09:08:52 2023 +0900
+
+    add : kakaoMap Component 추가
+
+[33mcommit 9c2d3c75b78695912ef6d29468e1434592f33615[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Oct 30 16:03:59 2023 +0900
+
+    fix : v-container 클래스의 padding 제거
+
+[33mcommit 4171874758475db6ae3ff10af7985ef62aa4df94[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Oct 30 16:03:42 2023 +0900
+
+    fix : 불필요 태그 제거
+
+[33mcommit aeb6661924629aa86717c219add9407a9c2692ff[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Oct 30 16:03:30 2023 +0900
+
+    add : banner 이미지 추가
+
+[33mcommit 0aadca4bb2ff293836895230587f826d2157c706[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Mon Oct 30 15:22:00 2023 +0900
+
+    feat : ProgressCard 컴포넌트 UI 수정
+
+[33mcommit 70feba7a14ede1b67dbd50cb775f9e613134c6e5[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 16:11:18 2023 +0900
+
+    feat : ProgressBar 컴포넌트 생성
+
+[33mcommit a9da6afedbaae1b6f217aebe5f5fa7c3c1b1a47f[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 15:21:01 2023 +0900
+
+    feat : 템플릿 코드 추가
+
+[33mcommit 032677a8299a97cea3de8416eb6f96b8a4b6a9c9[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 15:20:47 2023 +0900
+
+    feat : 앱바 UI 수정 및 redirect 오류 수정
+
+[33mcommit 97bcd7ad252f565624a2d1e4d258a394b51d9555[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 15:20:02 2023 +0900
+
+    feat : Banner Component 추가
+
+[33mcommit 4c979443cb77567963abc08cce4c2d715649ac8a[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 14:31:29 2023 +0900
+
+    feat : 라우팅 기능 추가
+
+[33mcommit d2d1237878918127ed11f456c00a2a2e08b1f24c[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 14:17:51 2023 +0900
+
+    feat : AppBar, Footer 템플릿 구현
+
+[33mcommit c646b93516258ad62bc0a733c10d245657ece910[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 14:06:39 2023 +0900
+
+    feat : Component 분리
+
+[33mcommit 6e18af9a17695b2e1ae58b8ee600ede2d06b4ae3[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 13:58:58 2023 +0900
+
+    vue.js 연습
+
+[33mcommit b63e2b29da9d96003e3f784329655d076b4d6c71[m
+Author: HyeonWoo Park <gogoadl@naver.com>
+Date:   Sun Oct 29 13:54:41 2023 +0900
+
+    init
