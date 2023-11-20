@@ -1,7 +1,7 @@
 // 비동기 통신하는 코드들을 싹다 모아놓음
-import { localAxios } from '@/utils/http-commons'
+import { userAxios } from '@/utils/http-commons'
 
-const userAPI = localAxios()
+const userAPI = userAxios()
 
 const registUser = async (user, success, fail) => {
   await userAPI.post(`/user/register`, user).then(success).catch(fail)

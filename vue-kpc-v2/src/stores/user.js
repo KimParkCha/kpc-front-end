@@ -46,6 +46,8 @@ export const useUserStore = defineStore('user', () => {
           sessionStorage.setItem('user', data.user)
           console.log('sessiontStorage에 담았다', isLogin.value)
         } else {
+          console.log(data.user)
+          console.log(data)
           console.log('로그인 실패2')
           isLogin.value = false
           isValidToken.value = false

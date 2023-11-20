@@ -1,6 +1,6 @@
-import { localAxios, backAxios } from '@/utils/http-commons'
+import { houseAxios } from '@/utils/http-commons'
 
-const houseAPI = backAxios()
+const houseAPI = houseAxios()
 
 // ㅣ키워드를 포함하는 시군구 정보 요청
 const getRegions = (keyword, success, fail) => {
