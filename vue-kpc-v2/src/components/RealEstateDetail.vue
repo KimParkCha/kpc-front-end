@@ -20,11 +20,7 @@ watch(props.data, (receivedData) => {
     <Transition name="slide-fade">
       <div v-if="show">
         <h2>단지 정보</h2>
-        <v-tabs>
-          <v-tab><h2>단지정보</h2></v-tab>
-          <v-tab><h2>실거래가 정보</h2></v-tab>
-          <v-tab><h2>뉴스</h2></v-tab>
-        </v-tabs>
+
         <v-table>
           <thead></thead>
 

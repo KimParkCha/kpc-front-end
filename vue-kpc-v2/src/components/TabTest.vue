@@ -51,6 +51,14 @@ const detail = {
   roadAddressPrefix: '강원도 강릉시',
   roadZipCode: '25469'
 }
+
+const RealPriceDetail = {
+  tradeYear: '2021',
+  tradeMonth: '12',
+  tradeDate: '14',
+  formattedPrice: '1억 4000',
+  floor: '4'
+}
 </script>
 
 <template>
@@ -65,7 +73,7 @@ const detail = {
       <v-window v-model="data.tab">
         <v-window-item value="one"> <RealEstateDetail :data="detail" /> </v-window-item>
 
-        <v-window-item value="two"> <realPriceView></realPriceView> </v-window-item>
+        <v-window-item value="two"> <realPriceView :data="RealPriceDetail" /> </v-window-item>
 
         <v-window-item value="three"> <NewsView></NewsView> </v-window-item>
       </v-window>
