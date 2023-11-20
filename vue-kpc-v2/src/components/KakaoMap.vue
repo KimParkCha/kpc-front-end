@@ -3,6 +3,8 @@ import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
 import RealEstateDetail from './RealEstateDetail.vue'
+import TabTest from './TabTest.vue'
+
 const props = defineProps(['receivedKeyword'])
 let map = null
 let clusterer = null
@@ -12,46 +14,46 @@ const keyword = ref('')
 const selectedMarker = ref(null)
 
 const detail = {
-    "complexNo": "14419",
-    "complexName": "초당유화1차",
-    "cortarNo": "5115011200",
-    "realEstateTypeCode": "APT",
-    "realEstateTypeName": "아파트",
-    "detailAddress": "182-2",
-    "roadAddress": "연당길 94-3",
-    "latitude": 37.7861,
-    "longitude": 128.91371,
-    "totalHouseholdCount": 90,
-    "totalLeaseHouseholdCount": 0,
-    "permanentLeaseHouseholdCount": 0,
-    "nationLeaseHouseholdCount": 0,
-    "civilLeaseHouseholdCount": 0,
-    "publicLeaseHouseholdCount": 0,
-    "longTermLeaseHouseholdCount": 0,
-    "etcLeaseHouseholdCount": 0,
-    "highFloor": 14,
-    "lowFloor": 5,
-    "useApproveYmd": "19931013",
-    "totalDongCount": 1,
-    "maxSupplyArea": 71.15,
-    "minSupplyArea": 71.15,
-    "dealCount": 9,
-    "rentCount": 1,
-    "leaseCount": 3,
-    "shortTermRentCount": 0,
-    "isBookmarked": false,
-    "batlRatio": "282",
-    "btlRatio": "26",
-    "parkingPossibleCount": 30,
-    "parkingCountByHousehold": 0.33,
-    "constructionCompanyName": "(주)유화주택건설",
-    "heatMethodTypeCode": "HT001",
-    "heatFuelTypeCode": "HF007",
-    "pyoengNames": "71",
-    "managementOfficeTelNo": "033-653-9687",
-    "address": "강원도 강릉시 초당동",
-    "roadAddressPrefix": "강원도 강릉시",
-    "roadZipCode": "25469"
+  complexNo: '14419',
+  complexName: '초당유화1차',
+  cortarNo: '5115011200',
+  realEstateTypeCode: 'APT',
+  realEstateTypeName: '아파트',
+  detailAddress: '182-2',
+  roadAddress: '연당길 94-3',
+  latitude: 37.7861,
+  longitude: 128.91371,
+  totalHouseholdCount: 90,
+  totalLeaseHouseholdCount: 0,
+  permanentLeaseHouseholdCount: 0,
+  nationLeaseHouseholdCount: 0,
+  civilLeaseHouseholdCount: 0,
+  publicLeaseHouseholdCount: 0,
+  longTermLeaseHouseholdCount: 0,
+  etcLeaseHouseholdCount: 0,
+  highFloor: 14,
+  lowFloor: 5,
+  useApproveYmd: '19931013',
+  totalDongCount: 1,
+  maxSupplyArea: 71.15,
+  minSupplyArea: 71.15,
+  dealCount: 9,
+  rentCount: 1,
+  leaseCount: 3,
+  shortTermRentCount: 0,
+  isBookmarked: false,
+  batlRatio: '282',
+  btlRatio: '26',
+  parkingPossibleCount: 30,
+  parkingCountByHousehold: 0.33,
+  constructionCompanyName: '(주)유화주택건설',
+  heatMethodTypeCode: 'HT001',
+  heatFuelTypeCode: 'HF007',
+  pyoengNames: '71',
+  managementOfficeTelNo: '033-653-9687',
+  address: '강원도 강릉시 초당동',
+  roadAddressPrefix: '강원도 강릉시',
+  roadZipCode: '25469'
 }
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
@@ -78,7 +80,7 @@ const initMap = () => {
   }
 
   map = new kakao.maps.Map(container, options)
-  
+
   geocoder = new kakao.maps.services.Geocoder()
   kakao.maps.event.addListener(map, 'idle', () => {
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
@@ -86,12 +88,12 @@ const initMap = () => {
     addClusterMarkers()
   })
 
-  // 마커 클러스터러를 생성합니다 
+  // 마커 클러스터러를 생성합니다
   clusterer = new kakao.maps.MarkerClusterer({
-        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체 
-        averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정 
-        minLevel: 2// 클러스터 할 최소 지도 레벨 
-    });
+    map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
+    averageCenter: true, // 클러스터에 포함된 마커들의 평균 위치를 클러스터 마커 위치로 설정
+    minLevel: 2 // 클러스터 할 최소 지도 레벨
+  })
 }
 
 const addClusterMarkers = () => {
@@ -116,7 +118,7 @@ const displayCenterInfo = (result, status) => {
 }
 const moveLatLng = (data, level) => {
   map.setCenter(data)
-  map.setLevel(level);
+  map.setLevel(level)
 }
 const getComplexes = () => {
   // console.log(map.getBounds())
@@ -137,8 +139,8 @@ const addMarkers = () => {
   clusterer.clear()
   const overlays = items.value.map((data) => {
     const position = data.latlng
-    const hgroup = document.createElement("hgroup")
-    hgroup.className ='speech-bubble'
+    const hgroup = document.createElement('hgroup')
+    hgroup.className = 'speech-bubble'
     const content = `
       <p class='overlay-h2'>${data.complexName}</p>
       <p class='overlay-p'>${data.cortarAddress}</p>
@@ -148,11 +150,11 @@ const addMarkers = () => {
       console.log(data)
       selectedMarker.value = data
     })
-    
+
     return new kakao.maps.CustomOverlay({
-        position : position, 
-        content : hgroup,
-    });
+      position: position,
+      content: hgroup
+    })
   })
   clusterer.addMarkers(overlays)
 }
@@ -176,14 +178,15 @@ const items = ref([])
   <div class="map-wrap">
     <v-row>
       <v-col class="map-items">
-        <RealEstateListItem :data="items" @selectedComplex="selectedComplex"/>
+        <RealEstateListItem :data="items" @selectedComplex="selectedComplex" />
       </v-col>
       <div id="map"></div>
     </v-row>
-    
+
     <!-- <v-container v-if="keyword != ''" class="mt-12"> -->
-      <RealEstateDetail :data="detail" />
-      <!-- <v-row>
+    <!-- <RealEstateDetail :data="detail" /> -->
+    <TabTest></TabTest>
+    <!-- <v-row>
         <progress-card
           :progressVal="50"
           :width="500"
@@ -235,27 +238,27 @@ const items = ref([])
 .v-sheet.v-card {
   padding: 20px;
   border-radius: 25px;
-} 
+}
 :deep() .speech-bubble {
-	position: relative;
-	background: #7ae9ff;
-	border-radius: 75px;
+  position: relative;
+  background: #7ae9ff;
+  border-radius: 75px;
   padding: 5px 15px 5px 15px;
 }
 
 :deep() .speech-bubble:after {
-	content: '';
-	position: absolute;
-	bottom: 0;
-	left: 50%;
-	width: 0;
-	height: 0;
-	border: 28px solid transparent;
-	border-top-color: #7ae9ff;
-	border-bottom: 0;
-	border-right: 0;
-	margin-left: -14px;
-	margin-bottom: -28px;
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border: 28px solid transparent;
+  border-top-color: #7ae9ff;
+  border-bottom: 0;
+  border-right: 0;
+  margin-left: -14px;
+  margin-bottom: -28px;
 }
 :deep() .overlay-h2 {
   font-weight: bold;

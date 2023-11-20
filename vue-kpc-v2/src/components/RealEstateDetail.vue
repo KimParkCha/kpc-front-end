@@ -2,6 +2,7 @@
 import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
 import realPriceView from './RealPriceView.vue'
+import tabTest from './TabTest.vue'
 
 const props = defineProps(['data'])
 
@@ -14,6 +15,7 @@ watch(props.data, (receivedData) => {
 </script>
 <template>
   <v-container>
+    <!-- <tabTest></tabTest> -->
     <button @click="show = !show">Toggle Slide + Fade</button>
     <Transition name="slide-fade">
       <div v-if="show">
@@ -71,7 +73,7 @@ watch(props.data, (receivedData) => {
     </Transition>
   </v-container>
 
-  <realPriceView></realPriceView>
+  <!-- <realPriceView></realPriceView> -->
 </template>
 
 <style scoped>
