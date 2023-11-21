@@ -92,7 +92,7 @@ const getComplexes = () => {
         ...complexes,
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
       }))
-      console.log(data.data)
+      // console.log(data.data)
       items.value = processsed
       addMarkers()
     },
@@ -198,6 +198,10 @@ onMounted(() => {
   box-sizing: border-box;
   background: white;
   overflow-y: auto;
+}
+.v-row {
+  display: flex;
+  flex-direction: row;
 }
 .analyze-card {
   padding: 20px;
