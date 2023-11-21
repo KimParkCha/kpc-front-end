@@ -126,6 +126,7 @@ const clickItem = (item) => {
   width: 400px;
   border-radius: 10px;
   top: 210px;
+  max-height: 300px;
 }
 
 .v-tabs {
