@@ -85,7 +85,7 @@ const moveLatLng = (data, level) => {
 }
 const getComplexes = () => {
   console.log(map.getBounds())
-  complexAPI.getComplexes(
+  complexAPI.getComplexCoords(
     map.getBounds(),
     (data) => {
       const processsed = data.data.map((complexes) => ({
