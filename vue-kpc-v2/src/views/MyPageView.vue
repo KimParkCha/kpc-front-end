@@ -8,8 +8,8 @@ const userStore = useUserStore()
 const route = useRoute()
 const { user, getUserInfo } = userStore
 
-const getUser = sessionStorage.getItem('user')
-console.log('mypage data:  ' + getUser.name)
+const getUser = JSON.parse(sessionStorage.getItem('user'));
+console.log('mypage data:  ' + getUser.id)
 </script>
 
 <template>
@@ -21,6 +21,7 @@ console.log('mypage data:  ' + getUser.name)
           <th class="text-left">번호</th>
           <th class="text-left">이름</th>
           <th class="text-left">이메일</th>
+          <th class="text-left">가입날짜</th>
         </tr>
       </thead>
       <tbody>
@@ -28,6 +29,7 @@ console.log('mypage data:  ' + getUser.name)
           <td>{{ getUser.id }}</td>
           <td>{{ getUser.name }}</td>
           <td>{{ getUser.email }}</td>
+          <td>{{ getUser.joinDate.substring(0,10) }}</td>
         </tr>
       </tbody>
     </v-table>
