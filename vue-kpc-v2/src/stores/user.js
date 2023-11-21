@@ -33,16 +33,17 @@ export const useUserStore = defineStore('user', () => {
       userInfo,
       ({ data }) => {
         if (data.response === 'success') {
-          setUser(data.user)
+          const userJson = JSON.stringify(data.user)
+          console.log('user: ' + userJson)
+          setUser(userJson)
           setToken(data.accessToken)
-          console.log('user: ' + data.user)
 
           isLogin.value = true
           isValidToken.value = true
 
           sessionStorage.setItem('accessToken', data.accessToken)
           sessionStorage.setItem('refreshToken', data.refreshToken)
-          sessionStorage.setItem('user', data.user)
+          sessionStorage.setItem('user', userJson)
           console.log('sessiontStorage에 담았다', isLogin.value)
         } else {
           console.log(data)

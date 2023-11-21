@@ -6,6 +6,7 @@ import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
 import NewsView from '../components/NewsView.vue'
+import ToggleAppBar from '../components/ToggleAppBar.vue'
 
 const topTitle = ref({
   isActive: false,
@@ -36,10 +37,12 @@ const posts = ref([
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
 ])
-
+const drawer = ref(null)
 </script>
 
 <template>
+  <!-- <ToggleAppBar></ToggleAppBar> -->
+
   <ParallaxBanner />
   <FloatingButton />
 
@@ -121,6 +124,10 @@ const posts = ref([
   <!-- <KakaoMapView /> -->
 </template>
 <style scoped>
+.v-navigation-drawer {
+z-index: 999999;
+}
+
 .v-col {
   animation: fadein 1s;
   -moz-animation: fadein 1s; /* Firefox */

@@ -4,10 +4,13 @@ import { useMenuStore } from '@/stores/menu'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
 import { ref, watch } from 'vue'
+import ToggleAppBar from './ToggleAppBar.vue'
 
 const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
+
+const getUser = JSON.parse(sessionStorage.getItem('user'))
 
 changeMenuState()
 console.log(menuList.value)
@@ -23,6 +26,7 @@ const fname = ref('logo')
 const getImageUrls = (name) => {
   return new URL(`/src/assets/${name}.svg`, import.meta.url).href
 }
+const drawer = ref(null)
 </script>
 
 <template>
@@ -37,9 +41,7 @@ const getImageUrls = (name) => {
 
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.routeName === 'logout'">
-        <RouterLink to="/" @click.prevent="logout"
-          ><v-btn>{{ menu.name }}</v-btn></RouterLink
-        >
+        <v-btn @click.stop="drawer = !drawer">{{ getUser.name }}님</v-btn>
       </template>
       <template v-else>
         <RouterLink :to="{ name: menu.routeName }"
@@ -54,10 +56,37 @@ const getImageUrls = (name) => {
     <v-btn><RouterLink to="/mypage">마이페이지</RouterLink></v-btn> -->
     <!-- <v-btn><RouterLink @click="logout">로그아웃</RouterLink></v-btn> -->
   </v-app-bar>
+  <v-navigation-drawer v-model="drawer" location="right" temporary>
+    <v-list-item></v-list-item>
+
+    <v-divider></v-divider>
+
+    <v-list density="compact" nav v-for="menu in menuList" :key="menu.routeName">
+      <template v-if="menu.routeName === 'logout'">
+        <v-list-item prepend-icon="mdi-view-dashboard">
+          <RouterLink to="/" @click.prevent="logout"
+            ><a>{{ menu.name }}</a></RouterLink
+          >
+        </v-list-item>
+      </template>
+      <template v-else>
+        <v-list-item prepend-icon="mdi-forum">
+          <RouterLink :to="{ name: menu.routeName }"
+            ><a>{{ menu.name }}</a></RouterLink
+          >
+        </v-list-item>
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <style scoped>
 .v-btn {
+  color: black;
+}
+
+a {
+  text-decoration: none;
   color: black;
 }
 </style>

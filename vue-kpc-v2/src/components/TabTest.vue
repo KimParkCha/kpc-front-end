@@ -27,8 +27,6 @@ watch(props, (receivedData) => {
   cityCode.value = receivedData.cortarNo.toString().substring(0, 2) + '00000000'
   dsvnCode.value = receivedData.cortarNo.toString().substring(0, 4) + '00000000'
 
-  console.log(cityCode.value)
-  console.log(dsvnCode.value)
 })
 
 // const code = {
