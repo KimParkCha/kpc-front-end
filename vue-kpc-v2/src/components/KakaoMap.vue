@@ -3,8 +3,8 @@ import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
 import TabTest from './TabTest.vue'
-import '@/assets/three-dots.css'
-import '@/assets/snack.css'
+// import '@/assets/three-dots.css'
+// import '@/assets/snack.css'
 
 const props = defineProps(['receivedKeyword'])
 let map = null
@@ -72,6 +72,9 @@ const initMap = () => {
   })
 }
 
+const displayCenterInfo = () => {
+  
+}
 const moveLatLng = (data, level) => {
   map.setCenter(data)
   map.setLevel(level)
