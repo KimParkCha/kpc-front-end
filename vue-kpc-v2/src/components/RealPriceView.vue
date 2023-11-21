@@ -6,7 +6,7 @@ import houseApi from '../api/realEstate.js'
 
 const props = defineProps(['complexNo'])
 
-// const show = ref(false)
+const show = ref(false)
 const realprice = ref()
 console.log('realpriceView 나와라좀')
 
@@ -23,7 +23,13 @@ const houseCall = (complexNo) => {
     (data) => {
       console.log('실거래가 가져와라잇')
       console.log(data.data)
-      realprice.value = data.data
+
+      if (data.data == '') {
+        show.value = true
+        console.log('실거래가 정보가 없습니다.')
+      } else {
+        realprice.value = data.data
+      }
     },
     () => {
       console.log('error')
@@ -33,7 +39,7 @@ const houseCall = (complexNo) => {
 </script>
 
 <template>
-  <v-container>
+  <v-container v-if="show">
     <div style="display: flex">
       <chartDataView :data="realprice"></chartDataView>
 
@@ -66,6 +72,7 @@ const houseCall = (complexNo) => {
 
     <!-- </Transition> -->
   </v-container>
+  <v-container v-if="!show"> <div>매물정보가 없습니다.</div> </v-container>
 </template>
 <style scoped>
 thead {

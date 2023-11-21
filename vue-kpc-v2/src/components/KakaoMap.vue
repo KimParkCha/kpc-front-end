@@ -32,7 +32,6 @@ watch(selectedMarker, (newVal) => {
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
   cortarNo.value = newVal.cortarNo
-
 })
 
 onMounted(() => {
@@ -72,9 +71,7 @@ const initMap = () => {
   })
 }
 
-const displayCenterInfo = () => {
-  
-}
+const displayCenterInfo = () => {}
 const moveLatLng = (data, level) => {
   map.setCenter(data)
   map.setLevel(level)
@@ -135,7 +132,6 @@ const getComplexes = () => {
     () => {}
   )
 }
-
 </script>
 <template>
   <div class="map-wrap">

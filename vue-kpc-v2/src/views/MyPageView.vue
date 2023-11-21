@@ -6,9 +6,9 @@ import { useUserStore } from '../stores/user'
 
 const userStore = useUserStore()
 const route = useRoute()
-const { user, getUserInfo } = userStore
+const { user, userInfo } = userStore
 
-const getUser = JSON.parse(sessionStorage.getItem('user'));
+const getUser = JSON.parse(sessionStorage.getItem('user'))
 console.log('mypage data:  ' + getUser.id)
 </script>
 
@@ -29,7 +29,7 @@ console.log('mypage data:  ' + getUser.id)
           <td>{{ getUser.id }}</td>
           <td>{{ getUser.name }}</td>
           <td>{{ getUser.email }}</td>
-          <td>{{ getUser.joinDate.substring(0,10) }}</td>
+          <td>{{ getUser.joinDate.substring(0, 10) }}</td>
         </tr>
       </tbody>
     </v-table>

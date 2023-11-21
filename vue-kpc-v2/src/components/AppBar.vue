@@ -10,7 +10,7 @@ const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
 
-const getUser = JSON.parse(sessionStorage.getItem('user'));
+const getUser = JSON.parse(sessionStorage.getItem('user'))
 
 changeMenuState()
 console.log(menuList.value)
@@ -27,7 +27,6 @@ const getImageUrls = (name) => {
   return new URL(`/src/assets/${name}.svg`, import.meta.url).href
 }
 const drawer = ref(null)
-
 </script>
 
 <template>
@@ -42,16 +41,14 @@ const drawer = ref(null)
 
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.routeName === 'logout'">
-       
-        <v-btn @click.stop="drawer = !drawer">{{getUser.name}}님</v-btn>
+        <v-btn @click.stop="drawer = !drawer">{{ getUser.name }}님</v-btn>
       </template>
       <template v-else>
-              <RouterLink :to="{ name: menu.routeName }"
-                ><v-btn>{{ menu.name }}</v-btn></RouterLink
-              >
+        <RouterLink :to="{ name: menu.routeName }"
+          ><v-btn>{{ menu.name }}</v-btn></RouterLink
+        >
       </template>
     </template>
-
 
     <!-- <RouterLink to="/map"><v-btn>지도</v-btn></RouterLink>
     <RouterLink to="/create"><v-btn>생성</v-btn></RouterLink>
@@ -59,51 +56,36 @@ const drawer = ref(null)
     <v-btn><RouterLink to="/mypage">마이페이지</RouterLink></v-btn> -->
     <!-- <v-btn><RouterLink @click="logout">로그아웃</RouterLink></v-btn> -->
   </v-app-bar>
-    <v-navigation-drawer
-        v-model="drawer"
-        location="right"
-        temporary
-      >
-        <v-list-item
-          :title="getUser.name.concat('님')"
-        ></v-list-item>
+  <v-navigation-drawer v-model="drawer" location="right" temporary>
+    <v-list-item></v-list-item>
 
-        <v-divider></v-divider>
+    <v-divider></v-divider>
 
-        <v-list density="compact" nav v-for="menu in menuList" :key="menu.routeName">
-          <template v-if="menu.routeName === 'logout'">
-          <v-list-item prepend-icon="mdi-view-dashboard">
-
-            <RouterLink to="/" @click.prevent="logout"
-          ><a>{{ menu.name }}</a></RouterLink
-        >
-          </v-list-item>
-          
-          </template>
-          <template v-else>
-            <v-list-item prepend-icon="mdi-forum">
-              <RouterLink :to="{ name: menu.routeName }"
-                ><a>{{ menu.name }}</a></RouterLink
-              >
-
-            </v-list-item>
+    <v-list density="compact" nav v-for="menu in menuList" :key="menu.routeName">
+      <template v-if="menu.routeName === 'logout'">
+        <v-list-item prepend-icon="mdi-view-dashboard">
+          <RouterLink to="/" @click.prevent="logout"
+            ><a>{{ menu.name }}</a></RouterLink
+          >
+        </v-list-item>
       </template>
-        </v-list>
-        
-      </v-navigation-drawer>
- 
-
-
+      <template v-else>
+        <v-list-item prepend-icon="mdi-forum">
+          <RouterLink :to="{ name: menu.routeName }"
+            ><a>{{ menu.name }}</a></RouterLink
+          >
+        </v-list-item>
+      </template>
+    </v-list>
+  </v-navigation-drawer>
 </template>
-
-
 
 <style scoped>
 .v-btn {
   color: black;
 }
 
-a{
+a {
   text-decoration: none;
   color: black;
 }

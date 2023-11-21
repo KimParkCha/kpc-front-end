@@ -4,16 +4,17 @@ import newsApi from '../api/news.js'
 
 const props = defineProps(['cityCode', 'dsvnCode'])
 
-console.log(props.cityCode)
-console.log(props.dsvnCode)
+// console.log(props.cityCode)
+// console.log(props.dsvnCode)
 
 const news = ref()
 
 watch(props, (receivedData) => {
+  console.log('watchNews')
   console.log(receivedData)
-  console.log(props.cityCode)
-  console.log(props.dsvnCode)
-  newsCall(props.cityCode, props.dsvnCode)
+  console.log('시코드 ' + receivedData.cityCode)
+  console.log('도코드 ' + receivedData.dsvnCode)
+  newsCall(receivedData.cityCode, receivedData.dsvnCode)
   // show.value = true
 })
 
@@ -34,7 +35,6 @@ const newsCall = (cityCode, dsvnCode) => {
 }
 
 // newsCall(props.cityCode, props.dsvnCode)
-
 </script>
 
 <template>
