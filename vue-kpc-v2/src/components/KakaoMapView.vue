@@ -17,12 +17,12 @@ const show = (payload) => {
 </script>
 <template>
   <div>
-    <KakaoMapHeader @search="search" @show="show"/>
+    <KakaoMapHeader @search="search" @show="show" />
     <KakaoMap :receivedKeyword="keyword" v-if="showState" />
     <div class="not-supported" v-else>
-      <img :src="src" width="96" height="96">
-      <br>
-        <h2>현재 지원하지 않는 기능이에요...</h2>
+      <img :src="src" width="96" height="96" />
+      <br />
+      <h2>현재 지원하지 않는 기능이에요...</h2>
     </div>
   </div>
 </template>

@@ -32,7 +32,6 @@ export const useUserStore = defineStore('user', () => {
     await userAPI.loginUser(
       userInfo,
       ({ data }) => {
-
         if (data.response === 'success') {
           setUser(data.user)
           setToken(data.accessToken)
@@ -66,7 +65,7 @@ export const useUserStore = defineStore('user', () => {
     userAPI.getUser(
       decodeToken.email,
       (response) => {
-        console.log("data   " + response.data.name)
+        console.log('data   ' + response.data.name)
         if (response.status === 200) {
           userInfo.value = response.data
           setUser(response.data)

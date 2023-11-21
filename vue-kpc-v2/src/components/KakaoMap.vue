@@ -15,13 +15,9 @@ const keyword = ref('')
 const selectedMarker = ref(null)
 const selectedNo = ref(null)
 const items = ref([])
-
 const loadingIcon = ref('./src/assets/ripple.gif')
-
 const loading = ref(false)
-function getImageUrl() {
-  return new URL(`/../assets/house1.png`, import.meta.url).href
-}
+
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -29,17 +25,26 @@ watch(props.receivedKeyword, (keyword) => {
   moveLatLng(latlng, 3)
   getComplexes()
 })
+
 watch(selectedMarker, (newVal) => {
   console.log(newVal)
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
-
 })
 
-const selectedComplex = (payload) => {
-  console.log(payload.item)
-  selectedMarker.value = payload.item
-}
+onMounted(() => {
+  if (window.kakao && window.kakao.maps) {
+    initMap()
+  } else {
+    const script = document.createElement('script')
+    /* global kakao */
+    script.onload = () => kakao.maps.load(initMap)
+    script.src =
+      '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services,clusterer'
+    document.head.appendChild(script)
+  }
+})
+
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
@@ -47,7 +52,6 @@ const initMap = () => {
     level: 4,
     maxLevel: 6
   }
-
   map = new kakao.maps.Map(container, options)
 
   geocoder = new kakao.maps.services.Geocoder()
@@ -57,7 +61,6 @@ const initMap = () => {
     getComplexes()
     addClusterMarkers()
   })
-
   // 마커 클러스터러를 생성합니다
   clusterer = new kakao.maps.MarkerClusterer({
     map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
@@ -66,21 +69,51 @@ const initMap = () => {
   })
 }
 
+const moveLatLng = (data, level) => {
+  map.setCenter(data)
+  map.setLevel(level)
+}
+
+const selectedComplex = (payload) => {
+  console.log(payload.item)
+  selectedMarker.value = payload.item
+}
+
 const addClusterMarkers = () => {
   items.value.map((item) => {
     clusterer.addMarkers(item.latlng)
   })
 }
+
 const searchAddrFromCoords = (coords, callback) => {
   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
-const displayCenterInfo = (result, status) => {
 
+const addMarkers = () => {
+  const src = './src/assets/house2.png'
+  const icon = new kakao.maps.MarkerImage(src, new kakao.maps.Size(31, 35), {
+    offset: new kakao.maps.Point(16, 34),
+    shape: 'poly',
+    coords: '1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33'
+  })
+  clusterer.clear()
+  const overlays = items.value.map((data) => {
+    const position = data.latlng
+    const marker = new kakao.maps.Marker({
+      position: position,
+      image: icon
+    })
+
+    kakao.maps.event.addListener(marker, 'click', function () {
+      console.log(data)
+      selectedMarker.value = data
+    })
+
+    return marker
+  })
+  clusterer.addMarkers(overlays)
 }
-const moveLatLng = (data, level) => {
-  map.setCenter(data)
-  map.setLevel(level)
-}
+
 const getComplexes = () => {
   complexAPI.getComplexCoords(
     map.getBounds(),
@@ -96,50 +129,6 @@ const getComplexes = () => {
     () => {}
   )
 }
-
-const addMarkers = () => {
-  const src = './src/assets/house2.png'
-  const icon = new kakao.maps.MarkerImage(
-    src,
-    new kakao.maps.Size(31, 35),
-    {
-        offset: new kakao.maps.Point(16, 34),
-        shape: "poly",
-        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
-    }
-);
-  clusterer.clear()
-  const overlays = items.value.map((data) => {
-    const position = data.latlng
-    const marker = new kakao.maps.Marker({
-      position: position,
-      image: icon
-    })
-
-    kakao.maps.event.addListener(marker, 'click', function() {
-      console.log(data)
-      selectedMarker.value = data
-    });
-
-    return marker;
-  })
-
-  clusterer.addMarkers(overlays)
-}
-
-onMounted(() => {
-  if (window.kakao && window.kakao.maps) {
-    initMap()
-  } else {
-    const script = document.createElement('script')
-    /* global kakao */
-    script.onload = () => kakao.maps.load(initMap)
-    script.src =
-      '//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=b0350300fd8a48810b080f1c100cf33b&libraries=services,clusterer'
-    document.head.appendChild(script)
-  }
-})
-
 </script>
 <template>
   <div class="map-wrap">
@@ -149,7 +138,7 @@ onMounted(() => {
       </v-col>
       <div id="map">
         <div class="stage" v-if="loading">
-          <img :src="loadingIcon" width="64" height="64">  
+          <img :src="loadingIcon" width="64" height="64" />
         </div>
       </div>
     </v-row>
@@ -225,5 +214,4 @@ onMounted(() => {
   margin-left: 128px;
   margin-bottom: 256px;
 }
-
 </style>

@@ -19,7 +19,7 @@ function getImageUrl(name) {
       </v-col>
       <v-col cols="5" class="mx-auto">
         <RouterLink to="/map"> <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink>
-    </v-col>
+      </v-col>
     </v-row>
   </v-parallax>
 </template>

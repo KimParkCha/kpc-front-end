@@ -6,7 +6,7 @@ import NewsView from './NewsView.vue'
 
 const props = defineProps(['complexNo'])
 
-const tab = ref("")
+const tab = ref('')
 const complexNo = ref(null)
 watch(props, (receivedData) => {
   console.log(receivedData)
@@ -43,4 +43,5 @@ const RealPriceDetail = {
 <style scoped>
 .v-card {
   margin-top: 24px;
-}</style>
+}
+</style>

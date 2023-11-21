@@ -1,10 +1,9 @@
 <script setup>
-import KakaoMapView from '@/components/KakaoMapView.vue';
-import FloatingButton from '../components/FloatingButton.vue';
+import KakaoMapView from '@/components/KakaoMapView.vue'
+import FloatingButton from '../components/FloatingButton.vue'
 </script>
 <template>
-    <FloatingButton />
-<KakaoMapView></KakaoMapView>
+  <FloatingButton />
+  <KakaoMapView></KakaoMapView>
 </template>
-<style scoped>
-</style>
+<style scoped></style>

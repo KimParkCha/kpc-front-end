@@ -15,10 +15,16 @@ const onClickCard = (item) => {
     item: item
   })
 }
-
 </script>
 <template>
-  <v-card outlined hover v-for="item in data" :key="item.id" class="ma-3 pa-3" @click="onClickCard(item)">
+  <v-card
+    outlined
+    hover
+    v-for="item in data"
+    :key="item.id"
+    class="ma-3 pa-3"
+    @click="onClickCard(item)"
+  >
     <v-card-title>
       {{ item.complexName }}
     </v-card-title>

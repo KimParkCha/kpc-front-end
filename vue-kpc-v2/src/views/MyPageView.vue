@@ -10,29 +10,27 @@ const { user, getUserInfo } = userStore
 
 const getUser = sessionStorage.getItem('user')
 console.log('mypage data:  ' + getUser.name)
-
 </script>
 
 <template>
-
   <v-sheet :elevation="12" class="mx-auto">
     <h2>마이페이지</h2>
     <v-table>
-    <thead>
-      <tr>
-        <th class="text-left">번호</th>
-        <th class="text-left">이름</th>
-        <th class="text-left">이메일</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>{{ getUser.id }}</td>
-        <td>{{ getUser.name }}</td>
-        <td>{{ getUser.email }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+      <thead>
+        <tr>
+          <th class="text-left">번호</th>
+          <th class="text-left">이름</th>
+          <th class="text-left">이메일</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{{ getUser.id }}</td>
+          <td>{{ getUser.name }}</td>
+          <td>{{ getUser.email }}</td>
+        </tr>
+      </tbody>
+    </v-table>
   </v-sheet>
 </template>
 
