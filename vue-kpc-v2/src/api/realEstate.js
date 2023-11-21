@@ -14,11 +14,26 @@ const getRegions = (keyword, success, fail) => {
     .catch(fail)
 }
 
-// 부서 조회
 const getComplexes = (ia, success, fail) => {
   console.log(ia)
   houseAPI
     .get(`/api/complex/list`, {
+      params: {
+        ha: ia.ha,
+        oa: ia.oa,
+        pa: ia.pa,
+        qa: ia.qa
+      }
+    })
+    .then(success)
+    .catch(fail)
+}
+
+// 부서 조회
+const getComplexCoords = (ia, success, fail) => {
+  // console.log(ia)
+  houseAPI
+    .get(`/api/complex/coord/list`, {
       params: {
         ha: ia.ha,
         oa: ia.oa,
@@ -38,4 +53,4 @@ const getRealPrices = (complexNo, success, fail) => {
   houseAPI.get(`/api/realprice/list/${complexNo}`).then(success).catch(fail)
 }
 
-export default { getRegions, getComplexes, getDetail, getRealPrices }
+export default { getRegions, getComplexes, getComplexCoords, getDetail, getRealPrices }

@@ -34,7 +34,7 @@ const newsCall = (cityCode, dsvnCode) => {
 }
 
 // newsCall(props.cityCode, props.dsvnCode)
-// houseAPI.get(`/localnews/cityCode${cityCode}/dsvnCode${dsvnCode}`).then(success).catch(fail)
+
 </script>
 
 <template>

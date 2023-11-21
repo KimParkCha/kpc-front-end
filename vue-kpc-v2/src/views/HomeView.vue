@@ -37,18 +37,12 @@ const posts = ref([
   }
 ])
 
-const code = {
-  cityCode: '4100000000',
-  dsvnCode: '4137000000'
-}
 </script>
 
 <template>
   <ParallaxBanner />
   <FloatingButton />
 
-  <!-- 뉴스 정보 -->
-  <NewsView v-bind="code" />
   <v-sheet
     class="d-flex flex-column justify-center align-center fill-height"
     color="transparent"

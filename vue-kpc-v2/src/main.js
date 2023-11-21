@@ -20,8 +20,8 @@ const vuetify = createVuetify({
     defaultSet: 'mdi',
     aliases,
     sets: {
-      mdi,
-    },
+      mdi
+    }
   },
   theme: {
     defaultTheme: 'light',
