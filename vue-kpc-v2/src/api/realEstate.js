@@ -31,7 +31,7 @@ const getComplexes = (ia, success, fail) => {
 
 // 부서 조회
 const getComplexCoords = (ia, success, fail) => {
-  console.log(ia)
+  // console.log(ia)
   houseAPI
     .get(`/api/complex/coord/list`, {
       params: {

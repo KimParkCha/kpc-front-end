@@ -3,6 +3,8 @@ import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
 import TabTest from './TabTest.vue'
+import '@/assets/three-dots.css'
+import '@/assets/snack.css'
 
 const props = defineProps(['receivedKeyword'])
 let map = null
@@ -14,6 +16,9 @@ const selectedMarker = ref(null)
 const selectedNo = ref(null)
 const items = ref([])
 
+const loadingIcon = ref('./src/assets/ripple.gif')
+
+const loading = ref(false)
 function getImageUrl() {
   return new URL(`/../assets/house1.png`, import.meta.url).href
 }
@@ -47,6 +52,7 @@ const initMap = () => {
 
   geocoder = new kakao.maps.services.Geocoder()
   kakao.maps.event.addListener(map, 'idle', () => {
+    loading.value = true
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
     getComplexes()
     addClusterMarkers()
@@ -69,22 +75,13 @@ const searchAddrFromCoords = (coords, callback) => {
   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
 const displayCenterInfo = (result, status) => {
-  if (status === kakao.maps.services.Status.OK) {
-    for (var i = 0; i < result.length; i++) {
-      // 행정동의 region_type 값은 'H' 이므로
-      if (result[i].region_type === 'H') {
-        console.log(result[i].address_name)
-        break
-      }
-    }
-  }
+
 }
 const moveLatLng = (data, level) => {
   map.setCenter(data)
   map.setLevel(level)
 }
 const getComplexes = () => {
-  console.log(map.getBounds())
   complexAPI.getComplexCoords(
     map.getBounds(),
     (data) => {
@@ -92,9 +89,9 @@ const getComplexes = () => {
         ...complexes,
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
       }))
-      // console.log(data.data)
       items.value = processsed
       addMarkers()
+      loading.value = false
     },
     () => {}
   )
@@ -150,7 +147,11 @@ onMounted(() => {
       <v-col class="map-items">
         <RealEstateListItem :data="items" @selectedComplex="selectedComplex" />
       </v-col>
-      <div id="map"></div>
+      <div id="map">
+        <div class="stage" v-if="loading">
+          <img :src="loadingIcon" width="64" height="64">  
+        </div>
+      </div>
     </v-row>
 
     <TabTest :complex-no="selectedNo"></TabTest>
@@ -211,4 +212,18 @@ onMounted(() => {
   padding: 20px;
   border-radius: 25px;
 }
+.stage {
+  width: 100%;
+  height: 100%;
+  z-index: 150;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+  margin-left: 128px;
+  margin-bottom: 256px;
+}
+
 </style>

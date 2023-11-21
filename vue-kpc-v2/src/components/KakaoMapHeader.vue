@@ -69,7 +69,7 @@ const clickItem = (item) => {
 </script>
 
 <template>
-  <div class="container">
+  <div>
     <v-tabs v-model="tab" fixed-tabs>
       <v-tab value="apt" >아파트, 오피스텔</v-tab>
       <v-tab value="vila">빌라, 주택</v-tab>
@@ -124,9 +124,6 @@ const clickItem = (item) => {
   </div>
 </template>
 <style scoped>
-.container {
-  position: static;
-}
 .v-list {
   z-index: 3333;
   position: absolute;
