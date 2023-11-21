@@ -25,21 +25,22 @@ const RealPriceDetail = {
 <template>
   <v-card>
     <v-tabs v-model="tab" bg-color="white">
-      <v-tab value="one"><h2>단지 정보</h2></v-tab>
-      <v-tab value="two"><h2>실거래가 정보</h2></v-tab>
-      <v-tab value="three"><h2>뉴스</h2></v-tab>
+      <v-tab value="one"><h3>단지 정보</h3></v-tab>
+      <v-tab value="two"><h3>실거래가 정보</h3></v-tab>
+      <v-tab value="three"><h3>뉴스</h3></v-tab>
     </v-tabs>
 
     <v-card-text>
       <v-window v-model="tab">
-        <v-window-item value="one"> <RealEstateDetail :complex-no="complexNo" /> </v-window-item>
-
-        <v-window-item value="two"> <realPriceView :complex-no="complexNo" /> </v-window-item>
-
-        <v-window-item value="three"> <NewsView :complex-no="complexNo" /> </v-window-item>
+        <v-window-item value="one"> <RealEstateDetail :complexNo="complexNo" /> </v-window-item>
+        <v-window-item value="two"> <realPriceView :complexNo="complexNo" /> </v-window-item>
+        <v-window-item value="three"> <NewsView :complexNo="complexNo" /> </v-window-item>
       </v-window>
     </v-card-text>
   </v-card>
 </template>
 
-<style scoped></style>
+<style scoped>
+.v-card {
+  margin-top: 24px;
+}</style>
