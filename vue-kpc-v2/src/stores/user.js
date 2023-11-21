@@ -35,7 +35,7 @@ export const useUserStore = defineStore('user', () => {
         if (data.response === 'success') {
           setUser(data.user)
           setToken(data.accessToken)
-          console.log('user: ' + data.user.value)
+          console.log('user: ' + data.user)
 
           isLogin.value = true
           isValidToken.value = true

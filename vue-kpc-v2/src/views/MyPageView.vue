@@ -6,10 +6,10 @@ import { useUserStore } from '../stores/user'
 
 const userStore = useUserStore()
 const route = useRoute()
-const { user, getUserInfo } = userStore
+const { user, userInfo } = userStore
 
 const getUser = sessionStorage.getItem('user')
-console.log('mypage data:  ' + getUser.name)
+console.log('mypage data:  ' + userInfo)
 </script>
 
 <template>
