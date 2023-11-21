@@ -5,6 +5,8 @@ import KakaoMapView from '../components/KakaoMapView.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
+import NewsView from '../components/NewsView.vue'
+
 const topTitle = ref({
   isActive: false,
   title: '매번 직접 분석해야했던 부동산 정보',
@@ -34,11 +36,13 @@ const posts = ref([
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
 ])
+
 </script>
 
 <template>
   <ParallaxBanner />
   <FloatingButton />
+
   <v-sheet
     class="d-flex flex-column justify-center align-center fill-height"
     color="transparent"

@@ -5,10 +5,11 @@ import { onMounted } from 'vue'
 
 const labels = ['2022.12', '2023.01', '2023.05', '2023.06']
 const props = defineProps(['data'])
+console.log(props.data)
 
-// watch(props.data, (receivedData) => {
-//   data.value = receivedData.value
-// })
+watch(props, (receivedData) => {
+  // labels = props.data.tradeYear
+})
 
 const data = {
   labels: labels,
@@ -24,12 +25,6 @@ const data = {
       backgroundColor: 'rgba(20,50,90)',
       borderColor: 'rgba(255,99,132)',
       data: [0.9, 1.8, 2.4, 2.8, 3.2]
-    },
-    {
-      label: '평균가',
-      backgroundColor: 'rgba(255,99,132)',
-      borderColor: 'rgba(255,99,132)',
-      data: [1.2, 1.8, 2.4, 2.8, 3.2]
     }
   ]
 }

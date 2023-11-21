@@ -14,6 +14,7 @@ let geocoder = null
 const keyword = ref('')
 const selectedMarker = ref(null)
 const selectedNo = ref(null)
+const cortarNo = ref(null)
 const items = ref([])
 const loadingIcon = ref('./src/assets/ripple.gif')
 const loading = ref(false)
@@ -30,6 +31,8 @@ watch(selectedMarker, (newVal) => {
   console.log(newVal)
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
+  cortarNo.value = newVal.cortarNo
+
 })
 
 onMounted(() => {
@@ -129,6 +132,7 @@ const getComplexes = () => {
     () => {}
   )
 }
+
 </script>
 <template>
   <div class="map-wrap">
@@ -143,7 +147,8 @@ const getComplexes = () => {
       </div>
     </v-row>
 
-    <TabTest :complex-no="selectedNo"></TabTest>
+    <TabTest :complex-no="selectedNo" :cortar-no="cortarNo"></TabTest>
+    <!-- <TabTest v-bind="complexInfo"></TabTest> -->
     <!-- <v-row>
         <progress-card
           :progressVal="50"
