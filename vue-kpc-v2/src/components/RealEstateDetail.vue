@@ -3,12 +3,11 @@ import { ref, watch } from 'vue'
 import colors from 'vuetify/lib/util/colors'
 import houseApi from '@/api/realEstate'
 const props = defineProps(['complexNo'])
-
 const show = ref(false)
 const detail = ref({})
 watch(props, (complexNo) => {
   console.log(complexNo)
-  getDetail(complexNo.complexNo.complexNo)
+  getDetail(complexNo.complexNo)
   show.value = true
 })
 

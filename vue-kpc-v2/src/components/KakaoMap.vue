@@ -12,6 +12,7 @@ let geocoder = null
 const keyword = ref('')
 const selectedMarker = ref(null)
 const selectedNo = ref(null)
+const cortarNo = ref(null)
 const items = ref([])
 
 function getImageUrl() {
@@ -28,7 +29,7 @@ watch(selectedMarker, (newVal) => {
   console.log(newVal)
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
-
+  cortarNo.value = newVal.cortarNo
 })
 
 const selectedComplex = (payload) => {
@@ -102,15 +103,11 @@ const getComplexes = () => {
 
 const addMarkers = () => {
   const src = './src/assets/house2.png'
-  const icon = new kakao.maps.MarkerImage(
-    src,
-    new kakao.maps.Size(31, 35),
-    {
-        offset: new kakao.maps.Point(16, 34),
-        shape: "poly",
-        coords: "1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33"
-    }
-);
+  const icon = new kakao.maps.MarkerImage(src, new kakao.maps.Size(31, 35), {
+    offset: new kakao.maps.Point(16, 34),
+    shape: 'poly',
+    coords: '1,20,1,9,5,2,10,0,21,0,27,3,30,9,30,20,17,33,14,33'
+  })
   clusterer.clear()
   const overlays = items.value.map((data) => {
     const position = data.latlng
@@ -119,12 +116,12 @@ const addMarkers = () => {
       image: icon
     })
 
-    kakao.maps.event.addListener(marker, 'click', function() {
+    kakao.maps.event.addListener(marker, 'click', function () {
       console.log(data)
       selectedMarker.value = data
-    });
+    })
 
-    return marker;
+    return marker
   })
 
   clusterer.addMarkers(overlays)
@@ -142,7 +139,6 @@ onMounted(() => {
     document.head.appendChild(script)
   }
 })
-
 </script>
 <template>
   <div class="map-wrap">
@@ -153,7 +149,8 @@ onMounted(() => {
       <div id="map"></div>
     </v-row>
 
-    <TabTest :complex-no="selectedNo"></TabTest>
+    <TabTest :complex-no="selectedNo" :cortar-no="cortarNo"></TabTest>
+    <!-- <TabTest v-bind="complexInfo"></TabTest> -->
     <!-- <v-row>
         <progress-card
           :progressVal="50"

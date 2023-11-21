@@ -4,22 +4,39 @@ import realPriceView from './RealPriceView.vue'
 import RealEstateDetail from './RealEstateDetail.vue'
 import NewsView from './NewsView.vue'
 
-const props = defineProps(['complexNo'])
+const props = defineProps(['complexNo', 'cortarNo'])
+// const props = defineProps({
+//   complexNo: String,
+//   cortarNo: String
+// })
 
-const tab = ref("")
+const tab = ref('')
 const complexNo = ref(null)
+const cortarNo = ref(null)
+
+const cityCode = ref(null)
+const dsvnCode = ref(null)
+
 watch(props, (receivedData) => {
-  console.log(receivedData)
-  complexNo.value = receivedData
+  console.log(receivedData.complexNo)
+  console.log(receivedData.cortarNo)
+  console.log(receivedData.cortarNo.toString().substring(0, 2))
+
+  complexNo.value = receivedData.complexNo
+  cortarNo.value = receivedData.cortarNo
+  cityCode.value = receivedData.cortarNo.toString().substring(0, 2) + '00000000'
+  dsvnCode.value = receivedData.cortarNo.toString().substring(0, 4) + '00000000'
+
+  console.log(cityCode.value)
+  console.log(dsvnCode.value)
 })
 
-const RealPriceDetail = {
-  tradeYear: '2021',
-  tradeMonth: '12',
-  tradeDate: '14',
-  formattedPrice: '1억 4000',
-  floor: '4'
-}
+// const code = {
+//   // cityCode: '4100000000',
+//   // dsvnCode: '4137000000'
+//   cityCode: cityCode.value,
+//   dsvnCode: dsvnCode.value
+// }
 </script>
 
 <template>
@@ -36,7 +53,9 @@ const RealPriceDetail = {
 
         <v-window-item value="two"> <realPriceView :complex-no="complexNo" /> </v-window-item>
 
-        <v-window-item value="three"> <NewsView :complex-no="complexNo" /> </v-window-item>
+        <v-window-item value="three">
+          <NewsView :city-code="cityCode" :dsvn-code="dsvnCode" />
+        </v-window-item>
       </v-window>
     </v-card-text>
   </v-card>

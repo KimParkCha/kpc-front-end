@@ -90,7 +90,6 @@ function houseAxios() {
   return instance
 }
 
-
 // News Port
 function newsAxios() {
   const instance = axios.create({

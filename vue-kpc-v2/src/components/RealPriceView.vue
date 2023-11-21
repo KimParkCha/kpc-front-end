@@ -12,7 +12,7 @@ console.log('realpriceView 나와라좀')
 
 watch(props, (complexNo) => {
   console.log('complex' + complexNo)
-  houseCall(complexNo.complexNo.complexNo)
+  houseCall(complexNo.complexNo)
   // show.value = true
 })
 
@@ -24,11 +24,6 @@ const houseCall = (complexNo) => {
       console.log('실거래가 가져와라잇')
       console.log(data.data)
       realprice.value = data.data
-      // console.log('realprice 배열 complexNo: ' + realprice.value[0].complexNo)
-      // console.log('realprice 배열 tradeYear: ' + realprice.value[0].tradeYear)
-      // console.log('realprice 배열 tradeMonth : ' + realprice.value[0].tradeMonth)
-      // console.log('realprice 배열 formattedPrice : ' + realprice.value[0].formattedPrice)
-      // console.log('realprice 배열 tradeDate : ' + realprice.value[0].tradeDate)
     },
     () => {
       console.log('error')
@@ -39,45 +34,36 @@ const houseCall = (complexNo) => {
 
 <template>
   <v-container>
-    <!-- <chartDataView :data="props.data"></chartDataView> -->
+    <div style="display: flex">
+      <chartDataView :data="realprice"></chartDataView>
 
-    <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
-    <!-- <Transition name="slide-fade"> -->
-    <div>
-      <h2>실거래가 정보</h2>
-      <v-table>
-        <thead>
-          <tr>
-            <td>계약월</td>
-            <td>전세가</td>
-          </tr>
-        </thead>
+      <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
+      <!-- <Transition name="slide-fade"> -->
+      <div>
+        <h2>실거래가 정보</h2>
+        <v-table>
+          <thead>
+            <tr>
+              <td>계약월</td>
+              <td>전세가</td>
+            </tr>
+          </thead>
 
-        <tbody>
-          <tr>
-            <!-- tradeYear. tradeMonth -->
-            <td>{{ console.log(realprice[0].tradeYear) }}</td>
-            <!-- formattedPrice(tradeDate일, floor층) -->
-            <td>
-              <!-- {{ realprice.value[0].formattedPrice }}({{ realprice.value[0].tradeDate }}일, -->
-              <!-- {{ realprice.value[0].floor }}층) -->
-            </td>
-          </tr>
-          <tr>
-            <td>2023.05</td>
-            <td>1억 9000(26일, 5층)</td>
-          </tr>
-          <tr>
-            <td>2023.01</td>
-            <td>1억 3500(26일, 5층)</td>
-          </tr>
-          <tr>
-            <td>2022.12</td>
-            <td>1억 1000(26일, 5층)</td>
-          </tr>
-        </tbody>
-      </v-table>
+          <tbody v-for="price in realprice" :key="price">
+            <tr>
+              <!-- tradeYear. tradeMonth -->
+              <td>{{ price.tradeYear }}.{{ price.tradeMonth }}</td>
+              <!-- formattedPrice(tradeDate일, floor층) -->
+              <td>
+                {{ price.formattedPrice }}({{ price.formattedTradeYearMonth }}일,
+                {{ price.floor }}층)
+              </td>
+            </tr>
+          </tbody>
+        </v-table>
+      </div>
     </div>
+
     <!-- </Transition> -->
   </v-container>
 </template>
