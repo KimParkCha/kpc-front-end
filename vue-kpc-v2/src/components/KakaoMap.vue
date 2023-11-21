@@ -3,8 +3,6 @@ import { ref, onMounted, watch } from 'vue'
 import RealEstateListItem from './RealEstateListItem.vue'
 import complexAPI from '@/api/realEstate'
 import TabTest from './TabTest.vue'
-import '@/assets/three-dots.css'
-import '@/assets/snack.css'
 
 const props = defineProps(['receivedKeyword'])
 let map = null
@@ -32,7 +30,6 @@ watch(selectedMarker, (newVal) => {
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
   cortarNo.value = newVal.cortarNo
-
 })
 
 onMounted(() => {
@@ -71,6 +68,7 @@ const initMap = () => {
     minLevel: 2 // 클러스터 할 최소 지도 레벨
   })
 }
+const displayCenterInfo = () => {}
 
 const moveLatLng = (data, level) => {
   map.setCenter(data)
@@ -132,7 +130,6 @@ const getComplexes = () => {
     () => {}
   )
 }
-
 </script>
 <template>
   <div class="map-wrap">
