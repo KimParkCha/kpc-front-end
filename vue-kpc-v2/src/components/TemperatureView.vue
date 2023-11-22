@@ -1,35 +1,43 @@
 <script setup>
 import '@/assets/test.css'
-import { ref } from 'vue'
+import { ref, watch, onMounted } from 'vue'
+import temperatureApi from '../api/temperature.js'
 const value = ref(0)
 let timerId = null
-const progressAnimate = () => {
-  const btn = document.getElementById('btn')
-  setInterval(() => {
-    const progress = document.getElementById('th-animated')
-    value.value += 1
-  }, 100)
-  btn.disabled = true
+const recievedData = ref(0)
+
+const temperatureCall = () => {
+  temperatureApi.getTemperature(
+    (data) => {
+      console.log(data.data)
+      recievedData.value = data.data
+    },
+    () => {
+      console.log('error')
+    }
+  )
 }
+
+const progressAnimate = () => {
+  temperatureCall()
+  value.value = 0;
+  timerId = setInterval(() => {
+    value.value += 1
+  }, 10)
+  // btn.disabled = true
+}
+
+watch(value, () => {
+  if (value.value >= recievedData.value) {
+    clearInterval(timerId)
+  }
+})
+
+
 </script>
 
 <template>
   <div class="wrapper">
-    <div class="thermometer">
-      <div class="thermometer-body">
-        <progress max="100" value="25"></progress>
-      </div>
-    </div>
-    <div class="thermometer">
-      <div class="thermometer-body">
-        <progress max="100" value="75"></progress>
-      </div>
-    </div>
-    <div class="thermometer">
-      <div class="thermometer-body">
-        <progress max="100" value="100"></progress>
-      </div>
-    </div>
     <div class="animated primary">
       <button name="button" id="btn" @click="progressAnimate(30)">Start progress</button>
       <div class="thermometer">
