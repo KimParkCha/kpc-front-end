@@ -34,7 +34,11 @@ const posts = ref([
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
 ])
+const onclickBtn = () => {
+  clicked.value++
+}
 const drawer = ref(null)
+const clicked = ref(0)
 </script>
 
 <template>
@@ -47,7 +51,7 @@ const drawer = ref(null)
   >
     <v-lazy v-model="topTitle.isActive" width="100%">
       <v-card-text class="ma-0 pa-3">
-        <v-row>
+        <v-row style="margin-top: 120px">
           <v-col class="d-flex flex-column justify-center align-center fade-view">
             <RouterLink to="/map" class="mt-12">
               <v-btn size="x-large" rounded="xl">지도보기</v-btn></RouterLink
@@ -61,16 +65,29 @@ const drawer = ref(null)
         <v-row class="justify-center align-center" style="height: 300px">
           <v-spacer></v-spacer>
           <h2>
-            왼쪽의 버튼을 통해 <br />오늘의
-            <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1>
-            를 확인해보세요.
+            오늘의 <br />
+            <v-btn @click="onclickBtn" class="pa-0 ma-0" variant="text">
+              <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1> </v-btn
+            >를 <br />
+            확인해보세요.
           </h2>
           <div style="width: 100px"></div>
-
-          <TemperatureView />
+          <TemperatureView :click="clicked" />
           <v-spacer></v-spacer>
         </v-row>
-        <WordCloudView />
+        <v-row class="justify-center align-center" style="height: 500px">
+          <v-spacer></v-spacer>
+          <h2>
+            오늘의 <br />
+            <v-btn class="pa-0 ma-0" variant="text">
+              <h1 style="color: rgb(230, 67, 67)">핫이슈 워드</h1></v-btn
+            >를 <br />
+            확인해보세요.
+          </h2>
+          <div style="width: 190px"></div>
+          <WordCloudView />
+          <v-spacer></v-spacer>
+        </v-row>
       </v-card-text>
     </v-lazy>
   </v-sheet>
