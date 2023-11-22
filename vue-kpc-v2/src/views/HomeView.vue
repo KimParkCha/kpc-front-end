@@ -4,6 +4,7 @@ import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
 import TemperatureView from '../components/TemperatureView.vue'
+import WordCloudView from '../components/WordCloudView.vue'
 const topTitle = ref({
   isActive: false,
   title: '매번 직접 분석해야했던 부동산 정보',
@@ -69,6 +70,7 @@ const drawer = ref(null)
           <TemperatureView />
           <v-spacer></v-spacer>
         </v-row>
+        <WordCloudView />
       </v-card-text>
     </v-lazy>
   </v-sheet>
