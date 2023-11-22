@@ -2,28 +2,16 @@
 import WordCloud from 'wordcloud'
 import { onMounted } from 'vue'
 import wordcloudApi from '../api/wordcloud.js'
-const data = [
-]
-const wordList = [
-  ['고기', 8],
-  ['가족', 7],
-  ['낫', 6],
-  ['쥐', 6],
-  ['캣', 6],
-  ['스마트폰', 6],
-  ['고양이', 5],
-  ['강아지', 5],
-  ['반가워', 3],
-  ['와이파이', 3]
-]
 
 const wordcloudCall = () => {
+  const canvas = document.getElementById('wordcloud')
   wordcloudApi.getWordCloud(
     (result) => {
       console.log(result)
-      data.values = result.data
+      const data = result.data
+
       WordCloud(canvas, {
-    list: data.values[0],
+    list: data,
     gridSize: 50,
     weightFactor: 3,
     fontFamily: 'Noto Sans KR',
@@ -39,7 +27,7 @@ const wordcloudCall = () => {
       }
     }
   })
-      
+  console.log("끝")
     },
     () => {
       console.log('error')
@@ -48,7 +36,6 @@ const wordcloudCall = () => {
 }
 
 onMounted(() => {
-  const canvas = document.getElementById('wordcloud')
   wordcloudCall()
 })
 </script>
