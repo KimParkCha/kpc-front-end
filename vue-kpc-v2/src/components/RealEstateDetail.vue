@@ -69,6 +69,7 @@ const getDetail = (complexNo) => {
         </tbody>
       </v-table>
     </div>
+    <div v-else><h2>단지정보가 없습니다.</h2></div>
   </v-container>
 </template>
 
