@@ -15,9 +15,6 @@ function getImageUrl(name) {
       <v-col cols="7" align="left">
         <h1 class="mb-4">오늘의 부동산 분석 정보를 <br /><br />김박차에서 확인하세요.</h1>
       </v-col>
-      <v-col cols="5" class="mx-auto">
-        <RouterLink to="/map"> <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink>
-      </v-col>
     </v-row>
   </v-parallax>
 </template>

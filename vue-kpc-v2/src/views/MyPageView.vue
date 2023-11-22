@@ -14,25 +14,27 @@ console.log('mypage data:  ' + getUser.id)
 
 <template>
   <v-sheet :elevation="12" class="mx-auto fade-view">
-    <h2>마이페이지</h2>
-    <v-table>
-      <thead>
-        <tr>
-          <th class="text-left">번호</th>
-          <th class="text-left">이름</th>
-          <th class="text-left">이메일</th>
-          <th class="text-left">가입날짜</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>{{ getUser.id }}</td>
-          <td>{{ getUser.name }}</td>
-          <td>{{ getUser.email }}</td>
-          <td>{{ getUser.joinDate.substring(0, 10) }}</td>
-        </tr>
-      </tbody>
-    </v-table>
+    <v-card class="mx-auto px-6 py-8">
+      <h2>마이페이지</h2>
+      <v-table>
+        <thead>
+          <tr>
+            <th class="text-left">번호</th>
+            <th class="text-left">이름</th>
+            <th class="text-left">이메일</th>
+            <th class="text-left">가입날짜</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{ getUser.id }}</td>
+            <td>{{ getUser.name }}</td>
+            <td>{{ getUser.email }}</td>
+            <td>{{ getUser.joinDate.substring(0, 10) }}</td>
+          </tr>
+        </tbody>
+      </v-table>
+    </v-card>
   </v-sheet>
 </template>
 

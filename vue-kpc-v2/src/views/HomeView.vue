@@ -48,6 +48,8 @@ const drawer = ref(null)
       <v-card-text class="ma-0 pa-3">
         <v-row>
           <v-col class="d-flex flex-column justify-center align-center fade-view">
+            <RouterLink to="/map"> <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink>
+            <br />
             <h1 class="title" v-html="topTitle.title"></h1>
             <br /><br />
             <h1 class="" v-html="topTitle.body"></h1>
@@ -76,6 +78,9 @@ const drawer = ref(null)
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
               <br />
+              <RouterLink to="/map">
+                <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink
+              >
               <h4 v-html="post.body"></h4>
             </v-col>
           </v-row>
@@ -116,7 +121,9 @@ const drawer = ref(null)
           <v-col class="d-flex flex-column justify-center align-center fade-view">
             <h1 class="title" v-html="bottomTitle.title"></h1>
             <br />
-            <RouterLink to="/map"><v-btn rounded="xl" size="x-large">시작하기</v-btn></RouterLink>
+            <RouterLink to="/map"
+              ><v-btn color="light-blue" rounded="xl" size="x-large">시작하기</v-btn></RouterLink
+            >
           </v-col>
         </v-row>
       </v-card-text>
