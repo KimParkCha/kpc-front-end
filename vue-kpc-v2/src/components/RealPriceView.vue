@@ -72,7 +72,7 @@ const houseCall = (complexNo) => {
 
     <!-- </Transition> -->
   </v-container>
-  <v-container v-if="!show"> <div>매물정보가 없습니다.</div> </v-container>
+  <v-container v-if="!show"> <h2>매물정보가 없습니다.</h2> </v-container>
 </template>
 <style scoped>
 thead {

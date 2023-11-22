@@ -26,7 +26,6 @@ watch(props, (receivedData) => {
   cortarNo.value = receivedData.cortarNo
   cityCode.value = receivedData.cortarNo.toString().substring(0, 2) + '00000000'
   dsvnCode.value = receivedData.cortarNo.toString().substring(0, 4) + '00000000'
-
 })
 
 // const code = {
@@ -38,7 +37,7 @@ watch(props, (receivedData) => {
 </script>
 
 <template>
-  <v-card>
+  <v-card class="ma-12 pa-12">
     <v-tabs v-model="tab" bg-color="white">
       <v-tab value="one"><h3>단지 정보</h3></v-tab>
       <v-tab value="two"><h3>실거래가 정보</h3></v-tab>
@@ -54,7 +53,6 @@ watch(props, (receivedData) => {
         <v-window-item value="three">
           <NewsView :city-code="cityCode" :dsvn-code="dsvnCode" />
         </v-window-item>
-
       </v-window>
     </v-card-text>
   </v-card>

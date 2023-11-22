@@ -26,13 +26,13 @@ const posts = ref([
   },
   {
     isActive: false,
-    title: '해당 매물 및 지역의 투자 상황 분석정보를 김박차 AI를 통해 확인하세요!',
+    title: '해당 매물 및 지역의 투자 상황 분석정보를<br> 김박차 AI를 통해 확인하세요!',
     body: '김박차 AI가 해당 매물 및 지역의 투자 정보를 분석하여 투자의 방향성에 도움을 받아보세요.',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563550.jpg'
   },
   {
     isActive: false,
-    title: '해당 매물 및 지역의 실거래가를 확인하고 상하향 추세를 확인하세요!',
+    title: '해당 매물 및 지역의 실거래가를 확인하고<br> 상하향 추세를 확인하세요!',
     body: '가격 변동사항을 확인할 수 있어요',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
@@ -74,11 +74,15 @@ const drawer = ref(null)
         }"
         class="fill-height"
       >
-        <v-card-text class="ma-0 pa-3">
-          <v-row align="center" :key="index">
-            <v-img :src="post.img" width="2%" />
+        <v-card-text class="ma-16 pa-16">
+          <v-row align="center" :key="index" justify="center">
+            <v-col>
+              <v-img :src="post.img" max-width="600" max-height="600" class="rounded-circle" />
+            </v-col>
+
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
+              <br />
               <h4 v-html="post.body"></h4>
             </v-col>
           </v-row>
@@ -92,13 +96,17 @@ const drawer = ref(null)
         }"
         class="fill-height"
       >
-        <v-card-text>
-          <v-row align="center" :key="index">
+        <v-card-text class="ma-16 pa-16">
+          <v-row align="center" :key="index" justify="center">
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
+              <br />
               <h4 v-html="post.body"></h4>
             </v-col>
-            <v-img :src="post.img" width="2%" />
+
+            <v-col>
+              <v-img :src="post.img" max-width="600" max-height="600" class="rounded-circle" />
+            </v-col>
           </v-row>
         </v-card-text>
       </v-lazy>
