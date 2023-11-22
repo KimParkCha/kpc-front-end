@@ -13,7 +13,7 @@ console.log('mypage data:  ' + getUser.id)
 </script>
 
 <template>
-  <v-sheet :elevation="12" class="mx-auto">
+  <v-sheet :elevation="12" class="mx-auto fade-view">
     <h2>마이페이지</h2>
     <v-table>
       <thead>

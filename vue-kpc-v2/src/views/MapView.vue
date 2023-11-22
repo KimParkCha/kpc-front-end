@@ -4,6 +4,6 @@ import FloatingButton from '../components/FloatingButton.vue'
 </script>
 <template>
   <FloatingButton />
-  <KakaoMapView></KakaoMapView>
+  <KakaoMapView class="fade-view"></KakaoMapView>
 </template>
 <style scoped></style>

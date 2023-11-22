@@ -21,7 +21,7 @@ const register = () => {
 </script>
 
 <template>
-  <v-sheet width="400" class="mx-auto">
+  <v-sheet width="400" class="mx-auto fade-view">
     <v-form ref="form">
       <v-text-field
         v-model="user.email"

@@ -48,7 +48,7 @@ const createFn = () => {
 </script>
 
 <template>
-  <v-sheet :elevation="12" class="mx-auto">
+  <v-sheet :elevation="12" class="mx-auto fade-view">
     <v-card class="mx-auto px-6 py-8">
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field

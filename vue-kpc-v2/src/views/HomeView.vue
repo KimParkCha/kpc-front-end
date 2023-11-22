@@ -47,7 +47,7 @@ const drawer = ref(null)
   <FloatingButton />
 
   <v-sheet
-    class="d-flex flex-column justify-center align-center fill-height"
+    class="d-flex flex-column justify-center align-center fill-height fade-view"
     color="transparent"
     min-height="500"
   >
