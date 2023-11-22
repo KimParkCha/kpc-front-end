@@ -20,8 +20,15 @@ watch(props, (receivedData) => {
     return Number(str)
   })
 
+  const rowDatas = reals.map((str) => {
+    return Number(str) - Math.random() * 2
+  })
+
   data.datasets[0].data = numberDatas
+  data.datasets[1].data = rowDatas
+
   data.labels = datas
+  data.labels.sort()
 
   myChart.update()
 })

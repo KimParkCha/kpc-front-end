@@ -37,6 +37,9 @@ td,
   font-family: 'dohyeon';
 }
 
+.password input {
+  font-family: 'Courier New', Courier, monospace;
+}
 @keyframes fadein {
   from {
     opacity: 0;
