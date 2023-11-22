@@ -3,7 +3,7 @@ import ParallaxBanner from '../components/ParallaxBanner.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
-
+import TemperatureView from '../components/TemperatureView.vue'
 const topTitle = ref({
   isActive: false,
   title: '매번 직접 분석해야했던 부동산 정보',
@@ -44,16 +44,30 @@ const drawer = ref(null)
     color="transparent"
     min-height="500"
   >
-    <v-lazy v-model="topTitle.isActive">
+    <v-lazy v-model="topTitle.isActive" width="100%">
       <v-card-text class="ma-0 pa-3">
         <v-row>
           <v-col class="d-flex flex-column justify-center align-center fade-view">
-            <RouterLink to="/map"> <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink>
+            <RouterLink to="/map" class="mt-12">
+              <v-btn size="x-large" rounded="xl">지도보기</v-btn></RouterLink
+            >
             <br />
             <h1 class="title" v-html="topTitle.title"></h1>
             <br /><br />
             <h1 class="" v-html="topTitle.body"></h1>
           </v-col>
+        </v-row>
+        <v-row class="justify-center align-center" style="height: 300px">
+          <v-spacer></v-spacer>
+          <h2>
+            왼쪽의 버튼을 통해 <br />오늘의
+            <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1>
+            를 확인해보세요.
+          </h2>
+          <div style="width: 100px"></div>
+
+          <TemperatureView />
+          <v-spacer></v-spacer>
         </v-row>
       </v-card-text>
     </v-lazy>
@@ -78,9 +92,6 @@ const drawer = ref(null)
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
               <br />
-              <RouterLink to="/map">
-                <v-btn size="x-large" rounded="xl">시작하기</v-btn></RouterLink
-              >
               <h4 v-html="post.body"></h4>
             </v-col>
           </v-row>
