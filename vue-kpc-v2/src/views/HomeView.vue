@@ -79,7 +79,7 @@ const drawer = ref(null)
             <v-img :src="post.img" width="2%" />
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
-              <div v-html="post.body"></div>
+              <h4 v-html="post.body"></h4>
             </v-col>
           </v-row>
         </v-card-text>
@@ -96,7 +96,7 @@ const drawer = ref(null)
           <v-row align="center" :key="index">
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
-              <div v-html="post.body"></div>
+              <h4 v-html="post.body"></h4>
             </v-col>
             <v-img :src="post.img" width="2%" />
           </v-row>
@@ -125,7 +125,7 @@ const drawer = ref(null)
 </template>
 <style scoped>
 .v-navigation-drawer {
-z-index: 999999;
+  z-index: 999999;
 }
 
 .v-col {

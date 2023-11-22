@@ -26,8 +26,12 @@ const onClickCard = (item) => {
     @click="onClickCard(item)"
   >
     <v-card-title>
-      {{ item.complexName }}
-    </v-card-title>
-    <v-card-subtitle>{{ item.cortarAddress }} </v-card-subtitle>
+      <h4>
+        {{ item.complexName }}
+      </h4></v-card-title
+    >
+    <v-card-subtitle
+      ><h5>{{ item.cortarAddress }}</h5>
+    </v-card-subtitle>
   </v-card>
 </template>
