@@ -22,7 +22,8 @@ const register = () => {
 
 <template>
   <v-sheet :elevation="12" class="mx-auto fade-view">
-    <v-card width="400" class="mx-auto px-6 py-8">
+    <v-card width="500" class="mx-auto px-6 py-8">
+      <h2 class="mb-12">회원가입</h2>
       <v-form ref="form">
         <v-text-field
           v-model="user.email"

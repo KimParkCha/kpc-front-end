@@ -3,7 +3,6 @@ import { RouterView } from 'vue-router'
 import AppBar from './components/AppBar.vue'
 import Footer from './components/Footer.vue'
 import '@/assets/main.css'
-import TemperatureView from "./components/TemperatureView.vue"
 </script>
 
 <template>
@@ -11,8 +10,8 @@ import TemperatureView from "./components/TemperatureView.vue"
     <AppBar />
     <v-main class="d-flex flex-column justify-center" style="min-height: 1000px">
       <RouterView />
+      <Footer />
     </v-main>
-    <Footer />
   </v-layout>
 </template>
 

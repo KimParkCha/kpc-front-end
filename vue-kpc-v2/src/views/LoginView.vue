@@ -43,13 +43,14 @@ const loginFn = async () => {
 }
 
 const createFn = () => {
-  router.push('/signup')
+  router.push('/create')
 }
 </script>
 
 <template>
-  <v-sheet :elevation="12" class="mx-auto fade-view">
-    <v-card width="400" class="mx-auto px-6 py-8">
+  <v-sheet :elevation="12" class="mx-auto">
+    <v-card width="500" class="mx-auto px-6 py-8">
+      <h2 class="mb-12">로그인</h2>
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model.lazy="loginUser.email"
@@ -96,6 +97,12 @@ const createFn = () => {
 </template>
 
 <style scoped>
+.v-sheet {
+  margin-top: 200px;
+  margin-bottom: 400px;
+  /* background-color: #27262c; */
+}
+
 .v-card {
   background-color: #fff;
 }
