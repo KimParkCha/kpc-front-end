@@ -8,6 +8,9 @@ const props = defineProps(['complexNo'])
 
 const show = ref(false)
 const realprice = ref()
+const yearMonth = ref([])
+const realpriceData = ref([])
+
 console.log('realpriceView 나와라좀')
 
 watch(props, (complexNo) => {
@@ -25,10 +28,19 @@ const houseCall = (complexNo) => {
       console.log(data.data)
 
       if (data.data == '') {
-        show.value = true
         console.log('실거래가 정보가 없습니다.')
       } else {
+        show.value = true
         realprice.value = data.data
+        console.log(data.data)
+        for (let i = 0; i < data.data.length; i++) {
+          yearMonth.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
+          realpriceData.value[i] =
+            data.data[i].dealPrice.toString().substring(0, 1) +
+            '.' +
+            data.data[i].dealPrice.toString().substring(1, 2)
+        }
+        console.log(realpriceData.value)
       }
     },
     () => {
@@ -41,7 +53,7 @@ const houseCall = (complexNo) => {
 <template>
   <v-container v-if="show">
     <div style="display: flex">
-      <chartDataView :data="realprice"></chartDataView>
+      <chartDataView :data="yearMonth" :real="realpriceData"></chartDataView>
 
       <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
       <!-- <Transition name="slide-fade"> -->
@@ -61,8 +73,9 @@ const houseCall = (complexNo) => {
               <td>{{ price.tradeYear }}.{{ price.tradeMonth }}</td>
               <!-- formattedPrice(tradeDate일, floor층) -->
               <td>
-                {{ price.formattedPrice }}({{ price.formattedTradeYearMonth }}일,
-                {{ price.floor }}층)
+                {{ price.formattedPrice }}({{
+                  price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
+                }}일, {{ price.floor }}층)
               </td>
             </tr>
           </tbody>

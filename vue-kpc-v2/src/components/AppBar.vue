@@ -10,10 +10,13 @@ const menuStore = useMenuStore()
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
 
-const getUser = JSON.parse(sessionStorage.getItem('user'))
-
+let getUser = ''
+const userName = ref()
 changeMenuState()
-console.log(menuList.value)
+watch(menuList, () => {
+  getUser = JSON.parse(sessionStorage.getItem('user'))
+  console.log(getUser.name)
+})
 
 const logout = () => {
   console.log('로그아웃!!!!')
@@ -37,7 +40,7 @@ const drawer = ref(null)
     <v-spacer></v-spacer>
 
     <RouterLink to="/map"><v-btn>지도</v-btn></RouterLink>
-    <RouterLink to="/create"><v-btn>생성</v-btn></RouterLink>
+    <RouterLink to="/todayNews"><v-btn>오늘의 뉴스</v-btn></RouterLink>
 
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.routeName === 'logout'">

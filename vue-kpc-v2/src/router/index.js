@@ -4,6 +4,7 @@ import LoginView from '../views/LoginView.vue'
 import MapView from '../views/MapView.vue'
 import MyPageView from '../views/MyPageView.vue'
 import CreateView from '../views/CreateView.vue'
+// import TodayNewsView from '../views/TodayNewsView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -31,6 +32,11 @@ const router = createRouter({
     {
       path: '/mypage',
       name: 'mypage',
+      component: MyPageView
+    },
+    {
+      path: '/todayNews',
+      name: 'todayNews',
       component: MyPageView
     }
   ]
