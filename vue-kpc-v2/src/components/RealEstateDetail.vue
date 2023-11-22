@@ -69,6 +69,7 @@ const getDetail = (complexNo) => {
         </tbody>
       </v-table>
     </div>
+    <div v-else><h2>단지정보가 없습니다.</h2></div>
   </v-container>
 </template>
 
@@ -76,13 +77,13 @@ const getDetail = (complexNo) => {
 th {
   border: 1px solid;
   border-color: v-bind(colors.grey.lighten2);
-  background-color: v-bind(colors.blue.lighten4);
+  background-color: v-bind(colors.shades.white);
   color: v-bind(colors.grey.darken2);
 }
 td {
   border: 1px solid;
   border-color: v-bind(colors.grey.lighten2);
-  background-color: v-bind(colors.blue.lighten5);
+  background-color: v-bind(colors.shades.white);
   color: v-bind(colors.grey.darken2);
 }
 .slide-fade-enter-active {

@@ -16,7 +16,7 @@ const show = (payload) => {
 }
 </script>
 <template>
-  <div>
+  <v-card class="ma-6">
     <KakaoMapHeader @search="search" @show="show" />
     <KakaoMap :receivedKeyword="keyword" v-if="showState" />
     <div class="not-supported" v-else>
@@ -24,7 +24,7 @@ const show = (payload) => {
       <br />
       <h2>현재 지원하지 않는 기능이에요...</h2>
     </div>
-  </div>
+  </v-card>
 </template>
 <style scoped>
 .not-supported {

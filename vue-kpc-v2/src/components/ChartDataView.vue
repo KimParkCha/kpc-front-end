@@ -3,56 +3,58 @@ import { ref, watch, defineComponent } from 'vue'
 import Chart from 'chart.js/auto'
 import { onMounted } from 'vue'
 
-const labels = ref([])
+let labels = ['']
 const yearMonth = ref([])
-const price = ref([])
+const price = ref([1])
 const props = defineProps(['data', 'real'])
 let myChart
 watch(props, (receivedData) => {
-  yearMonth.value = receivedData.data
-  // data.datasets = receivedData.real
+  //////////////////////////////// 실거래가격 ////////////////////////////////
+  data.datasets = receivedData.real
   console.log(receivedData.real)
   for (let i = 0; i < receivedData.real.length; i++) {
-    // data.datasets[i].price = receivedData.real
+    console.log(i)
+    let numberValue = receivedData.real[i]
+    console.log(parseFloat(numberValue))
+    price.value.push(numberValue)
+    // price.value.push(receivedData.real[i])
   }
-  console.log(data.datasets)
-  // labels.value = yearMonth.value
-  for (let i = 0; i < yearMonth.value.length; i++) {
-    labels.value.push(yearMonth.value[i])
+  // price.value = receivedData.real
+  // data.datasets = price.value
+  console.log(price.value)
+
+  ////
+  for (let i = 0; i < receivedData.data.length; i++) {
+    labels[i] = receivedData.data[i]
   }
 
-  labels.value.sort()
-  console.log(labels.value)
-  data.labels = labels.value
-
-  for (let i = 0; i < labels.value.length; i++) {
-    labels.value.splice(0, labels.value.length)
-  }
+  data.labels = labels.sort()
+  console.log(labels)
   myChart.update()
-  console.log(labels.value)
+  data.labels = []
 })
 
 const data = {
-  labels: labels.value,
+  labels: labels,
   datasets: [
     {
       label: '상한가',
       backgroundColor: 'rgba(255,99,132)',
       borderColor: 'rgba(255,99,132)',
-      price: [4.9, 4.1, 4.0, 4.2]
+      data: price.value
     },
     {
       label: '하한가',
       backgroundColor: 'rgba(20,50,90)',
       borderColor: 'rgba(20,50,90)',
-      price: [0.9, 1.8, 2.4, 2.8, 3.2]
+      data: price.value
     }
   ]
 }
 
 const config = {
   type: 'line',
-  data: price,
+  data: data,
   options: {}
 }
 

@@ -19,6 +19,10 @@ const items = ref([])
 const loadingIcon = ref('./src/assets/ripple.gif')
 const loading = ref(false)
 
+const toBottom = () => {
+  window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+}
+
 watch(props.receivedKeyword, (keyword) => {
   console.log(props.receivedKeyword.key)
   keyword.value = props.receivedKeyword.key
@@ -32,6 +36,7 @@ watch(selectedMarker, (newVal) => {
   moveLatLng(newVal.latlng, 1)
   selectedNo.value = newVal.complexNo
   cortarNo.value = newVal.cortarNo
+  toBottom()
 })
 
 onMounted(() => {
@@ -70,7 +75,6 @@ const initMap = () => {
     minLevel: 2 // 클러스터 할 최소 지도 레벨
   })
 }
-
 const displayCenterInfo = () => {}
 const moveLatLng = (data, level) => {
   map.setCenter(data)

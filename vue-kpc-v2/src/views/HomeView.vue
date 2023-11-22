@@ -1,13 +1,9 @@
 <script setup>
 import ParallaxBanner from '../components/ParallaxBanner.vue'
-import KakaoMap from '../components/KakaoMap.vue'
-import KakaoMapView from '../components/KakaoMapView.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
-import NewsView from '../components/NewsView.vue'
-import ToggleAppBar from '../components/ToggleAppBar.vue'
-
+import TemperatureView from '../components/TemperatureView.vue'
 const topTitle = ref({
   isActive: false,
   title: '매번 직접 분석해야했던 부동산 정보',
@@ -26,13 +22,13 @@ const posts = ref([
   },
   {
     isActive: false,
-    title: '해당 매물 및 지역의 투자 상황 분석정보를 김박차 AI를 통해 확인하세요!',
+    title: '해당 매물 및 지역의 투자 상황 분석정보를<br> 김박차 AI를 통해 확인하세요!',
     body: '김박차 AI가 해당 매물 및 지역의 투자 정보를 분석하여 투자의 방향성에 도움을 받아보세요.',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563550.jpg'
   },
   {
     isActive: false,
-    title: '해당 매물 및 지역의 실거래가를 확인하고 상하향 추세를 확인하세요!',
+    title: '해당 매물 및 지역의 실거래가를 확인하고<br> 상하향 추세를 확인하세요!',
     body: '가격 변동사항을 확인할 수 있어요',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
@@ -41,24 +37,37 @@ const drawer = ref(null)
 </script>
 
 <template>
-  <!-- <ToggleAppBar></ToggleAppBar> -->
-
   <ParallaxBanner />
   <FloatingButton />
-
   <v-sheet
     class="d-flex flex-column justify-center align-center fill-height"
     color="transparent"
     min-height="500"
   >
-    <v-lazy v-model="topTitle.isActive">
+    <v-lazy v-model="topTitle.isActive" width="100%">
       <v-card-text class="ma-0 pa-3">
         <v-row>
-          <v-col class="d-flex flex-column justify-center align-center">
+          <v-col class="d-flex flex-column justify-center align-center fade-view">
+            <RouterLink to="/map" class="mt-12">
+              <v-btn size="x-large" rounded="xl">지도보기</v-btn></RouterLink
+            >
+            <br />
             <h1 class="title" v-html="topTitle.title"></h1>
             <br /><br />
             <h1 class="" v-html="topTitle.body"></h1>
           </v-col>
+        </v-row>
+        <v-row class="justify-center align-center" style="height: 300px">
+          <v-spacer></v-spacer>
+          <h2>
+            왼쪽의 버튼을 통해 <br />오늘의
+            <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1>
+            를 확인해보세요.
+          </h2>
+          <div style="width: 100px"></div>
+
+          <TemperatureView />
+          <v-spacer></v-spacer>
         </v-row>
       </v-card-text>
     </v-lazy>
@@ -74,12 +83,16 @@ const drawer = ref(null)
         }"
         class="fill-height"
       >
-        <v-card-text class="ma-0 pa-3">
-          <v-row align="center" :key="index">
-            <v-img :src="post.img" width="2%" />
+        <v-card-text class="ma-16 pa-16">
+          <v-row align="center" :key="index" justify="center">
+            <v-col>
+              <v-img :src="post.img" max-width="600" max-height="600" class="rounded-circle" />
+            </v-col>
+
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
-              <div v-html="post.body"></div>
+              <br />
+              <h4 v-html="post.body"></h4>
             </v-col>
           </v-row>
         </v-card-text>
@@ -92,13 +105,17 @@ const drawer = ref(null)
         }"
         class="fill-height"
       >
-        <v-card-text>
-          <v-row align="center" :key="index">
+        <v-card-text class="ma-16 pa-16">
+          <v-row align="center" :key="index" justify="center">
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
-              <div v-html="post.body"></div>
+              <br />
+              <h4 v-html="post.body"></h4>
             </v-col>
-            <v-img :src="post.img" width="2%" />
+
+            <v-col>
+              <v-img :src="post.img" max-width="600" max-height="600" class="rounded-circle" />
+            </v-col>
           </v-row>
         </v-card-text>
       </v-lazy>
@@ -112,61 +129,20 @@ const drawer = ref(null)
     <v-lazy v-model="bottomTitle.isActive" :options="{ threshold: 0.5 }">
       <v-card-text class="ma-0 pa-3">
         <v-row class="fade-in-box">
-          <v-col class="d-flex flex-column justify-center align-center">
+          <v-col class="d-flex flex-column justify-center align-center fade-view">
             <h1 class="title" v-html="bottomTitle.title"></h1>
             <br />
-            <RouterLink to="/map"><v-btn rounded="xl" size="x-large">시작하기</v-btn></RouterLink>
+            <RouterLink to="/map"
+              ><v-btn color="light-blue" rounded="xl" size="x-large">시작하기</v-btn></RouterLink
+            >
           </v-col>
         </v-row>
       </v-card-text>
     </v-lazy>
   </v-sheet>
-  <!-- <KakaoMapView /> -->
 </template>
 <style scoped>
 .v-navigation-drawer {
-z-index: 999999;
-}
-
-.v-col {
-  animation: fadein 1s;
-  -moz-animation: fadein 1s; /* Firefox */
-  -webkit-animation: fadein 1s; /* Safari and Chrome */
-  -o-animation: fadein 1s; /* Opera */
-}
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-moz-keyframes fadein {
-  /* Firefox */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fadein {
-  /* Safari and Chrome */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-o-keyframes fadein {
-  /* Opera */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  z-index: 999999;
 }
 </style>

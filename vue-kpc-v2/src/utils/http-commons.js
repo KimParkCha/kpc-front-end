@@ -101,4 +101,5 @@ function newsAxios() {
 
   return instance
 }
+
 export { userAxios, houseAxios, newsAxios }
