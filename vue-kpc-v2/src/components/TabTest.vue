@@ -25,7 +25,7 @@ watch(props, (receivedData) => {
   complexNo.value = receivedData.complexNo
   cortarNo.value = receivedData.cortarNo
   cityCode.value = receivedData.cortarNo.toString().substring(0, 2) + '00000000'
-  dsvnCode.value = receivedData.cortarNo.toString().substring(0, 4) + '00000000'
+  dsvnCode.value = receivedData.cortarNo.toString().substring(0, 4) + '000000'
 })
 
 // const code = {

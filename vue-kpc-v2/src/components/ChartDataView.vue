@@ -3,12 +3,35 @@ import { ref, watch, defineComponent } from 'vue'
 import Chart from 'chart.js/auto'
 import { onMounted } from 'vue'
 
-const labels = ['2022.12', '2023.01', '2023.05', '2023.06']
-const props = defineProps(['data'])
-console.log(props.data)
-
+let labels = ['']
+const yearMonth = ref([])
+const price = ref([1])
+const props = defineProps(['data', 'real'])
+let myChart
 watch(props, (receivedData) => {
-  // labels = props.data.tradeYear
+  //////////////////////////////// 실거래가격 ////////////////////////////////
+  data.datasets = receivedData.real
+  console.log(receivedData.real)
+  for (let i = 0; i < receivedData.real.length; i++) {
+    console.log(i)
+    let numberValue = receivedData.real[i]
+    console.log(parseFloat(numberValue))
+    price.value.push(numberValue)
+    // price.value.push(receivedData.real[i])
+  }
+  // price.value = receivedData.real
+  // data.datasets = price.value
+  console.log(price.value)
+
+  ////
+  for (let i = 0; i < receivedData.data.length; i++) {
+    labels[i] = receivedData.data[i]
+  }
+
+  data.labels = labels.sort()
+  console.log(labels)
+  myChart.update()
+  data.labels = []
 })
 
 const data = {
@@ -18,13 +41,13 @@ const data = {
       label: '상한가',
       backgroundColor: 'rgba(255,99,132)',
       borderColor: 'rgba(255,99,132)',
-      data: [1.1, 1.6, 1.8, 2.3, 1.7]
+      data: price.value
     },
     {
       label: '하한가',
       backgroundColor: 'rgba(20,50,90)',
-      borderColor: 'rgba(255,99,132)',
-      data: [0.9, 1.8, 2.4, 2.8, 3.2]
+      borderColor: 'rgba(20,50,90)',
+      data: price.value
     }
   ]
 }
@@ -37,7 +60,7 @@ const config = {
 
 onMounted(() => {
   const canvasTag = document.getElementById('myChart')
-  const myChart = new Chart(canvasTag, config)
+  myChart = new Chart(canvasTag, config)
 })
 </script>
 

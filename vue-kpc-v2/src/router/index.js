@@ -32,6 +32,11 @@ const router = createRouter({
       path: '/mypage',
       name: 'mypage',
       component: MyPageView
+    },
+    {
+      path: '/todayNews',
+      name: 'todayNews',
+      component: MyPageView
     }
   ]
 })
