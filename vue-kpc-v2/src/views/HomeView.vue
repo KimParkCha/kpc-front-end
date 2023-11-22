@@ -1,12 +1,8 @@
 <script setup>
 import ParallaxBanner from '../components/ParallaxBanner.vue'
-import KakaoMap from '../components/KakaoMap.vue'
-import KakaoMapView from '../components/KakaoMapView.vue'
 import { RouterLink } from 'vue-router'
 import { ref } from 'vue'
 import FloatingButton from '../components/FloatingButton.vue'
-import NewsView from '../components/NewsView.vue'
-import ToggleAppBar from '../components/ToggleAppBar.vue'
 
 const topTitle = ref({
   isActive: false,
@@ -41,13 +37,10 @@ const drawer = ref(null)
 </script>
 
 <template>
-  <!-- <ToggleAppBar></ToggleAppBar> -->
-
   <ParallaxBanner />
   <FloatingButton />
-
   <v-sheet
-    class="d-flex flex-column justify-center align-center fill-height fade-view"
+    class="d-flex flex-column justify-center align-center fill-height"
     color="transparent"
     min-height="500"
   >
@@ -129,17 +122,9 @@ const drawer = ref(null)
       </v-card-text>
     </v-lazy>
   </v-sheet>
-  <!-- <KakaoMapView /> -->
 </template>
 <style scoped>
 .v-navigation-drawer {
   z-index: 999999;
-}
-
-.fade-view {
-  animation: fadein 1s;
-  -moz-animation: fadein 1s; /* Firefox */
-  -webkit-animation: fadein 1s; /* Safari and Chrome */
-  -o-animation: fadein 1s; /* Opera */
 }
 </style>
