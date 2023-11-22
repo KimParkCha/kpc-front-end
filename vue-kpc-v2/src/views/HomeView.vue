@@ -92,7 +92,7 @@ const drawer = ref(null)
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
               <br />
-              <h4 v-html="post.body"></h4>
+              <h3 v-html="post.body"></h3>
             </v-col>
           </v-row>
         </v-card-text>
@@ -110,7 +110,7 @@ const drawer = ref(null)
             <v-col mx-auto>
               <h1 v-html="post.title"></h1>
               <br />
-              <h4 v-html="post.body"></h4>
+              <h3 v-html="post.body"></h3>
             </v-col>
 
             <v-col>
