@@ -40,7 +40,7 @@ const drawer = ref(null)
     <v-spacer></v-spacer>
 
     <RouterLink to="/map"><v-btn>지도</v-btn></RouterLink>
-    <RouterLink to="/todayNews"><v-btn>오늘의 뉴스</v-btn></RouterLink>
+    <!-- <RouterLink to="/todayNews"><v-btn>오늘의 뉴스</v-btn></RouterLink> -->
 
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.routeName === 'logout'">

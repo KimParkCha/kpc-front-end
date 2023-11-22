@@ -8,6 +8,8 @@ console.log(props.cityCode)
 console.log(props.dsvnCode)
 
 const news = ref()
+const show = ref(false)
+const datashow = ref(false)
 
 watch(props, (receivedData) => {
   console.log('watchNews')
@@ -26,7 +28,13 @@ const newsCall = (cityCode, dsvnCode) => {
     (data) => {
       console.log('뉴스가져와')
       console.log(data.data)
-      news.value = data.data
+      if (data.data == '') {
+        console.log('뉴스정보가 없습니다.')
+      } else {
+        show.value = true
+        news.value = data.data
+        console.log(news.value)
+      }
     },
     () => {
       console.log('error')
@@ -38,12 +46,12 @@ newsCall(props.cityCode, props.dsvnCode)
 </script>
 
 <template>
-  <v-container>
+  <v-container v-show="show">
     <div><h2>뉴스 정보</h2></div>
     <v-row align="center" justify="center">
       <v-col v-for="(newsinfo, i) in news" :key="i" cols="6">
         <v-card
-          v-if="i < 8"
+          v-if="i < 8 && newsinfo != null"
           class="mx-auto my-8"
           max-width="500px"
           :title="newsinfo.title"
@@ -56,6 +64,7 @@ newsCall(props.cityCode, props.dsvnCode)
       </v-col>
     </v-row>
   </v-container>
+  <v-container v-show="!show"> <h2>뉴스정보가 없습니다.</h2> </v-container>
 </template>
 
 <style scoped>

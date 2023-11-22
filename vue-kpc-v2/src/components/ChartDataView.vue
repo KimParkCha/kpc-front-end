@@ -5,6 +5,7 @@ import { onMounted } from 'vue'
 
 let labels = []
 let price = []
+let rowPrice = []
 const yearMonth = ref([])
 
 const props = defineProps(['data', 'real'])
@@ -33,6 +34,12 @@ const data = {
       backgroundColor: 'rgba(255,99,132)',
       borderColor: 'rgba(255,99,132)',
       data: price
+    },
+    {
+      label: '하한가',
+      backgroundColor: 'rgba(20,50,90)',
+      borderColor: 'rgba(20,50,90)',
+      data: rowPrice
     }
   ]
 }
@@ -50,8 +57,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <h2>매매 실거래가</h2>
   <div class="chart">
+    <div class="mtitle"><h2>매매 실거래가</h2></div>
     <canvas id="myChart"></canvas>
   </div>
 </template>
@@ -59,5 +66,10 @@ onMounted(() => {
 <style>
 .chart {
   width: 500px;
+  margin-right: 50px;
+}
+
+.title {
+  margin-right: 50px;
 }
 </style>

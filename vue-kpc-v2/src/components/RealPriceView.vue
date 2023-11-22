@@ -88,6 +88,10 @@ const houseCall = (complexNo) => {
   <v-container v-if="!show"> <h2>매물정보가 없습니다.</h2> </v-container>
 </template>
 <style scoped>
+.v-table {
+  width: 1000px;
+}
+
 thead {
   border: 1px solid;
   border-color: v-bind(colors.grey.lighten2);
@@ -95,16 +99,16 @@ thead {
   color: v-bind(colors.grey.darken2);
 }
 
-tr {
+th {
   border: 1px solid;
   border-color: v-bind(colors.grey.lighten2);
-  background-color: v-bind(colors.blue.lighten4);
+  background-color: v-bind(colors.shades.white);
   color: v-bind(colors.grey.darken2);
 }
 td {
   border: 1px solid;
   border-color: v-bind(colors.grey.lighten2);
-  background-color: v-bind(colors.blue.lighten5);
+  background-color: v-bind(colors.shades.white);
   color: v-bind(colors.grey.darken2);
 }
 .slide-fade-enter-active {
