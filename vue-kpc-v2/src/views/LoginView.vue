@@ -49,7 +49,7 @@ const createFn = () => {
 
 <template>
   <v-sheet :elevation="12" class="mx-auto fade-view">
-    <v-card class="mx-auto px-6 py-8">
+    <v-card width="400" class="mx-auto px-6 py-8">
       <v-form v-model="form" @submit.prevent="onSubmit">
         <v-text-field
           v-model.lazy="loginUser.email"
@@ -96,13 +96,6 @@ const createFn = () => {
 </template>
 
 <style scoped>
-.v-sheet {
-  height: 200px;
-  width: 500px;
-  margin-bottom: 400px;
-  /* background-color: #27262c; */
-}
-
 .v-card {
   background-color: #fff;
 }

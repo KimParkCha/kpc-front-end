@@ -21,53 +21,55 @@ const register = () => {
 </script>
 
 <template>
-  <v-card width="400" class="mx-auto fade-view">
-    <v-form ref="form">
-      <v-text-field
-        v-model="user.email"
-        :counter="10"
-        :rules="nameRules"
-        label="이메일"
-        required
-      ></v-text-field>
+  <v-sheet :elevation="12" class="mx-auto fade-view">
+    <v-card width="400" class="mx-auto px-6 py-8">
+      <v-form ref="form">
+        <v-text-field
+          v-model="user.email"
+          :counter="10"
+          :rules="nameRules"
+          label="이메일"
+          required
+        ></v-text-field>
 
-      <v-text-field
-        v-model="user.password"
-        type="password"
-        :counter="10"
-        :rules="nameRules"
-        label="비밀번호"
-        required
-      ></v-text-field>
+        <v-text-field
+          v-model="user.password"
+          type="password"
+          :counter="10"
+          :rules="nameRules"
+          label="비밀번호"
+          required
+        ></v-text-field>
 
-      <v-text-field
-        v-model="user.passwordCheck"
-        type="password"
-        :counter="15"
-        :rules="nameRules"
-        label="비밀번호 확인"
-        required
-      ></v-text-field>
+        <v-text-field
+          v-model="user.passwordCheck"
+          type="password"
+          :counter="15"
+          :rules="nameRules"
+          label="비밀번호 확인"
+          required
+        ></v-text-field>
 
-      <v-text-field
-        v-model="user.name"
-        :counter="10"
-        :rules="nameRules"
-        label="이름"
-        required
-      ></v-text-field>
+        <v-text-field
+          v-model="user.name"
+          :counter="10"
+          :rules="nameRules"
+          label="이름"
+          required
+        ></v-text-field>
 
-      <v-checkbox
-        :rules="[(v) => !!v || 'You must agree to continue!']"
-        label="개인정보 수집에 동의하십니까?"
-        required
-      ></v-checkbox>
+        <v-checkbox
+          :rules="[(v) => !!v || 'You must agree to continue!']"
+          label="개인정보 수집에 동의하십니까?"
+          required
+        ></v-checkbox>
 
-      <div class="d-flex flex-column">
-        <v-btn color="light-blue" class="mt-4" size="large" @click="register"> 가입하기 </v-btn>
-      </div>
-    </v-form>
-  </v-card>
+        <div class="d-flex flex-column">
+          <v-btn color="light-blue" class="mt-4" size="large" @click="register"> 가입하기 </v-btn>
+        </div>
+      </v-form>
+    </v-card>
+  </v-sheet>
 </template>
 
 <style scoped>
