@@ -1,37 +1,28 @@
 <script setup lang="ts">
-import { ref, watch, defineComponent } from 'vue'
+import { ref, watch, defineComponent, toRaw } from 'vue'
 import Chart from 'chart.js/auto'
 import { onMounted } from 'vue'
 
-let labels = ['']
+let labels = []
+let price = []
 const yearMonth = ref([])
-const price = ref([1])
+
 const props = defineProps(['data', 'real'])
+
 let myChart
 watch(props, (receivedData) => {
   //////////////////////////////// 실거래가격 ////////////////////////////////
-  data.datasets = receivedData.real
-  console.log(receivedData.real)
-  for (let i = 0; i < receivedData.real.length; i++) {
-    console.log(i)
-    let numberValue = receivedData.real[i]
-    console.log(parseFloat(numberValue))
-    price.value.push(numberValue)
-    // price.value.push(receivedData.real[i])
-  }
-  // price.value = receivedData.real
-  // data.datasets = price.value
-  console.log(price.value)
+  const reals = toRaw(receivedData.real)
+  const datas = toRaw(receivedData.data)
 
-  ////
-  for (let i = 0; i < receivedData.data.length; i++) {
-    labels[i] = receivedData.data[i]
-  }
+  const numberDatas = reals.map((str) => {
+    return Number(str)
+  })
 
-  data.labels = labels.sort()
-  console.log(labels)
+  data.datasets[0].data = numberDatas
+  data.labels = datas
+
   myChart.update()
-  data.labels = []
 })
 
 const data = {
@@ -41,13 +32,7 @@ const data = {
       label: '상한가',
       backgroundColor: 'rgba(255,99,132)',
       borderColor: 'rgba(255,99,132)',
-      data: price.value
-    },
-    {
-      label: '하한가',
-      backgroundColor: 'rgba(20,50,90)',
-      borderColor: 'rgba(20,50,90)',
-      data: price.value
+      data: price
     }
   ]
 }
