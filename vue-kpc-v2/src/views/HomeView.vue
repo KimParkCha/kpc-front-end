@@ -47,7 +47,7 @@ const drawer = ref(null)
   >
     <v-lazy v-model="topTitle.isActive" width="100%">
       <v-card-text class="ma-0 pa-3">
-        <v-row>
+        <v-row style="margin-top: 120px">
           <v-col class="d-flex flex-column justify-center align-center fade-view">
             <RouterLink to="/map" class="mt-12">
               <v-btn size="x-large" rounded="xl">지도보기</v-btn></RouterLink
