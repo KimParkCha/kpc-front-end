@@ -54,7 +54,7 @@ const drawer = ref(null)
     <v-lazy v-model="topTitle.isActive">
       <v-card-text class="ma-0 pa-3">
         <v-row>
-          <v-col class="d-flex flex-column justify-center align-center">
+          <v-col class="d-flex flex-column justify-center align-center fade-view">
             <h1 class="title" v-html="topTitle.title"></h1>
             <br /><br />
             <h1 class="" v-html="topTitle.body"></h1>
@@ -120,7 +120,7 @@ const drawer = ref(null)
     <v-lazy v-model="bottomTitle.isActive" :options="{ threshold: 0.5 }">
       <v-card-text class="ma-0 pa-3">
         <v-row class="fade-in-box">
-          <v-col class="d-flex flex-column justify-center align-center">
+          <v-col class="d-flex flex-column justify-center align-center fade-view">
             <h1 class="title" v-html="bottomTitle.title"></h1>
             <br />
             <RouterLink to="/map"><v-btn rounded="xl" size="x-large">시작하기</v-btn></RouterLink>
@@ -136,45 +136,10 @@ const drawer = ref(null)
   z-index: 999999;
 }
 
-.v-col {
+.fade-view {
   animation: fadein 1s;
   -moz-animation: fadein 1s; /* Firefox */
   -webkit-animation: fadein 1s; /* Safari and Chrome */
   -o-animation: fadein 1s; /* Opera */
-}
-@keyframes fadein {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-moz-keyframes fadein {
-  /* Firefox */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-webkit-keyframes fadein {
-  /* Safari and Chrome */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@-o-keyframes fadein {
-  /* Opera */
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
 }
 </style>
