@@ -21,7 +21,7 @@ const register = () => {
 </script>
 
 <template>
-  <v-sheet width="400" class="mx-auto fade-view">
+  <v-card width="400" class="mx-auto fade-view">
     <v-form ref="form">
       <v-text-field
         v-model="user.email"
@@ -67,7 +67,7 @@ const register = () => {
         <v-btn color="light-blue" class="mt-4" size="large" @click="register"> 가입하기 </v-btn>
       </div>
     </v-form>
-  </v-sheet>
+  </v-card>
 </template>
 
 <style scoped>

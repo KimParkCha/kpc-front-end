@@ -43,7 +43,7 @@ const loginFn = async () => {
 }
 
 const createFn = () => {
-  router.push('/create')
+  router.push('/signup')
 }
 </script>
 
