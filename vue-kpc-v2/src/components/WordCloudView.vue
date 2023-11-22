@@ -1,19 +1,8 @@
 <script setup>
 import WordCloud from 'wordcloud'
 import { onMounted } from 'vue'
+import wordcloudApi from '../api/wordcloud.js'
 const data = [
-  ['Document Object Model', 12],
-  ['<audio>', 12],
-  ['<video>', 12],
-  ['Web Technologies', 26],
-  ['HTML', 20],
-  ['<canvas>', 20],
-  ['CSS', 15],
-  ['JavaScript', 15],
-  ['Web Workers', 12],
-  ['Geolocation', 9],
-  ['setTimeout', 7],
-  ['CORS', 5]
 ]
 const wordList = [
   ['고기', 8],
@@ -28,11 +17,13 @@ const wordList = [
   ['와이파이', 3]
 ]
 
-onMounted(() => {
-  const canvas = document.getElementById('wordcloud')
-
-  WordCloud(canvas, {
-    list: data,
+const wordcloudCall = () => {
+  wordcloudApi.getWordCloud(
+    (result) => {
+      console.log(result)
+      data.values = result.data
+      WordCloud(canvas, {
+    list: data.values[0],
     gridSize: 50,
     weightFactor: 3,
     fontFamily: 'Noto Sans KR',
@@ -48,6 +39,17 @@ onMounted(() => {
       }
     }
   })
+      
+    },
+    () => {
+      console.log('error')
+    }
+  )
+}
+
+onMounted(() => {
+  const canvas = document.getElementById('wordcloud')
+  wordcloudCall()
 })
 </script>
 <template>
