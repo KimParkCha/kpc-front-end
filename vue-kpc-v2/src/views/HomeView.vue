@@ -65,18 +65,29 @@ const clicked = ref(0)
         <v-row class="justify-center align-center" style="height: 300px">
           <v-spacer></v-spacer>
           <h2>
-            왼쪽의 버튼을 통해 오늘의 <br />
+            오늘의 <br />
             <v-btn @click="onclickBtn" class="pa-0 ma-0" variant="text">
               <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1> </v-btn
-            ><br />
-            를 확인해보세요.
+            >를 <br />
+            확인해보세요.
           </h2>
           <div style="width: 100px"></div>
-
           <TemperatureView :click="clicked" />
           <v-spacer></v-spacer>
         </v-row>
-        <WordCloudView />
+        <v-row class="justify-center align-center" style="height: 500px">
+          <v-spacer></v-spacer>
+          <h2>
+            오늘의 <br />
+            <v-btn class="pa-0 ma-0" variant="text">
+              <h1 style="color: rgb(230, 67, 67)">핫이슈 워드</h1></v-btn
+            >를 <br />
+            확인해보세요.
+          </h2>
+          <div style="width: 190px"></div>
+          <WordCloudView />
+          <v-spacer></v-spacer>
+        </v-row>
       </v-card-text>
     </v-lazy>
   </v-sheet>
