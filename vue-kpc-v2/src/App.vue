@@ -3,6 +3,7 @@ import { RouterView } from 'vue-router'
 import AppBar from './components/AppBar.vue'
 import Footer from './components/Footer.vue'
 import '@/assets/main.css'
+import TemperatureView from "./components/TemperatureView.vue"
 </script>
 
 <template>
