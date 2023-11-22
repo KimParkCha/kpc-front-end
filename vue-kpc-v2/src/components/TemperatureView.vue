@@ -4,7 +4,7 @@ import temperatureApi from '../api/temperature.js'
 const value = ref(0)
 let timerId = null
 const recievedData = ref(0)
-
+const props = defineProps(['click'])
 const temperatureCall = () => {
   temperatureApi.getTemperature(
     (data) => {
@@ -16,7 +16,9 @@ const temperatureCall = () => {
     }
   )
 }
-
+watch(props, (newVal) => {
+  progressAnimate()
+})
 const progressAnimate = () => {
   temperatureCall()
   value.value = 0
@@ -33,11 +35,8 @@ watch(value, () => {
 </script>
 
 <template>
-  <v-card elevated hover class="ma-2 pa-6 rounded-xl" width="400">
+  <v-card elevated hover class="ma-12 pa-12 rounded-xl" width="400">
     <div class="temperature-container">
-      <v-btn size="x-large" @click="progressAnimate"
-        ><h4 style="color: rgb(230, 67, 67)">온도 확인하기</h4></v-btn
-      >
       <div class="thermometer">
         <div class="thermometer-body">
           <progress max="100" :value="value" id="th-animated"></progress>

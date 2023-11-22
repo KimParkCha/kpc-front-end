@@ -34,7 +34,11 @@ const posts = ref([
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563554.jpg'
   }
 ])
+const onclickBtn = () => {
+  clicked.value++
+}
 const drawer = ref(null)
+const clicked = ref(0)
 </script>
 
 <template>
@@ -61,13 +65,15 @@ const drawer = ref(null)
         <v-row class="justify-center align-center" style="height: 300px">
           <v-spacer></v-spacer>
           <h2>
-            왼쪽의 버튼을 통해 <br />오늘의
-            <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1>
+            왼쪽의 버튼을 통해 오늘의 <br />
+            <v-btn @click="onclickBtn" class="pa-0 ma-0" variant="text">
+              <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1> </v-btn
+            ><br />
             를 확인해보세요.
           </h2>
           <div style="width: 100px"></div>
 
-          <TemperatureView />
+          <TemperatureView :click="clicked" />
           <v-spacer></v-spacer>
         </v-row>
         <WordCloudView />
