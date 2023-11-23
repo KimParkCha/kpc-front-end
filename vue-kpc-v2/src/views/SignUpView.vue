@@ -62,6 +62,9 @@ const register = () => {
 </template>
 
 <style>
+.v-sheet {
+  margin-top: 300px;
+}
 .password {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
