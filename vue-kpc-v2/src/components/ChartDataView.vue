@@ -20,12 +20,7 @@ watch(props, (receivedData) => {
     return Number(str)
   })
 
-  const rowDatas = reals.map((str) => {
-    return Number(str) - Math.random() * 1
-  })
-
-  data.datasets[0].data = numberDatas
-  data.datasets[1].data = rowDatas
+  data.datasets[0].data = numberDatas.reverse()
 
   data.labels = datas
   data.labels.sort()
@@ -38,16 +33,10 @@ const data = {
   labels: labels,
   datasets: [
     {
-      label: '상한가',
+      label: '실거래가',
       backgroundColor: 'rgba(255,99,132)',
       borderColor: 'rgba(255,99,132)',
       data: price
-    },
-    {
-      label: '하한가',
-      backgroundColor: 'rgba(20,50,90)',
-      borderColor: 'rgba(20,50,90)',
-      data: rowPrice
     }
   ]
 }
@@ -66,7 +55,7 @@ onMounted(() => {
 
 <template>
   <div class="chart">
-    <div class="mtitle"><h2>전세 실거래가</h2></div>
+    <div class="mtitle"><h2>매매 실거래가</h2></div>
     <canvas id="myChart"></canvas>
   </div>
 </template>
