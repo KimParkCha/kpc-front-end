@@ -106,7 +106,7 @@ const searchAddrFromCoords = (coords, callback) => {
   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
 
-const addMarkers = () => {
+const addHouseMarkers = () => {
   const src = './src/assets/house2.png'
   const icon = new kakao.maps.MarkerImage(src, new kakao.maps.Size(31, 35), {
     offset: new kakao.maps.Point(16, 34),
@@ -140,7 +140,7 @@ const getComplexes = () => {
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
       }))
       items.value = processsed
-      addMarkers()
+      addHouseMarkers()
       loading.value = false
     },
     () => {}
