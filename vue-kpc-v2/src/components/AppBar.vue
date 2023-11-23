@@ -24,18 +24,18 @@ const logout = () => {
   changeMenuState()
 }
 
-const fname = ref('logo')
-
-const getImageUrls = (name) => {
-  return new URL(`/src/assets/${name}.svg`, import.meta.url).href
-}
 const drawer = ref(null)
 </script>
 
 <template>
   <v-app-bar>
     <RouterLink to="/">
-      <v-img :src="getImageUrls(fname)" :width="56" :height="56" class="ms-2"></v-img>
+      <v-img
+        src="https://github.com/gogoadl/Algorithm/assets/49335446/7bebc317-b15c-4f5f-b398-84153e622ee3"
+        :width="128"
+        :height="128"
+        class="ms-2"
+      ></v-img>
     </RouterLink>
     <v-spacer></v-spacer>
 
