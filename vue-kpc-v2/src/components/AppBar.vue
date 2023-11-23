@@ -11,20 +11,25 @@ const userStore = useUserStore()
 
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
-const { user } = storeToRefs(userStore)
 
-let getUser = ''
+// const { user } = storeToRefs(userStore)
+const { user } = userStore
+
 const userName = ref()
 changeMenuState()
 watch(menuList, () => {
   getUser = JSON.parse(sessionStorage.getItem('user'))
-  // console.log(getUser.name)
-  console.log(user)
-  // userName.value = user.value.name
   userName.value = JSON.parse(user.value).name
   console.log(userName.value)
 })
-
+onMounted(() => {
+  const user = sessionStorage.getItem('user')
+  if (user !== null) {
+    const { name } = JSON.parse(user)
+    userName.value = name
+    console.log(name)
+  }
+})
 const logout = () => {
   console.log('로그아웃!!!!')
   sessionStorage.clear()
