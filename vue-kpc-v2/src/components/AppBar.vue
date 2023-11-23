@@ -3,19 +3,26 @@ import { RouterLink } from 'vue-router'
 import { useMenuStore } from '@/stores/menu'
 import { useUserStore } from '@/stores/user'
 import { storeToRefs } from 'pinia'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import ToggleAppBar from './ToggleAppBar.vue'
 
 const menuStore = useMenuStore()
+const userStore = useUserStore()
+
 const { menuList } = storeToRefs(menuStore)
 const { changeMenuState } = menuStore
+const { user } = storeToRefs(userStore)
 
 let getUser = ''
 const userName = ref()
 changeMenuState()
 watch(menuList, () => {
   getUser = JSON.parse(sessionStorage.getItem('user'))
-  console.log(getUser.name)
+  // console.log(getUser.name)
+  console.log(user)
+  // userName.value = user.value.name
+  userName.value = JSON.parse(user.value).name
+  console.log(userName.value)
 })
 
 const logout = () => {
@@ -44,7 +51,7 @@ const drawer = ref(null)
 
     <template v-for="menu in menuList" :key="menu.routeName">
       <template v-if="menu.routeName === 'logout'">
-        <v-btn @click.stop="drawer = !drawer">{{ getUser.name }}님</v-btn>
+        <v-btn @click.stop="drawer = !drawer">{{ userName }}님</v-btn>
       </template>
       <template v-else>
         <RouterLink :to="{ name: menu.routeName }"

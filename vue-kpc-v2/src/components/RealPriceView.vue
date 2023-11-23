@@ -50,12 +50,23 @@ const houseCall = (complexNo) => {
         console.log(data.data)
         ym.value = []
         yearMonth.value = []
+        realpriceData.value = []
         for (let i = 0; i < data.data.length; i++) {
-          ym.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
-          realpriceData.value[i] =
-            data.data[i].dealPrice.toString().substring(0, 1) +
-            '.' +
-            data.data[i].dealPrice.toString().substring(1, 2)
+          // ym.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
+          ym.value[i] = data.data[i].formattedTradeYearMonth
+          if (data.data[i].dealPrice.toString().length == 5) {
+            realpriceData.value[i] =
+              data.data[i].dealPrice.toString().substring(0, 1) +
+              '.' +
+              data.data[i].dealPrice.toString().substring(1, 2)
+          } else if (data.data[i].dealPrice.toString().length == 6) {
+            realpriceData.value[i] =
+              data.data[i].dealPrice.toString().substring(0, 2) +
+              '.' +
+              data.data[i].dealPrice.toString().substring(2, 3)
+          } else if (data.data[i].dealPrice.toString().length == 4) {
+            realpriceData.value[i] = data.data[i].dealPrice
+          }
         }
         for (let j = 0; j < ym.value.length; j++) {
           console.log(j)
@@ -67,7 +78,7 @@ const houseCall = (complexNo) => {
         console.log(yearMonth.value)
         console.log(ym.value)
         console.log(realpriceData.value)
-        yearMonth.value.sort()
+        // yearMonth.value.sort()
       }
     },
     () => {
@@ -80,18 +91,18 @@ const houseCall = (complexNo) => {
 <template>
   <v-container v-if="show">
     <div style="display: grid">
-      <chartDataView :data="yearMonth" :real="realpriceData"></chartDataView>
+      <chartDataView :data="ym" :real="realpriceData"></chartDataView>
 
       <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
       <!-- <Transition name="slide-fade"> -->
       <br />
       <div>
-        <h2>{{ detail.complexName }} 전세 실거래가</h2>
+        <h2>{{ detail.complexName }} 매매 실거래가</h2>
         <br />
         <v-table>
           <thead>
             <tr>
-              <td>계약월</td>
+              <td>계약 날짜</td>
               <td>전세가</td>
             </tr>
           </thead>
@@ -99,9 +110,9 @@ const houseCall = (complexNo) => {
           <tbody v-for="price in realprice" :key="price">
             <tr>
               <!-- tradeYear. tradeMonth -->
-              <td>{{ price.tradeYear }}.{{ price.tradeMonth }}</td>
+              <td>{{ price.formattedTradeYearMonth }}</td>
               <!-- formattedPrice(tradeDate일, floor층) -->
-              <td v-if="price.dealPrice.toString().length <= 5">
+              <td v-if="price.dealPrice.toString().length == 5">
                 {{ price.dealPrice.toString().substring(0, 1) }}.{{
                   price.dealPrice.toString().substring(1, 2)
                 }}억({{
@@ -109,12 +120,18 @@ const houseCall = (complexNo) => {
                 }}일, {{ price.floor }}층)
               </td>
 
-              <td v-else>
+              <td v-if="price.dealPrice.toString().length == 6">
                 {{ price.dealPrice.toString().substring(0, 2) }}
                 억
                 {{
                   price.dealPrice.toString().substring(2, price.dealPrice.toString().length)
                 }}천({{
+                  price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
+                }}일, {{ price.floor }}층)
+              </td>
+
+              <td v-if="price.dealPrice.toString().length == 4">
+                {{ price.dealPrice }}천({{
                   price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
                 }}일, {{ price.floor }}층)
               </td>
