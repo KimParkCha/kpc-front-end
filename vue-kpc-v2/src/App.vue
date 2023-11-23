@@ -8,7 +8,7 @@ import '@/assets/main.css'
 <template>
   <v-layout>
     <AppBar />
-    <v-main class="d-flex flex-column justify-center" style="min-height: 1000px">
+    <v-main class="d-flex flex-column justify-center" style="min-height: 1000px margin-top: 0px">
       <RouterView />
       <Footer />
     </v-main>
