@@ -8,16 +8,30 @@ const props = defineProps(['complexNo'])
 
 const show = ref(false)
 const realprice = ref()
-const yearMonth = ref([])
-const realpriceData = ref([])
+let yearMonth = ref([])
+let ym = ref([])
+let realpriceData = ref([])
+const detail = ref({})
 
 console.log('realpriceView 나와라좀')
 
 watch(props, (complexNo) => {
   console.log('complex' + complexNo)
   houseCall(complexNo.complexNo)
+  getDetail(complexNo.complexNo)
   // show.value = true
 })
+
+const getDetail = (complexNo) => {
+  houseApi.getDetail(
+    complexNo,
+    (data) => {
+      console.log(data)
+      detail.value = data.data
+    },
+    () => {}
+  )
+}
 
 const houseCall = (complexNo) => {
   console.log('realprice call')
@@ -34,15 +48,25 @@ const houseCall = (complexNo) => {
         show.value = true
         realprice.value = data.data
         console.log(data.data)
+        ym.value = []
+        yearMonth.value = []
         for (let i = 0; i < data.data.length; i++) {
-          yearMonth.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
+          ym.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
           realpriceData.value[i] =
             data.data[i].dealPrice.toString().substring(0, 1) +
             '.' +
             data.data[i].dealPrice.toString().substring(1, 2)
         }
-        yearMonth.value = [...new Set(yearMonth.value)]
+        for (let j = 0; j < ym.value.length; j++) {
+          console.log(j)
+          if (!yearMonth.value.includes(ym.value[j])) {
+            yearMonth.value.push(ym.value[j])
+          }
+        }
+
+        // yearMonth.value = [...new Set(ym.value)]
         console.log(yearMonth.value)
+        console.log(ym.value)
         console.log(realpriceData.value)
       }
     },
@@ -61,7 +85,7 @@ const houseCall = (complexNo) => {
       <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
       <!-- <Transition name="slide-fade"> -->
       <div>
-        <h2>실거래가 정보</h2>
+        <h2>{{ detail.complexName }} 전세 실거래가</h2>
         <v-table>
           <thead>
             <tr>

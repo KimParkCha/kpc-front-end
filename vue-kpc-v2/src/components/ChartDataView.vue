@@ -15,7 +15,7 @@ watch(props, (receivedData) => {
   //////////////////////////////// 실거래가격 ////////////////////////////////
   const reals = toRaw(receivedData.real)
   const datas = toRaw(receivedData.data)
-
+  console.log(receivedData.data)
   const numberDatas = reals.map((str) => {
     return Number(str)
   })
@@ -66,7 +66,7 @@ onMounted(() => {
 
 <template>
   <div class="chart">
-    <div class="mtitle"><h2>매매 실거래가</h2></div>
+    <div class="mtitle"><h2>전세 실거래가</h2></div>
     <canvas id="myChart"></canvas>
   </div>
 </template>
