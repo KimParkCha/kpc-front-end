@@ -27,13 +27,14 @@ const register = () => {
       <v-form ref="form">
         <v-text-field
           v-model="user.email"
-          :counter="10"
+          :counter="20"
           :rules="nameRules"
           label="이메일"
           required
         ></v-text-field>
 
         <v-text-field
+          class="password"
           v-model="user.password"
           type="password"
           :counter="10"
@@ -44,6 +45,7 @@ const register = () => {
 
         <v-text-field
           v-model="user.passwordCheck"
+          class="password"
           type="password"
           :counter="15"
           :rules="nameRules"
@@ -73,7 +75,11 @@ const register = () => {
   </v-sheet>
 </template>
 
-<style scoped>
+<style>
+.password {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
 .v-text-field {
   background-color: #fff;
 }
