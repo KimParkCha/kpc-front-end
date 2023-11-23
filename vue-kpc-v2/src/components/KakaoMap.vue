@@ -62,16 +62,18 @@ onMounted(() => {
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    center: new kakao.maps.LatLng(37.50120980488759, 127.03585281505912),
     level: 4,
     maxLevel: 6
   }
   map = new kakao.maps.Map(container, options)
 
   geocoder = new kakao.maps.services.Geocoder()
+  getComplexes()
   kakao.maps.event.addListener(map, 'idle', () => {
     loading.value = true
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
+    console.log(map.getCenter())
     getComplexes()
     addClusterMarkers()
   })
