@@ -24,7 +24,6 @@ const items = ref([])
 const loadingIcon = ref('./src/assets/ripple.gif')
 const loading = ref(false)
 const tab = ref('')
-console.log(selectedMarker.value)
 const toBottom = () => {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
 }
@@ -291,13 +290,15 @@ const displayPlaceInfo = (place) => {
 const onClickCategory = (e) => {
   placeOverlay.setMap(null)
 
+  if (e.srcElement.localName === 'span') {
+    console.log(e.target.parentElement)
+    e = e.target.parentElement
+  }
   if (e.srcElement.className === 'on') {
-    console.log('on')
     currCategory = ''
     changeCategoryClass()
     removeMarker()
   } else {
-    console.log('off')
     currCategory = e.target.id
     changeCategoryClass(e.srcElement)
     searchPlaces()
@@ -311,7 +312,6 @@ const changeCategoryClass = (el) => {
     i
 
   for (i = 0; i < children.length; i++) {
-    console.log(children[i].className)
     children[i].className = ''
   }
 
@@ -468,6 +468,7 @@ const changeCategoryClass = (el) => {
 #category li .category_bg {
   background: url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_category.png)
     no-repeat;
+  pointer-events: none;
 }
 #category li .bank {
   background-position: -10px 0;
