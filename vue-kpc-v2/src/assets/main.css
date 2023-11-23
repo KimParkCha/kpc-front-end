@@ -35,10 +35,21 @@ td,
 .v-field,
 .v-list-item {
   font-family: 'dohyeon';
+  /* font-family: 'IBM Plex Sans KR', sans-serif; */
 }
 
 .password input {
   font-family: 'Courier New', Courier, monospace;
+}
+
+.v-tab {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+.v-card-title {
+  font-family: 'Courier New', Courier, monospace;
+  /* font-size: 30px; */
+  /* background-color: yellow; */
 }
 @keyframes fadein {
   from {

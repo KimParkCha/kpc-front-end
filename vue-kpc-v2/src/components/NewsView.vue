@@ -47,18 +47,16 @@ newsCall(props.cityCode, props.dsvnCode)
 
 <template>
   <v-container v-show="show">
-    <div><h2>뉴스 정보</h2></div>
+    <div>
+      <h2>뉴스 정보</h2>
+      <br />
+    </div>
     <v-row align="center" justify="center">
-      <v-col v-for="(newsinfo, i) in news" :key="i" cols="6">
-        <v-card
-          v-if="i < 8 && newsinfo != null"
-          class="mx-auto my-8"
-          max-width="500px"
-          :title="newsinfo.title"
-          :href="newsinfo.link"
-          target="_blank"
-          rel="noopener"
-        >
+      <v-col v-for="(newsinfo, i) in news" :key="i" cols="8">
+        <v-card v-if="i < 8 && newsinfo.title != ''">
+          <v-card-title
+            ><a :href="newsinfo.link" target="_blank">{{ newsinfo.title }}</a></v-card-title
+          >
           <v-card-subtitle class="subtitle">{{ newsinfo.joinDate }}</v-card-subtitle>
         </v-card>
       </v-col>
@@ -68,11 +66,26 @@ newsCall(props.cityCode, props.dsvnCode)
 </template>
 
 <style scoped>
+.v-col {
+  margin-right: 150px;
+}
+
 .v-card {
-  background-color: #fff;
+  background-color: rgb(248, 250, 247);
+  color: wheat;
+  font-weight: bold;
+  width: 400px;
 }
 
 .subtitle {
   text-align: right;
+  font-size: 17px;
+  color: rgb(12, 12, 11);
+}
+
+a {
+  text-decoration: none;
+  color: rgb(99, 90, 73);
+  font-family: 'dohyeon';
 }
 </style>

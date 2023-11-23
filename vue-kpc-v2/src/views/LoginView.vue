@@ -41,61 +41,71 @@ const loginFn = async () => {
     router.push('/login')
   }
 }
+const fname = ref('logo')
 
 const createFn = () => {
   router.push('/create')
 }
+
+const getImageUrls = (name) => {
+  return new URL(`/src/assets/${name}.svg`, import.meta.url).href
+}
 </script>
 
 <template>
-  <v-sheet :elevation="12" class="mx-auto">
-    <v-card width="500" class="mx-auto px-6 py-8">
-      <h2 class="mb-12">로그인</h2>
-      <v-form v-model="form" @submit.prevent="onSubmit">
-        <v-text-field
-          v-model.lazy="loginUser.email"
-          class="mb-2"
-          clearable
-          label="이메일"
-        ></v-text-field>
+  <div style="display: inline-flex">
+    <div>
+      <!-- <v-img :src="getImageUrls(fname)" :width="500" :height="500" class="ms-2"></v-img> -->
+    </div>
+    <v-sheet :elevation="12" class="mx-auto">
+      <v-card width="500" class="mx-auto px-6 py-8">
+        <h2 class="mb-12">로그인</h2>
+        <v-form v-model="form" @submit.prevent="onSubmit">
+          <v-text-field
+            v-model.lazy="loginUser.email"
+            class="mb-2"
+            clearable
+            label="이메일"
+          ></v-text-field>
 
-        <v-text-field
-          class="password"
-          v-model.lazy="loginUser.password"
-          clearable
-          label="비밀번호"
-          type="password"
-          placeholder="Enter your password"
-        ></v-text-field>
+          <v-text-field
+            class="password"
+            v-model.lazy="loginUser.password"
+            clearable
+            label="비밀번호"
+            type="password"
+            placeholder="Enter your password"
+          ></v-text-field>
 
-        <br />
+          <br />
 
-        <v-btn
-          :loading="loading"
-          block
-          color="light-blue"
-          size="large"
-          type="submit"
-          variant="elevated"
-          @click="loginFn"
-        >
-          로그인
-        </v-btn>
-        <br />
-        <v-btn
-          :loading="loading"
-          block
-          color="light-blue"
-          size="large"
-          type="submit"
-          variant="elevated"
-          @click="createFn"
-        >
-          회원가입
-        </v-btn>
-      </v-form>
-    </v-card>
-  </v-sheet>
+          <v-btn
+            :loading="loading"
+            block
+            color="light-blue"
+            size="large"
+            type="submit"
+            variant="elevated"
+            @click="loginFn"
+          >
+            로그인
+          </v-btn>
+          <br />
+          <v-btn
+            :loading="loading"
+            block
+            color="light-blue"
+            size="large"
+            type="submit"
+            variant="elevated"
+            @click="createFn"
+          >
+            회원가입
+          </v-btn>
+        </v-form>
+      </v-card>
+    </v-sheet>
+  </div>
 </template>
 
 <style scoped>
@@ -107,5 +117,9 @@ const createFn = () => {
 
 .v-card {
   background-color: #fff;
+}
+
+.v-img {
+  margin: 100px;
 }
 </style>

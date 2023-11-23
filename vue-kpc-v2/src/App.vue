@@ -15,4 +15,8 @@ import '@/assets/main.css'
   </v-layout>
 </template>
 
-<style scoped></style>
+<style scoped>
+body {
+  font-family: 'Hahmlet', serif;
+}
+</style>

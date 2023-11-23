@@ -8,16 +8,30 @@ const props = defineProps(['complexNo'])
 
 const show = ref(false)
 const realprice = ref()
-const yearMonth = ref([])
-const realpriceData = ref([])
+let yearMonth = ref([])
+let ym = ref([])
+let realpriceData = ref([])
+const detail = ref({})
 
 console.log('realpriceView 나와라좀')
 
 watch(props, (complexNo) => {
   console.log('complex' + complexNo)
   houseCall(complexNo.complexNo)
+  getDetail(complexNo.complexNo)
   // show.value = true
 })
+
+const getDetail = (complexNo) => {
+  houseApi.getDetail(
+    complexNo,
+    (data) => {
+      console.log(data)
+      detail.value = data.data
+    },
+    () => {}
+  )
+}
 
 const houseCall = (complexNo) => {
   console.log('realprice call')
@@ -28,19 +42,32 @@ const houseCall = (complexNo) => {
       console.log(data.data)
 
       if (data.data == '') {
+        show.value = false
         console.log('실거래가 정보가 없습니다.')
       } else {
         show.value = true
         realprice.value = data.data
         console.log(data.data)
+        ym.value = []
+        yearMonth.value = []
         for (let i = 0; i < data.data.length; i++) {
-          yearMonth.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
+          ym.value[i] = data.data[i].tradeYear + '.' + data.data[i].tradeMonth
           realpriceData.value[i] =
             data.data[i].dealPrice.toString().substring(0, 1) +
             '.' +
             data.data[i].dealPrice.toString().substring(1, 2)
         }
+        for (let j = 0; j < ym.value.length; j++) {
+          console.log(j)
+          if (!yearMonth.value.includes(ym.value[j])) {
+            yearMonth.value.push(ym.value[j])
+          }
+        }
+        // yearMonth.value = [...new Set(ym.value)]
+        console.log(yearMonth.value)
+        console.log(ym.value)
         console.log(realpriceData.value)
+        yearMonth.value.sort()
       }
     },
     () => {
@@ -52,13 +79,15 @@ const houseCall = (complexNo) => {
 
 <template>
   <v-container v-if="show">
-    <div style="display: flex">
+    <div style="display: grid">
       <chartDataView :data="yearMonth" :real="realpriceData"></chartDataView>
 
       <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
       <!-- <Transition name="slide-fade"> -->
+      <br />
       <div>
-        <h2>실거래가 정보</h2>
+        <h2>{{ detail.complexName }} 전세 실거래가</h2>
+        <br />
         <v-table>
           <thead>
             <tr>
@@ -72,8 +101,20 @@ const houseCall = (complexNo) => {
               <!-- tradeYear. tradeMonth -->
               <td>{{ price.tradeYear }}.{{ price.tradeMonth }}</td>
               <!-- formattedPrice(tradeDate일, floor층) -->
-              <td>
-                {{ price.formattedPrice }}({{
+              <td v-if="price.dealPrice.toString().length <= 5">
+                {{ price.dealPrice.toString().substring(0, 1) }}.{{
+                  price.dealPrice.toString().substring(1, 2)
+                }}억({{
+                  price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
+                }}일, {{ price.floor }}층)
+              </td>
+
+              <td v-else>
+                {{ price.dealPrice.toString().substring(0, 2) }}
+                억
+                {{
+                  price.dealPrice.toString().substring(2, price.dealPrice.toString().length)
+                }}천({{
                   price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
                 }}일, {{ price.floor }}층)
               </td>
@@ -89,7 +130,7 @@ const houseCall = (complexNo) => {
 </template>
 <style scoped>
 .v-table {
-  width: 1000px;
+  width: 400px;
 }
 
 thead {

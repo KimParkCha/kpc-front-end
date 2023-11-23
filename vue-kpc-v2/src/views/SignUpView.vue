@@ -25,20 +25,13 @@ const register = () => {
     <v-card width="500" class="mx-auto px-6 py-8">
       <h2 class="mb-12">회원가입</h2>
       <v-form ref="form">
-        <v-text-field
-          v-model="user.email"
-          :counter="20"
-          :rules="nameRules"
-          label="이메일"
-          required
-        ></v-text-field>
+        <v-text-field v-model="user.email" :counter="20" label="이메일" required></v-text-field>
 
         <v-text-field
           class="password"
           v-model="user.password"
           type="password"
           :counter="10"
-          :rules="nameRules"
           label="비밀번호"
           required
         ></v-text-field>
@@ -48,18 +41,11 @@ const register = () => {
           class="password"
           type="password"
           :counter="15"
-          :rules="nameRules"
           label="비밀번호 확인"
           required
         ></v-text-field>
 
-        <v-text-field
-          v-model="user.name"
-          :counter="10"
-          :rules="nameRules"
-          label="이름"
-          required
-        ></v-text-field>
+        <v-text-field v-model="user.name" :counter="10" label="이름" required></v-text-field>
 
         <v-checkbox
           :rules="[(v) => !!v || 'You must agree to continue!']"

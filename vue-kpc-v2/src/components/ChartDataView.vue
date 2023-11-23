@@ -15,13 +15,13 @@ watch(props, (receivedData) => {
   //////////////////////////////// 실거래가격 ////////////////////////////////
   const reals = toRaw(receivedData.real)
   const datas = toRaw(receivedData.data)
-
+  console.log(receivedData.data)
   const numberDatas = reals.map((str) => {
     return Number(str)
   })
 
   const rowDatas = reals.map((str) => {
-    return Number(str) - Math.random() * 2
+    return Number(str) - Math.random() * 1
   })
 
   data.datasets[0].data = numberDatas
@@ -30,6 +30,7 @@ watch(props, (receivedData) => {
   data.labels = datas
   data.labels.sort()
 
+  console.log(data.labels)
   myChart.update()
 })
 
@@ -65,14 +66,14 @@ onMounted(() => {
 
 <template>
   <div class="chart">
-    <div class="mtitle"><h2>매매 실거래가</h2></div>
+    <div class="mtitle"><h2>전세 실거래가</h2></div>
     <canvas id="myChart"></canvas>
   </div>
 </template>
 
 <style>
 .chart {
-  width: 500px;
+  width: 400px;
   margin-right: 50px;
 }
 
