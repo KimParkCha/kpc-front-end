@@ -23,7 +23,8 @@ const cortarNo = ref(null)
 const items = ref([])
 const loadingIcon = ref('./src/assets/ripple.gif')
 const loading = ref(false)
-const tab = ref('')
+const tab = ref('one')
+
 const toBottom = () => {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
 }
@@ -110,9 +111,9 @@ const moveLatLng = (data, level) => {
 }
 
 const selectedComplex = (payload) => {
-  console.log(payload.item)
-  selectedMarker.value = payload.item
+  console.log('카드 클릭' + payload.item)
   tab.value = 'two'
+  selectedMarker.value = payload.item
 }
 
 const addClusterMarkers = () => {
@@ -141,7 +142,8 @@ const addHouseMarkers = () => {
     })
 
     kakao.maps.event.addListener(marker, 'click', function () {
-      console.log(data)
+      console.log('마커 클릭' + data)
+      tab.value = 'two'
       selectedMarker.value = data
     })
 
@@ -328,7 +330,7 @@ const changeCategoryClass = (el) => {
           <v-window-item value="one"
             ><RealEstateListItem :data="items" @selectedComplex="selectedComplex" />
           </v-window-item>
-          <v-window-item value="two">
+          <v-window-item eager value="two">
             <TabTest
               class="map-detail-items"
               :complex-no="selectedNo"

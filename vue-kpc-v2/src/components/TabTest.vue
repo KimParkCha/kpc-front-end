@@ -1,6 +1,6 @@
 <script setup>
-import { ref, watch } from 'vue'
-import realPriceView from './RealPriceView.vue'
+import { ref, watch, onMounted } from 'vue'
+import RealPriceView from './RealPriceView.vue'
 import RealEstateDetail from './RealEstateDetail.vue'
 import NewsView from './NewsView.vue'
 
@@ -15,6 +15,7 @@ const cityCode = ref(null)
 const dsvnCode = ref(null)
 
 watch(props, (receivedData) => {
+  console.log(receivedData)
   console.log(receivedData.complexNo)
   console.log(receivedData.cortarNo)
   console.log(receivedData.cortarNo.toString().substring(0, 2))
@@ -43,11 +44,13 @@ const closeDetail = () => {
   </v-row>
   <v-card-text>
     <v-window v-model="tab">
-      <v-window-item value="one"> <RealEstateDetail :complex-no="complexNo" /> </v-window-item>
+      <v-window-item eager value="one">
+        <RealEstateDetail :complex-no="complexNo" />
+      </v-window-item>
 
-      <v-window-item value="two"> <realPriceView :complex-no="complexNo" /> </v-window-item>
+      <v-window-item eager value="two"> <RealPriceView :complex-no="complexNo" /> </v-window-item>
 
-      <v-window-item value="three">
+      <v-window-item eager value="three">
         <NewsView :city-code="cityCode" :dsvn-code="dsvnCode" />
       </v-window-item>
     </v-window>

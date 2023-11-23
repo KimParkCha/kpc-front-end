@@ -16,7 +16,8 @@ watch(props, (receivedData) => {
   console.log(receivedData)
   console.log('시코드 ' + receivedData.cityCode)
   console.log('도코드 ' + receivedData.dsvnCode)
-  newsCall(receivedData.cityCode, receivedData.dsvnCode)
+  if (receivedData.cityCode !== null && receivedData.dsvnCode !== null)
+    newsCall(receivedData.cityCode, receivedData.dsvnCode)
   // show.value = true
 })
 

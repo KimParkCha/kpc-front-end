@@ -1,14 +1,18 @@
 <script setup>
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted, watchEffect } from 'vue'
 import colors from 'vuetify/lib/util/colors'
 import houseApi from '@/api/realEstate'
+
 const props = defineProps(['complexNo'])
 const show = ref(false)
-const detail = ref({})
-watch(props, (complexNo) => {
-  console.log(complexNo)
-  getDetail(complexNo.complexNo)
-  show.value = true
+const detail = ref(null)
+watch(props, (received) => {
+  console.log(received)
+  if (received.complexNo !== null) {
+    getDetail(received.complexNo)
+  } else {
+    console.log('null receive')
+  }
 })
 
 const getDetail = (complexNo) => {
@@ -17,6 +21,7 @@ const getDetail = (complexNo) => {
     (data) => {
       console.log(data)
       detail.value = data.data
+      show.value = true
     },
     () => {}
   )

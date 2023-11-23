@@ -5,10 +5,16 @@ const props = defineProps({ data: Object })
 const emit = defineEmits(['selectedComplex'])
 const datas = ref([])
 
-watch(props.data, () => {
-  datas.value = props.data
-  console.log(props.data)
-})
+watch(
+  props.data,
+  () => {
+    datas.value = props.data
+    console.log(props.data)
+  },
+  {
+    immediate: true
+  }
+)
 
 const onClickCard = (item) => {
   emit('selectedComplex', {
