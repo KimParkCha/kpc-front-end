@@ -18,9 +18,14 @@ const cortarNo = ref(null)
 const items = ref([])
 const loadingIcon = ref('./src/assets/ripple.gif')
 const loading = ref(false)
-
+const tab = ref('')
+console.log(selectedMarker.value)
 const toBottom = () => {
   window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+}
+
+const closeDetail = () => {
+  tab.value = 'one'
 }
 
 watch(props.receivedKeyword, (keyword) => {
@@ -32,11 +37,13 @@ watch(props.receivedKeyword, (keyword) => {
 })
 
 watch(selectedMarker, (newVal) => {
-  console.log(newVal)
-  moveLatLng(newVal.latlng, 1)
-  selectedNo.value = newVal.complexNo
-  cortarNo.value = newVal.cortarNo
-  toBottom()
+  if (newVal != null) {
+    console.log(newVal)
+    moveLatLng(newVal.latlng, 1)
+    selectedNo.value = newVal.complexNo
+    cortarNo.value = newVal.cortarNo
+    // toBottom()
+  }
 })
 
 onMounted(() => {
@@ -55,16 +62,18 @@ onMounted(() => {
 const initMap = () => {
   const container = document.getElementById('map')
   const options = {
-    center: new kakao.maps.LatLng(33.450701, 126.570667),
+    center: new kakao.maps.LatLng(37.50120980488759, 127.03585281505912),
     level: 4,
     maxLevel: 6
   }
   map = new kakao.maps.Map(container, options)
 
   geocoder = new kakao.maps.services.Geocoder()
+  getComplexes()
   kakao.maps.event.addListener(map, 'idle', () => {
     loading.value = true
     searchAddrFromCoords(map.getCenter(), displayCenterInfo)
+    console.log(map.getCenter())
     getComplexes()
     addClusterMarkers()
   })
@@ -84,6 +93,7 @@ const moveLatLng = (data, level) => {
 const selectedComplex = (payload) => {
   console.log(payload.item)
   selectedMarker.value = payload.item
+  tab.value = 'two'
 }
 
 const addClusterMarkers = () => {
@@ -96,7 +106,7 @@ const searchAddrFromCoords = (coords, callback) => {
   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback)
 }
 
-const addMarkers = () => {
+const addHouseMarkers = () => {
   const src = './src/assets/house2.png'
   const icon = new kakao.maps.MarkerImage(src, new kakao.maps.Size(31, 35), {
     offset: new kakao.maps.Point(16, 34),
@@ -130,7 +140,7 @@ const getComplexes = () => {
         latlng: new kakao.maps.LatLng(complexes.latitude, complexes.longitude)
       }))
       items.value = processsed
-      addMarkers()
+      addHouseMarkers()
       loading.value = false
     },
     () => {}
@@ -141,7 +151,19 @@ const getComplexes = () => {
   <div class="map-wrap">
     <v-row>
       <v-col class="map-items">
-        <RealEstateListItem :data="items" @selectedComplex="selectedComplex" />
+        <v-window v-model="tab">
+          <v-window-item value="one"
+            ><RealEstateListItem :data="items" @selectedComplex="selectedComplex" />
+          </v-window-item>
+          <v-window-item value="two">
+            <TabTest
+              class="map-detail-items"
+              :complex-no="selectedNo"
+              :cortar-no="cortarNo"
+              @closeDetail="closeDetail"
+            ></TabTest>
+          </v-window-item>
+        </v-window>
       </v-col>
       <div id="map">
         <div class="stage" v-if="loading">
@@ -149,30 +171,6 @@ const getComplexes = () => {
         </div>
       </div>
     </v-row>
-
-    <TabTest :complex-no="selectedNo" :cortar-no="cortarNo"></TabTest>
-    <!-- <TabTest v-bind="complexInfo"></TabTest> -->
-    <!-- <v-row>
-        <progress-card
-          :progressVal="50"
-          :width="500"
-          :height="200"
-          :title="keyword + ' 지역의 투자상황'"
-        >
-        </progress-card>
-        <v-spacer></v-spacer>
-        <v-card class="analyze-card" elevation="2" outlined>
-          <v-card-title>{{ keyword }} 지역의 투자상황을 분석해봤어요</v-card-title>
-          <ul>
-            <li>최근에 사건사고가 많이 있네요</li>
-            <li>밥집이 많이 생겼어요</li>
-            <li>치킨집이 생겼네요</li>
-          </ul>
-          <v-card-subtitle>김박차는 해당 지역의 투자를 추천해요.</v-card-subtitle>
-        </v-card>
-      </v-row>
-      <news-list-with-thumbnail></news-list-with-thumbnail> -->
-    <!-- </v-container> -->
   </div>
 </template>
 
@@ -180,18 +178,26 @@ const getComplexes = () => {
 #map {
   position: relative;
   width: 100%;
-  height: 600px;
+  height: 630px;
 }
 .map-wrap {
   position: relative;
   z-index: 100;
   width: 100%;
-  margin-bottom: 200px;
 }
-.v-col {
+.map-items {
   position: absolute;
-  width: 400px;
-  height: 600px;
+  width: 500px;
+  height: 630px;
+  z-index: 100;
+  box-sizing: border-box;
+  background: white;
+  overflow-y: auto;
+}
+.map-detail-items {
+  position: absolute;
+  width: 100%;
+  height: 100%;
   z-index: 100;
   box-sizing: border-box;
   background: white;

@@ -129,7 +129,7 @@ const clickItem = (item) => {
   position: absolute;
   width: 400px;
   border-radius: 10px;
-  top: 210px;
+  top: 150px;
   max-height: 300px;
 }
 
