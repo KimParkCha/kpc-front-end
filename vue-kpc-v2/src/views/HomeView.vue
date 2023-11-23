@@ -7,24 +7,23 @@ import TemperatureView from '../components/TemperatureView.vue'
 import WordCloudView from '../components/WordCloudView.vue'
 const topTitle = ref({
   isActive: false,
-  title: '매번 직접 분석해야했던 부동산 정보',
-  body: '이제 김박차에서 쉽고, 빠르고, 간편하게 확인하세요.'
+  title: '매번 직접 분석해야했던 부동산 정보'
 })
 const bottomTitle = ref({
   isActive: false,
-  title: '지금바로 김박차를 사용해보세요.'
+  title: '지금바로 "보일러를 틀어줘"를 사용해보세요.'
 })
 const posts = ref([
   {
     isActive: false,
-    title: '원하는 매물 정보를 김박차에서 검색하세요!',
+    title: '원하는 매물 정보를 보일러를 틀어줘에서 검색하세요!',
     body: '매물 정보를 검색 및 지도 이동을 통해 확인할 수 있어요.',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563551.jpg'
   },
   {
     isActive: false,
-    title: '해당 매물 및 지역의 투자 상황 분석정보를<br> 김박차 AI를 통해 확인하세요!',
-    body: '김박차 AI가 해당 매물 및 지역의 투자 정보를 분석하여 투자의 방향성에 도움을 받아보세요.',
+    title: '해당 매물 및 지역의 투자 상황 분석정보를<br> 보일러를 틀어줘 AI를 통해 확인하세요!',
+    body: '보일러를 틀어줘 AI가 해당 매물 및 지역의 투자 정보를 분석하여 투자의 방향성에 도움을 받아보세요.',
     img: 'https://imagescdn.gettyimagesbank.com/500/202203/jv12563550.jpg'
   },
   {
@@ -59,18 +58,28 @@ const clicked = ref(0)
             <br />
             <h1 class="title" v-html="topTitle.title"></h1>
             <br /><br />
-            <h1 class="" v-html="topTitle.body"></h1>
+            <h1 class="">
+              이제 &quot;보일러를 틀어줘&quot;에서 쉽고, 빠르고, 간편하게 확인하세요.
+            </h1>
           </v-col>
         </v-row>
         <v-row class="justify-center align-center" style="height: 300px">
           <v-spacer></v-spacer>
-          <h2>
-            오늘의 <br />
-            <v-btn @click="onclickBtn" class="pa-0 ma-0" variant="text">
-              <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1> </v-btn
-            >를 <br />
-            확인해보세요.
-          </h2>
+          <div>
+            <h2>
+              오늘의 <br />
+              <v-btn @click="onclickBtn" class="pa-0 ma-0" variant="text">
+                <h1 style="color: rgb(230, 67, 67)">부동산 온도</h1> </v-btn
+              >를 <br />
+              확인해보세요.
+            </h2>
+            <br />
+            <h3>
+              상단의 [부동산 온도] 버튼을 클릭하여 AI가 분석한 <br />부동산 투자시장 상황을
+              확인해보세요.
+            </h3>
+          </div>
+
           <div style="width: 100px"></div>
           <TemperatureView :click="clicked" />
           <v-spacer></v-spacer>
