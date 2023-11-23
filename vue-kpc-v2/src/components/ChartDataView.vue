@@ -21,7 +21,7 @@ watch(props, (receivedData) => {
   })
 
   const rowDatas = reals.map((str) => {
-    return Number(str) - Math.random() * 2
+    return Number(str) - Math.random() * 1
   })
 
   data.datasets[0].data = numberDatas
@@ -73,7 +73,7 @@ onMounted(() => {
 
 <style>
 .chart {
-  width: 500px;
+  width: 400px;
   margin-right: 50px;
 }
 

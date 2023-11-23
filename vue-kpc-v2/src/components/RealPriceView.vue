@@ -63,11 +63,11 @@ const houseCall = (complexNo) => {
             yearMonth.value.push(ym.value[j])
           }
         }
-
         // yearMonth.value = [...new Set(ym.value)]
         console.log(yearMonth.value)
         console.log(ym.value)
         console.log(realpriceData.value)
+        yearMonth.value.sort()
       }
     },
     () => {
@@ -79,13 +79,15 @@ const houseCall = (complexNo) => {
 
 <template>
   <v-container v-if="show">
-    <div style="display: flex">
+    <div style="display: grid">
       <chartDataView :data="yearMonth" :real="realpriceData"></chartDataView>
 
       <!-- <button @click="show = !show">Toggle Slide + Fade</button> -->
       <!-- <Transition name="slide-fade"> -->
+      <br />
       <div>
         <h2>{{ detail.complexName }} 전세 실거래가</h2>
+        <br />
         <v-table>
           <thead>
             <tr>
@@ -128,7 +130,7 @@ const houseCall = (complexNo) => {
 </template>
 <style scoped>
 .v-table {
-  width: 1000px;
+  width: 400px;
 }
 
 thead {
