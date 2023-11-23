@@ -60,9 +60,11 @@ const createFn = () => {
         ></v-text-field>
 
         <v-text-field
+          class="password"
           v-model.lazy="loginUser.password"
           clearable
           label="비밀번호"
+          type="password"
           placeholder="Enter your password"
         ></v-text-field>
 
