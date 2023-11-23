@@ -44,7 +44,7 @@ const loginFn = async () => {
 const fname = ref('logo')
 
 const createFn = () => {
-  router.push('/create')
+  router.push('/signup')
 }
 
 const getImageUrls = (name) => {
@@ -60,7 +60,7 @@ const getImageUrls = (name) => {
     <v-sheet :elevation="12" class="mx-auto">
       <v-card width="500" class="mx-auto px-6 py-8">
         <h2 class="mb-12">로그인</h2>
-        <v-form v-model="form" @submit.prevent="onSubmit">
+        <v-form @submit.prevent="onSubmit">
           <v-text-field
             v-model.lazy="loginUser.email"
             class="mb-2"
@@ -80,7 +80,6 @@ const getImageUrls = (name) => {
           <br />
 
           <v-btn
-            :loading="loading"
             block
             color="light-blue"
             size="large"
@@ -92,7 +91,6 @@ const getImageUrls = (name) => {
           </v-btn>
           <br />
           <v-btn
-            :loading="loading"
             block
             color="light-blue"
             size="large"
