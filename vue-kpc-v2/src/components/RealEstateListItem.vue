@@ -25,7 +25,7 @@ const onClickCard = (item) => {
     class="ma-3 pa-3"
     @click="onClickCard(item)"
   >
-    <v-card-title>
+    <v-card-title class="card-list">
       <h4>
         {{ item.complexName }}
       </h4></v-card-title
@@ -35,3 +35,8 @@ const onClickCard = (item) => {
     </v-card-subtitle>
   </v-card>
 </template>
+<style>
+.v-card-title {
+  font-size: 25px;
+}
+</style>

@@ -19,7 +19,6 @@ console.log('mypage data:  ' + getUser.id)
       <v-table>
         <thead>
           <tr>
-            <th class="text-left">번호</th>
             <th class="text-left">이름</th>
             <th class="text-left">이메일</th>
             <th class="text-left">가입날짜</th>
@@ -27,7 +26,6 @@ console.log('mypage data:  ' + getUser.id)
         </thead>
         <tbody>
           <tr>
-            <td>{{ getUser.id }}</td>
             <td>{{ getUser.name }}</td>
             <td>{{ getUser.email }}</td>
             <td>{{ getUser.joinDate.substring(0, 10) }}</td>

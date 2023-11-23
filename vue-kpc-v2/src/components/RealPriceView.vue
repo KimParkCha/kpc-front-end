@@ -28,6 +28,7 @@ const houseCall = (complexNo) => {
       console.log(data.data)
 
       if (data.data == '') {
+        show.value = false
         console.log('실거래가 정보가 없습니다.')
       } else {
         show.value = true
@@ -40,6 +41,8 @@ const houseCall = (complexNo) => {
             '.' +
             data.data[i].dealPrice.toString().substring(1, 2)
         }
+        yearMonth.value = [...new Set(yearMonth.value)]
+        console.log(yearMonth.value)
         console.log(realpriceData.value)
       }
     },
@@ -72,8 +75,20 @@ const houseCall = (complexNo) => {
               <!-- tradeYear. tradeMonth -->
               <td>{{ price.tradeYear }}.{{ price.tradeMonth }}</td>
               <!-- formattedPrice(tradeDate일, floor층) -->
-              <td>
-                {{ price.formattedPrice }}({{
+              <td v-if="price.dealPrice.toString().length <= 5">
+                {{ price.dealPrice.toString().substring(0, 1) }}.{{
+                  price.dealPrice.toString().substring(1, 2)
+                }}억({{
+                  price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
+                }}일, {{ price.floor }}층)
+              </td>
+
+              <td v-else>
+                {{ price.dealPrice.toString().substring(0, 2) }}
+                억
+                {{
+                  price.dealPrice.toString().substring(2, price.dealPrice.toString().length)
+                }}천({{
                   price.formattedTradeYearMonth.substring(price.formattedTradeYearMonth.length - 2)
                 }}일, {{ price.floor }}층)
               </td>

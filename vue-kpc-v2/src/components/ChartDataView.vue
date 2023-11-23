@@ -30,6 +30,7 @@ watch(props, (receivedData) => {
   data.labels = datas
   data.labels.sort()
 
+  console.log(data.labels)
   myChart.update()
 })
 

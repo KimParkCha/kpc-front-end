@@ -142,4 +142,9 @@ const clickItem = (item) => {
 .container {
   background-color: '#BBDEFB';
 }
+
+.v-tab {
+  font-weight: 900;
+  font-size: 20px;
+}
 </style>
