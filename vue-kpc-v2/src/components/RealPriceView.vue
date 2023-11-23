@@ -89,7 +89,7 @@ const houseCall = (complexNo) => {
 </script>
 
 <template>
-  <v-container v-if="show">
+  <v-container v-show="show">
     <div style="display: grid">
       <chartDataView :data="ym" :real="realpriceData"></chartDataView>
 
